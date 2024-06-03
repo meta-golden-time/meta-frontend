@@ -1,16 +1,21 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
-import Home from '@pages/home'
+import Main from '@pages/main'
+import UserPage from './pages/userPage';
+
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+    <BrowserRouter>
       <Header/>
-      <Home/>
-      </BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Main/>}/>
+        <Route path='/user/userPage' element={<UserPage/>}/>
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }

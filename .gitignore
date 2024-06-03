@@ -5,3 +5,4 @@ yarn.lock
 postcss.config.js
 tailwind.config.js
 vite.config.js
+/testImage
