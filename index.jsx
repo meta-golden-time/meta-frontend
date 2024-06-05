@@ -5,7 +5,7 @@ import Header from '@components/header';
 import Main from '@pages/main'
 import UserPage from './pages/userPage';
 
-
+// userPage에 들어가는 리스트 데이터
 function App() {
   const bookmarks = [
     { id: 1, from: '장소 1', to: '장소 2' },
