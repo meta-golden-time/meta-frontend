@@ -7,13 +7,19 @@ import UserPage from './pages/userPage';
 
 
 function App() {
+  const bookmarks = [
+    { id: 1, from: '장소 1', to: '장소 2' },
+    { id: 2, from: '장소 3', to: '장소 4' },
+    { id: 3, from: '장소 5', to: '장소 6' },
+  ];
+
   return (
     <>
     <BrowserRouter>
       <Header/>
       <Routes>
         <Route path='/' element={<Main/>}/>
-        <Route path='/user/userPage' element={<UserPage/>}/>
+        <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
       </Routes>
     </BrowserRouter>
     </>
