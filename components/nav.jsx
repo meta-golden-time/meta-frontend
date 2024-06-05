@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 
 export function Nav() {
+  const userInfo = true;
+
   return (
+    <div>
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/user">User page로 이동</Link></li>
-        <li><Link to="/sign">Sign page로 이동</Link></li>
-      </ul>
+      <Link to="/">Home</Link> <br/>
+      <Link to="/user">weather</Link> <br/>
+      <Link to="/sign">map</Link> <br/>
     </nav>
+    <nav>
+      {/* 로그인일 경우 링크 숨김, 로그인이 되었을 경우 링크 보여짐 */}
+      {userInfo ? ( <Link to="/user/userPage" >유저페이지로 이동</Link> ) : null }
+    </nav>
+    </div>
   )
 }

@@ -1,16 +1,27 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
-import Home from '@pages/home'
+import Main from '@pages/main'
+import UserPage from './pages/userPage';
 
+// userPage에 들어가는 리스트 데이터
 function App() {
+  const bookmarks = [
+    { id: 1, from: '장소 1', to: '장소 2' },
+    { id: 2, from: '장소 3', to: '장소 4' },
+    { id: 3, from: '장소 5', to: '장소 6' },
+  ];
+
   return (
     <>
-      <BrowserRouter>
+    <BrowserRouter>
       <Header/>
-      <Home/>
-      </BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Main/>}/>
+        <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }
