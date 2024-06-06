@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
 import Main from '@pages/main'
-import UserPage from './pages/userPage';
+import LoginPage from '@pages/loginPage'
+import UserPage from '@pages/userPage';
 
 // userPage에 들어가는 리스트 데이터
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Main/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
         <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
       </Routes>
     </BrowserRouter>

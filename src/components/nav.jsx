@@ -9,6 +9,7 @@ export function Nav() {
       <Link to="/">Home</Link> <br/>
       <Link to="/user">weather</Link> <br/>
       <Link to="/sign">map</Link> <br/>
+      <Link to="/login">login</Link> <br/>
     </nav>
     <nav>
       {/* 로그인일 경우 링크 숨김, 로그인이 되었을 경우 링크 보여짐 */}

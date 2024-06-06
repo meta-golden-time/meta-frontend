@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/userPage.scss';
+import '@styles/userPage.scss';
 
 const UserPage = ({ bookmarks }) => {
   return (
