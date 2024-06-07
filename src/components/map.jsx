@@ -120,62 +120,7 @@ const Map = () => {
         }    
       }
 
-      // pointObj의 변경이 있을 때마다 출발지와 목적지의 marker를 map에 표시
-      
 
-      
-
-      async function getCarDirection() {
-        const REST_API_KEY = '5f5f311bee7e2ebe56b7fbafb3bb04e1';
-        const url = 'https://apis-navi.kakaomobility.com/v1/directions';
-        const origin = `${pointObj.origin.lng},${pointObj.origin.lat}`;
-        const destination = `${pointObj.destination.lng},${pointObj.destination.lat}`;
-
-        const headers = {
-          Authorization: `KakaoAK ${REST_API_KEY}`,
-          'Content-Type': 'application/json'
-        };
-
-        const queryParams = new URLSearchParams({
-          origin: origin,
-          destination: destination
-        });
-
-        const requestUrl = `${url}?${queryParams}`;
-
-        try {
-          const response = await fetch(requestUrl, {
-            method: 'GET',
-            headers: headers
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          const linePath = [];
-          data.routes[0].sections[0].roads.forEach(router => {
-            router.vertexes.forEach((vertex, index) => {
-              if (index % 2 === 0) {
-                linePath.push(new kakao.maps.LatLng(router.vertexes[index + 1], router.vertexes[index]));
-              }
-            });
-          });
-
-          var polyline = new kakao.maps.Polyline({
-            path: linePath,
-            strokeWeight: 5,
-            strokeColor: '#000000',
-            strokeOpacity: 0.7,
-            strokeStyle: 'solid'
-          });
-
-          polyline.setMap(kakaoMap);
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      }
 
   // useEffect(() => {
     
@@ -227,6 +172,58 @@ const handleChange = (event) => {
   const { name, value } = event.target;
   setPointObj(prev => ({ ...prev, [name]: value }));
 };
+
+async function getCarDirection() {
+  const REST_API_KEY = '5f5f311bee7e2ebe56b7fbafb3bb04e1';
+  const url = 'https://apis-navi.kakaomobility.com/v1/directions';
+  const origin = `${pointObj.origin.lng},${pointObj.origin.lat}`;
+  const destination = `${pointObj.destination.lng},${pointObj.destination.lat}`;
+
+  const headers = {
+    Authorization: `KakaoAK ${REST_API_KEY}`,
+    'Content-Type': 'application/json'
+  };
+
+  const queryParams = new URLSearchParams({
+    origin: origin,
+    destination: destination
+  });
+
+  const requestUrl = `${url}?${queryParams}`;
+
+  try {
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: headers
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const linePath = [];
+    data.routes[0].sections[0].roads.forEach(router => {
+      router.vertexes.forEach((vertex, index) => {
+        if (index % 2 === 0) {
+          linePath.push(new kakao.maps.LatLng(router.vertexes[index + 1], router.vertexes[index]));
+        }
+      });
+    });
+
+    var polyline = new kakao.maps.Polyline({
+      path: linePath,
+      strokeWeight: 5,
+      strokeColor: '#000000',
+      strokeOpacity: 0.7,
+      strokeStyle: 'solid'
+    });
+
+    polyline.setMap(kakaoMap);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
 
   return (

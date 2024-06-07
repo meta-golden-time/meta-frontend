@@ -7,8 +7,8 @@ export function Nav() {
     <div>
     <nav>
       <Link to="/">Home</Link> <br/>
-      <Link to="/user">weather</Link> <br/>
-      <Link to="/sign">map</Link> <br/>
+      <Link to="/weather">weather</Link> <br/>
+      <Link to="/map">map</Link> <br/>
       <Link to="/login">login</Link> <br/>
     </nav>
     <nav>

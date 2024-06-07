@@ -114,7 +114,7 @@ class PwChangeForm extends Component {
             text: contents,
             icon: icon,
             confirmButtonText: confirmButtonText
-          })
+        })
     }
 
     sweetalertSucc = (title, showConfirmButton) => {
