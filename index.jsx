@@ -6,7 +6,6 @@ import Main from '@pages/main'
 import LoginPage from '@pages/loginPage'
 import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx'
-import WeatherPage from '@pages/weatherPage'
 
 
 // userPage에 들어가는 리스트 데이터
@@ -26,7 +25,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
         <Route path='/map' element={<MapPage/>}/>
-        <Route path='/weather' element={<WeatherPage/>}/>
+        {/* <Route path='/weather' element={<WeatherPage/>}/> */}
 
       </Routes>
     </BrowserRouter>
