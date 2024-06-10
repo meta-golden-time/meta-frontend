@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
 import SimpleDialogDemo from '../components/Modal/addressSearch'; // SimpleDialogDemo 컴포넌트를 import 합니다.
-
 import ReCAPTCHA from 'react-google-recaptcha';
+
+
+//////test
+import { getData, postData, updateData, deleteData } from '../apis/registerApi/recaptcha';
+/////////////
 
 class Register extends Component {
     constructor(props) {
@@ -12,7 +16,6 @@ class Register extends Component {
         this.state = {
             address: '',
             recaptchaValue: null,
-
         };
     }
 
@@ -20,17 +23,16 @@ class Register extends Component {
         this.setState({ address });
     };
 
-
     onRecaptchaChange = (value) => {
-        console.log("🚀 ~ Register ~ value:", value)
         this.setState({ recaptchaValue: value });
-        
     };
 
     submitClick = async (type, e) => {
         e.preventDefault();
-        
+        console.log("🚀 ~ Register ~ submitClick= ~ this.state.recaptchaValue:", this.state.recaptchaValue)
+
         if (!this.state.recaptchaValue) {
+            console.log("wwwwwwwwwwwwwwwwww")
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -39,22 +41,43 @@ class Register extends Component {
             return;
         }
 
+
         // 유효성 검사 및 다른 코드
         // 예를 들어 axios를 사용하여 서버에 요청을 보냅니다.
         try {
-            const response = await axios.post('/api/register', {
-                // 폼 데이터
-                recaptcha: this.state.recaptchaValue,
+            const response = await fetch('http://localhost:4000/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: $('#email_val').val(),
+                    emailDomain: $('#email2_val').val(),
+                    password: $('#pwd_val').val(),
+                    confirmPassword: $('#pwd_cnf_val').val(),
+                    name: $('#name_val').val(),
+                    address: this.state.address,
+                    organization: $('#org_val').val(),
+                    major: $('#major_val').val(),
+                    phone1: $('#phone1_val').val(),
+                    phone2: $('#phone2_val').val(),
+                    phone3: $('#phone3_val').val(),
+                    recaptcha: this.state.recaptchaValue,
+                }),
             });
 
-            // 성공 처리
-            Swal.fire('Success', 'You have registered successfully', 'success');
+            const result = await response.json();
+
+            if (result.success) {
+                Swal.fire('Success', 'You have registered successfully', 'success');
+            } else {
+                Swal.fire('Error', result.message, 'error');
+            }
         } catch (error) {
+            console.error('Error during registration:', error);
             // 에러 처리
             Swal.fire('Error', 'There was an error during registration', 'error');
         }
-
-
     };
 
     render() {
@@ -68,45 +91,64 @@ class Register extends Component {
                                 <div className="re1_wrap">
                                     <div className="re_cnt ct2">
                                         <table className="table_ty1">
-
                                             <tbody>
                                                 <tr className="re_email">
                                                     <th>이메일</th>
                                                     <td>
-                                                        <input id="email_val" type="text" name="is_Useremail1"
-                                                            placeholder="이메일을 입력해주세요." onKeyPress={this.emailKeyPress} />
+                                                        <input
+                                                            id="email_val"
+                                                            type="text"
+                                                            name="is_Useremail1"
+                                                            placeholder="이메일을 입력해주세요."
+                                                            onKeyPress={this.emailKeyPress}
+                                                        />
                                                         <span className="e_goll">@</span>
                                                         <select id="email2_val" name="is_Useremail2" className="select_ty1">
                                                             <option value="">선택하세요</option>
-                                                            <option value='naver.com'>naver.com</option>
-                                                            <option value='hanmail.net'>hanmail.net</option>
-                                                            <option value='nate.com'>nate.com</option>
-                                                            <option value='hotmail.com'>hotmail.com</option>
-                                                            <option value='gmail.com'>gmail.com</option>
-                                                            <option value='yahoo.co.kr'>yahoo.co.kr</option>
-                                                            <option value='yahoo.com'>yahoo.com</option>
+                                                            <option value="naver.com">naver.com</option>
+                                                            <option value="hanmail.net">hanmail.net</option>
+                                                            <option value="nate.com">nate.com</option>
+                                                            <option value="hotmail.com">hotmail.com</option>
+                                                            <option value="gmail.com">gmail.com</option>
+                                                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                            <option value="yahoo.com">yahoo.com</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>비밀번호</th>
                                                     <td>
-                                                        <input id="pwd_val" type="password" name="is_Password"
-                                                            placeholder="비밀번호를 입력해주세요." onKeyPress={this.pwdKeyPress} />
+                                                        <input
+                                                            id="pwd_val"
+                                                            type="password"
+                                                            name="is_Password"
+                                                            placeholder="비밀번호를 입력해주세요."
+                                                            onKeyPress={this.pwdKeyPress}
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>비밀번호 확인</th>
                                                     <td>
-                                                        <input id="pwd_cnf_val" type="password" name="is_Password"
-                                                            placeholder="비밀번호를 다시 입력해주세요." onKeyPress={this.pwdCnfKeyPress} />
+                                                        <input
+                                                            id="pwd_cnf_val"
+                                                            type="password"
+                                                            name="is_Password"
+                                                            placeholder="비밀번호를 다시 입력해주세요."
+                                                            onKeyPress={this.pwdCnfKeyPress}
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>성명</th>
                                                     <td>
-                                                        <input id="name_val" type="text" name="is_Username"
-                                                            placeholder="성명을 입력해주세요." onKeyPress={this.nameKeyPress} />
+                                                        <input
+                                                            id="name_val"
+                                                            type="text"
+                                                            name="is_Username"
+                                                            placeholder="성명을 입력해주세요."
+                                                            onKeyPress={this.nameKeyPress}
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -119,15 +161,23 @@ class Register extends Component {
                                                 <tr>
                                                     <th>소속 기관</th>
                                                     <td>
-                                                        <input id="org_val" type="text" name="is_Organization"
-                                                            placeholder="소속 기관명을 입력해주세요." />
+                                                        <input
+                                                            id="org_val"
+                                                            type="text"
+                                                            name="is_Organization"
+                                                            placeholder="소속 기관명을 입력해주세요."
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>전공</th>
                                                     <td>
-                                                        <input id="major_val" type="text" name="is_Usermajor"
-                                                            placeholder="전공을 입력해주세요." />
+                                                        <input
+                                                            id="major_val"
+                                                            type="text"
+                                                            name="is_Usermajor"
+                                                            placeholder="전공을 입력해주세요."
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr className="tr_tel">
@@ -143,11 +193,21 @@ class Register extends Component {
                                                             <option value="019">019</option>
                                                         </select>
                                                         <span className="tel_dot">-</span>
-                                                        <input id="phone2_val" name="is_Userphone2" max="9999"
-                                                            maxLength="4" onChange={(e) => this.mustNumber("phone2_val")} />
+                                                        <input
+                                                            id="phone2_val"
+                                                            name="is_Userphone2"
+                                                            max="9999"
+                                                            maxLength="4"
+                                                            onChange={(e) => this.mustNumber('phone2_val')}
+                                                        />
                                                         <span className="tel_dot">-</span>
-                                                        <input id="phone3_val" name="is_Userphone3" max="9999"
-                                                            maxLength="4" onChange={(e) => this.mustNumber("phone3_val")} />
+                                                        <input
+                                                            id="phone3_val"
+                                                            name="is_Userphone3"
+                                                            max="9999"
+                                                            maxLength="4"
+                                                            onChange={(e) => this.mustNumber('phone3_val')}
+                                                        />
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -156,14 +216,14 @@ class Register extends Component {
                                 </div>
                                 <div className="re1_wrap">
                                     <ReCAPTCHA
-                                        sitekey="6Len3vQpAAAAAP-ZMeFc_7AwfoL1W7UVPw33Uv-L" // 자신의 사이트 키로 대체하세요.
+                                        sitekey="6Ld9Y_UpAAAAAJGCq3NInWaTCDtH6nHjA9_rP6AU" // 자신의 사이트 키로 대체하세요.
                                         onChange={this.onRecaptchaChange}
                                     />
                                 </div>
-
                                 <div className="btn_confirm">
-                                    <div className="bt_ty bt_ty2 submit_ty1"
-                                        onClick={(e) => this.submitClick('signup', e)}>회원가입</div>
+                                    <div className="bt_ty bt_ty2 submit_ty1" onClick={(e) => this.submitClick('signup', e)}>
+                                        회원가입
+                                    </div>
                                 </div>
                             </form>
                         </div>
