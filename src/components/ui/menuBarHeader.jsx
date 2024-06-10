@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+// Material UI의 컴포넌트 불러오기
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,18 +13,22 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+// import AdbIcon from '@mui/icons-material/Adb';
+
+// "디바이스" 자체의 화면폭을 확인해서 true/false를 반환해주는 리액트 전용 훅
 import useMediaQuery from '@mui/material/useMediaQuery';
+// 테마 객체를 가져옴 : 어플리케이션의 색상, 폰트 크기, 브레이크포인트 등 다양한 스타일 속성을 포함하고 있음
 import { useTheme } from '@mui/material/styles';
 import myLogo from '../../img/main/goldenTimeLogo.png';
-// import AdbIcon from '@mui/icons-material/Adb';
 
 // 페이지 메뉴 항목을 정의
 const pages = ['weather', 'map'];
 // 사용자 설정 메뉴 항목을 정의
 const settings = ['Profile', 'Account', 'Logout'];
 
+
 // 네비게이션 메뉴와 사용자 설정 메뉴의 항목들을 정의
-function MenuAppBar() {
+function MenuBarHeader() {
   // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
@@ -48,6 +54,8 @@ function MenuAppBar() {
   };
 
   const theme = useTheme();
+
+  // 화면 크기가 'md' (기본적으로 960px) 이하일 때를 의미하는 미디어 쿼리 조건을 생성
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
   const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
 
@@ -61,7 +69,7 @@ function MenuAppBar() {
           {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내주는 AdbIcon 태그 코드를
           아래 Box 태그 코드로 수정함 */}
           {!isMobile && (
-            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 2 }} />
+            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
           )}
 
           <Typography
@@ -80,7 +88,7 @@ function MenuAppBar() {
             }}
           >
             Golden Time
-          </Typography> {/* 'LOGO' 텍스트를 표시합니다. xs 크기에서는 숨기고 md 크기 이상에서는 표시합니다. */}
+          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시합니다. */}
@@ -125,16 +133,17 @@ function MenuAppBar() {
           {/* 작은 화면(모바일 화면)이 큰 화면(pc 화면)으로 전환 될 때 아이콘 표시 여부를 나타내주는 AdbIcon 태그 코드를
           아래 Box 태그 코드로 수정함 */}
           {!isPc && (
-            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 2 }} />
+            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 1 }} />
           )}
 
+          {/* 작은 화면에서는 'LOGO' 텍스트를 표시합니다. */}
           <Typography
             variant="h5"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
+              mr: 1,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -145,8 +154,9 @@ function MenuAppBar() {
             }}
           >
             Golden Time
-          </Typography> {/* 작은 화면에서는 'LOGO' 텍스트를 표시합니다. */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {/* 큰 화면에서는 내비게이션 메뉴 버튼을 표시합니다. */}
             {pages.map((page) => (
               <Button
@@ -159,6 +169,7 @@ function MenuAppBar() {
             ))}
           </Box>
 
+          {/* 사용자 아이콘은 오른쪽에 유지 */}
           <Box sx={{ flexGrow: 0 }}>
             {/* 사용자 메뉴를 위한 아이콘 버튼을 표시합니다. */}
             <Tooltip title="Open settings">
@@ -194,4 +205,4 @@ function MenuAppBar() {
     </AppBar>
   );
 }
-export default MenuAppBar;
+export default MenuBarHeader;
