@@ -1,112 +1,62 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2'
-import $ from 'jquery';
 import axios from "axios";
+import cookie from 'react-cookies';
+import Swal from 'sweetalert2';
+import $ from 'jquery';
 
-class PwChangeForm extends Component {
-    constructor (props) {
-    super(props);
-        this.state = {
-            email: props.match.params.email,
-            token: props.match.params.token,
-        }
-    }
+// 이미지 파일을 상단에서 import
+import logImg from '../img/main/log_img.png';
+import logIcon3 from '../img/main/m_log_i3.png';
+import logIcon2 from '../img/main/m_log_i2.png';
+import logIcon1 from '../img/main/m_log_i1.png';
 
-    componentDidMount() {
-        let token = this.state.token.replace(/가/gi, "/"); 
-        axios.post('/api/LoginForm?type=emailtoken', {
-            is_Email : this.state.email,
-            is_Token : token,
-        })
-        .then( response => {
-            if(response.data.json[0].username == undefined){
-                window.location.replace('about:blank')
-            }
-        })
-        .catch( error => {
-            this.sweetalert('유효한 접속이 아닙니다.', error, 'error', '닫기')
-            setTimeout(function() {
-                window.location.replace('about:blank')    
-                }.bind(this),1000
-            );
-        });
-    }
+class LoginForm extends Component {
+    submitClick = (e) => {
+        this.email_val = $('#email_val').val();
+        this.pwd_val = $('#pwd_val').val();
+        if (this.email_val === '' || this.pwd_val === '') {
+            this.sweetalert('이메일과 비밀번호를 확인해주세요.', '', 'info', '닫기')
+        } else {
+            axios.post('/api/LoginForm?type=signin', {
+                is_Email: this.email_val,
+                is_Password: this.pwd_val
+            })
+                .then(response => {
+                    var userid = response.data.json[0].useremail;
+                    var username = response.data.json[0].username;
+                    var upw = response.data.json[0].userpassword;
 
-    submitClick = async (e) => {
-        this.pwd_val_checker = $('#pwd_val').val();
-        this.pwd_cnf_val_checker = $('#pwd_cnf_val').val();
+                    if (userid != null && userid !== '') {
+                        this.sweetalert('로그인 되었습니다.', '', 'info', '닫기');
+                        const expires = new Date();
+                        expires.setMinutes(expires.getMinutes() + 60);
 
-        this.fnValidate = (e) => {
-            var pattern1 = /[0-9]/;
-            var pattern2 = /[a-zA-Z]/;
-            var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
+                        axios.post('/api/LoginForm?type=SessionState', {
+                            is_Email: userid,
+                            is_UserName: username,
+                        })
+                            .then(response => {
+                                cookie.save('userid', response.data.token1, { path: '/', expires });
+                                cookie.save('username', response.data.token2, { path: '/', expires });
+                                cookie.save('userpassword', upw, { path: '/', expires });
+                            })
+                            .catch(error => {
+                                this.sweetalert('작업 중 오류가 발생하였습니다.', error, 'error', '닫기');
+                            });
 
-            if(this.pwd_val_checker ==='') {
-                $('#pwd_val').addClass('border_validate_err');
-                this.sweetalert('비밀번호를 입력해주세요.', '', 'info', '닫기')
-                return false;
-            }
-            if(this.pwd_val_checker !='') {
-                var str = this.pwd_val_checker;
-                if(str.search(/\s/) != -1) {
-                    $('#pwd_val').addClass('border_validate_err');
-                    this.sweetalert('비밀번호 공백을 제거해 주세요.', '', 'info', '닫기')
-                    return false;
-                } 
-                if(!pattern1.test(str) || !pattern2.test(str) || !pattern3.test(str)
-                || str.length < 8 || str.length > 16) {
-                    $('#pwd_val').addClass('border_validate_err');
-                    this.sweetalert('8~16자 영문 대 소문자, 숫자\n 특수문자를 사용하세요.', '', 'info', '닫기')
-                    return false; 
-                } 
-            }
-            $('#pwd_val').removeClass('border_validate_err');
-
-            if(this.pwd_cnf_val_checker ==='') {
-                $('#pwd_cnf_val').addClass('border_validate_err');
-                this.sweetalert('비밀번호 확인을 입력해주세요.', '', 'info', '닫기')
-                return false;
-            }
-            if(this.pwd_val_checker != this.pwd_cnf_val_checker) {
-                $('#pwd_val').addClass('border_validate_err');
-                $('#pwd_cnf_val').addClass('border_validate_err');
-                this.sweetalert('비밀번호가 일치하지 않습니다.', '', 'info', '닫기')
-                return false;
-            }
-            $('#pwd_cnf_val').removeClass('border_validate_err');
-            return true;
-        }
-
-        if(this.fnValidate()){
-            var jsonstr = $("form[name='frm']").serialize();
-            jsonstr = decodeURIComponent(jsonstr);
-            var Json_form = JSON.stringify(jsonstr).replace(/\"/gi,'')
-            Json_form = "{\"" +Json_form.replace(/\&/g,'\",\"').replace(/=/gi,'\":"')+"\"}";
-            
-            try {
-                const response = await fetch('/api/register?type=pwdmodify', {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json',
-                    },
-                    body: Json_form,
+                        setTimeout(function () {
+                            window.location.href = '/SoftwareList';
+                        }.bind(this), 1000);
+                    } else {
+                        this.sweetalert('이메일과 비밀번호를 확인해주세요.', '', 'info', '닫기');
+                    }
+                })
+                .catch(error => {
+                    this.sweetalert('이메일과 비밀번호를 확인해주세요.', '', 'info', '닫기');
                 });
-                const body = await response.text();
-                if(body == "succ"){
-                    this.sweetalertSucc('비밀번호 수정이 완료되었습니다.', false)
-                    setTimeout(function() {
-                        this.props.history.push('/');
-                        }.bind(this),1500
-                    );
-                }else{
-                    this.sweetalert('작업 중 오류가 발생하였습니다.', '', 'error', '닫기')
-                }  
-            } catch (error) {
-                this.sweetalert('작업 중 오류가 발생하였습니다.', error, 'error', '닫기')
-            }
         }
-    };
+    }
 
     sweetalert = (title, contents, icon, confirmButtonText) => {
         Swal.fire({
@@ -114,54 +64,126 @@ class PwChangeForm extends Component {
             text: contents,
             icon: icon,
             confirmButtonText: confirmButtonText
+
         })
+
     }
 
-    sweetalertSucc = (title, showConfirmButton) => {
-        Swal.fire({
-            position: 'bottom-end',
-            icon: 'success',
-            title: title,
-            showConfirmButton: showConfirmButton,
-            timer: 1000
-        })
+    pwdResetClick = () => {
+        $('.signin').hide();
+        $('.chgpw').fadeIn();
+        $('.chgpw').css('display', 'table-cell');
     }
 
-    render () {
+    pwdResetCancelClick = () => {
+        $('.chgpw').hide();
+        $('.signin').fadeIn();
+        $('.signin').css('display', 'table-cell');
+    }
+
+    pwdResetConfirm = (e) => {
+        this.reset_email = $('#reset_email_val').val();
+        this.reset_name = $('#reset_name_val').val();
+        if (this.reset_email === '' || this.reset_name === '') {
+            this.sweetalert('이메일과 성명을 확인해주세요.', '', 'info', '닫기')
+        } else {
+            axios.post('/api/LoginForm?type=pwreset', {
+                is_Email: this.reset_email,
+                is_Name: this.reset_name,
+            })
+                .then(response => {
+                    var userpassword = response.data.json[0].userpassword;
+                    userpassword = userpassword.replace(/\//gi, "가");
+
+                    if (userpassword != null && userpassword !== '') {
+                        this.sendEmail(this.reset_email, 'react200 비밀번호 재설정 메일', userpassword);
+                    } else {
+                        this.sweetalert('이메일과 성명을 확인해주세요.', '', 'info', '닫기');
+                    }
+                })
+                .catch(error => {
+                    this.sweetalert('이메일과 성명을 확인해주세요.', '', 'info', '닫기');
+                });
+        }
+    }
+
+    sendEmail = (email, subject, password, e) => {
+        axios.post('/api/mail', {
+            is_Email: email,
+            is_Subject: subject,
+            is_Password: password
+        })
+            .then(response => {
+                if (response.data === "succ") {
+                    this.sweetalert('입력하신 이메일로 비밀번호 재설정 메일을 보내드렸습니다.', '', 'info', '닫기');
+                } else {
+                    this.sweetalert('작업 중 오류가 발생하였습니다.', '', 'error', '닫기');
+                }
+            })
+            .catch(error => {
+                this.sweetalert('작업 중 오류가 발생하였습니다.', error, 'error', '닫기');
+            });
+    }
+
+    render() {
         return (
             <section className="main">
-                <div className="m_login">
-                <h3 className="pw_ls">비밀번호 재설정 <span className="compl1">완료</span></h3>
-                    <form method="post" name="frm" action="">
-                        <input type="hidden" id="is_Useremail" name="is_Useremail" value={this.state.email}/>
-                        <div className="log_box">
+                <div className="m_login signin">
+                    <h3>
+                        <span>
+                            <img src={logImg} alt="" />
+                        </span>
+                        LOGIN
+                    </h3>
+                    <div className="log_box">
+                        <div className="in_ty1">
+                            <span>
+                                <img src={logIcon3} alt="" />
+                            </span>
+                            <input type="text" id="email_val" placeholder="이메일" />
+                        </div>
+                        <div className="in_ty1">
+                            <span className="ic_2">
+                                <img src={logIcon2} alt="" />
+                            </span>
+                            <input type="password" id="pwd_val" placeholder="비밀번호" />
+                        </div>
+                        <ul className="af">
+                            <li>회원가입</li>
+                            {/* <li><Link to={'/register'}>회원가입</Link></li> */}
+                            <li className="pwr_b" onClick={this.pwdResetClick}>
+                                <a href="#n">비밀번호 재설정</a>
+                            </li>
+                        </ul>
+                        <div className="s_bt" type="" onClick={(e) => this.submitClick(e)}>로그인</div>
+                    </div>
+                </div>
+                {/* <div className="m_login m_pw chgpw">
+                    <h3 className="pw_ls">비밀번호 재설정 <span className="compl1">완료</span></h3>
+                    <div className="log_box">
+                        <div className="pw_one">
                             <div className="in_ty1">
-                                <span className="ic_2">
-                                    <img src={require("../img/main/m_log_i2.png")} alt="" />
+                                <span>
+                                    <img src={logIcon3} alt="" />
                                 </span>
-                                <input type="password" id="pwd_val"
-                                name="is_Password" placeholder="새 비밀번호" />
-                                </div>
-                                <div className="in_ty1">
-                                <span className="ic_2">
-                                    <img src={require("../img/main/m_log_i2.png")} alt="" />
+                                <input type="text" id="reset_email_val" placeholder="이메일" />
+                            </div>
+                            <div className="in_ty1">
+                                <span>
+                                    <img src={logIcon1} alt="" />
                                 </span>
-                                <input type="password" id="pwd_cnf_val"
-                                name="is_Password" placeholder="새 비밀번호 확인" />
-                                </div>
-                                <div className="btn_confirm btn_confirm_m">
-                                <Link to={'/'}>
-                                    <div className="bt_ty bt_ty_m bt_ty1 cancel_ty1">취소</div>
-                                </Link>
-                                <a href="#n" className="bt_ty bt_ty_m bt_ty2 submit_ty1" 
-                                onClick={(e) => this.submitClick(e)}>재설정</a>
+                                <input type="text" id="reset_name_val" placeholder="성명" />
+                            </div>
+                            <div className="btn_confirm btn_confirm_m">
+                                <div className="bt_ty bt_ty_m bt_ty1 cancel_ty1" onClick={this.pwdResetCancelClick}>취소</div>
+                                <a href="#n" className="bt_ty bt_ty_m bt_ty2 submit_ty1" onClick={this.pwdResetConfirm}>확인</a>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </div> */}
             </section>
         );
     }
 }
 
-export default PwChangeForm;
+export default LoginForm;

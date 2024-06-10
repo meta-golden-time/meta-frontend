@@ -8,8 +8,9 @@ export function Nav() {
     <nav>
       <Link to="/">Home</Link> <br/>
       <Link to="/weather">weather</Link> <br/>
-      <Link to="/map">map</Link> <br/>
+      <Link to="/maps">map</Link> <br/>
       <Link to="/login">login</Link> <br/>
+      <Link to="/register">회원가입</Link> <br/>
     </nav>
     <nav>
       {/* 로그인일 경우 링크 숨김, 로그인이 되었을 경우 링크 보여짐 */}
