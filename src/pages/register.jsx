@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import $ from 'jquery';
 import SimpleDialogDemo from '../components/Modal/addressSearch'; // SimpleDialogDemo 컴포넌트를 import 합니다.
+
 import ReCAPTCHA from 'react-google-recaptcha';
 
 class Register extends Component {
@@ -11,12 +12,14 @@ class Register extends Component {
         this.state = {
             address: '',
             recaptchaValue: null,
+
         };
     }
 
     handleAddressSelect = (address) => {
         this.setState({ address });
     };
+
 
     onRecaptchaChange = (value) => {
         console.log("🚀 ~ Register ~ value:", value)
@@ -50,6 +53,8 @@ class Register extends Component {
             // 에러 처리
             Swal.fire('Error', 'There was an error during registration', 'error');
         }
+
+
     };
 
     render() {
@@ -63,6 +68,7 @@ class Register extends Component {
                                 <div className="re1_wrap">
                                     <div className="re_cnt ct2">
                                         <table className="table_ty1">
+
                                             <tbody>
                                                 <tr className="re_email">
                                                     <th>이메일</th>
@@ -154,6 +160,7 @@ class Register extends Component {
                                         onChange={this.onRecaptchaChange}
                                     />
                                 </div>
+
                                 <div className="btn_confirm">
                                     <div className="bt_ty bt_ty2 submit_ty1"
                                         onClick={(e) => this.submitClick('signup', e)}>회원가입</div>

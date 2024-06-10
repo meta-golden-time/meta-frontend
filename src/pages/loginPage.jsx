@@ -65,6 +65,7 @@ class LoginForm extends Component {
             icon: icon,
             confirmButtonText: confirmButtonText
 
+
         })
 
     }
@@ -124,6 +125,7 @@ class LoginForm extends Component {
                 this.sweetalert('작업 중 오류가 발생하였습니다.', error, 'error', '닫기');
             });
     }
+
 
     render() {
         return (
