@@ -3,8 +3,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@/lib/*": ["src/lib/*"],
-      "@/components/*": ["src/components/*"],
+      "@lib/*": ["src/lib/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages"],
+      "@styles/*": ["src/styles"],
+      "@assets/weatherAsset/*": ["src/assets/weatherAssets"]
     }
   }
 }
