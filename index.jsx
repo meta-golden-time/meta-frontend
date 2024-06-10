@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
 import Main from '@pages/main'
 import LoginPage from '@pages/loginPage'
+import RegisterPage from '@pages/register'
 import UserPage from '@pages/userPage';
 
 // userPage에 들어가는 리스트 데이터
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Main/>}/>
         <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
       </Routes>
     </BrowserRouter>
