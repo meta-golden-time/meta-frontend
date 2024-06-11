@@ -1,0 +1,44 @@
+.path-finder {
+  display: flex;
+  gap: 20px;
+}
+
+.left-panel {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-button {
+  height: 40px;
+}
+
+.map {
+  flex: 1;
+  height: 450px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  flex: 1;
+}

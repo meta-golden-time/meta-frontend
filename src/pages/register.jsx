@@ -1,14 +1,15 @@
+// Register.js
 import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
-import SimpleDialogDemo from '../components/Modal/addressSearch'; // SimpleDialogDemo 컴포넌트를 import 합니다.
+import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-
 //////test
-import { postRegister } from '../apis/userApi/user'
+import { postRegister } from '../apis/userApi/user';
 /////////////
+import '../styles/users/register.css';  // CSS 파일을 import 합니다.
 
 class Register extends Component {
     constructor(props) {
@@ -28,55 +29,78 @@ class Register extends Component {
         this.setState({ recaptchaValue: value });
     };
 
+    validateInputs = () => {
+        const userID = document.getElementById('id_val').value.trim();
+        const email1 = document.getElementById('email_val').value.trim();
+        const email2 = document.getElementById('email2_val').value.trim();
+        const password = document.getElementById('pwd_val').value.trim();
+        const confirmPassword = document.getElementById('pwd_cnf_val').value.trim();
+        const name = document.getElementById('name_val').value.trim();
+        const phone1 = document.getElementById('phone1_val').value.trim();
+        const phone2 = document.getElementById('phone2_val').value.trim();
+        const phone3 = document.getElementById('phone3_val').value.trim();
+        const { address } = this.state;
+
+        if (!userID || !email1 || !email2 || !password || !confirmPassword || !name || !phone1 || !phone2 || !phone3 || !address) {
+            Swal.fire({
+                icon: 'warning',
+                title: '필수 입력 항목 누락',
+                text: '모든 필수 입력 항목을 작성해 주세요.',
+            });
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            Swal.fire({
+                icon: 'warning',
+                title: '비밀번호 불일치',
+                text: '비밀번호가 다릅니다. 다시 확인해 주세요.',
+            });
+            return false;
+        }
+
+        return true;
+    };
+
     submitClick = async (type, e) => {
         e.preventDefault();
-        console.log("🚀 ~ Register ~ submitClick= ~ this.state.recaptchaValue:", this.state.recaptchaValue)
-        
+
         if (!this.state.recaptchaValue) {
-            console.log("wwwwwwwwwwwwwwwwww")
             Swal.fire({
-                icon: 'warring',
+                icon: 'warning',
                 title: 'AI 체크',
                 text: '리캡챠 체크가 안되었습니다.',
             });
             return;
         }
-        if(document.getElementById('pwd_val').value != document.getElementById('pwd_cnf_val').value){
-            Swal.fire({
-                icon: 'warring',
-                title: '비밀번호 불일치',
-                text: '비밀번호가 다릅니다. 다시 확인 해 주세요.',
-            });
+
+        if (!this.validateInputs()) {
             return;
         }
-        console.log("🚀 ~ Register ~ submitClick= ~ document.getElementById('pwd_cnf_val').value:", document.getElementById('pwd_cnf_val').value)
-        console.log("🚀 ~ Register ~ submitClick= ~ document.getElementById('pwd_val').value:", document.getElementById('pwd_val').value)
 
         const data = {
-        userID: document.getElementById('id_val').value,
-        email: document.getElementById('email_val').value +"@"+ document.getElementById('email2_val').value,
-        password: document.getElementById('pwd_val').value,
-        confirmPassword: document.getElementById('pwd_cnf_val').value,
-        name: document.getElementById('name_val').value,
-        address: this.state.address, //서버에 가서 좌표값 받아오기
-        phone: document.getElementById('phone1_val').value + "-" + document.getElementById('phone2_val').value + "-" + document.getElementById('phone3_val').value,
-        role: document.getElementById('admin2_val').value,
-        recaptcha: this.state.recaptchaValue,
+            userID: document.getElementById('id_val').value,
+            email: document.getElementById('email_val').value + "@" + document.getElementById('email2_val').value,
+            password: document.getElementById('pwd_val').value,
+            confirmPassword: document.getElementById('pwd_cnf_val').value,
+            name: document.getElementById('name_val').value,
+            address: this.state.address,
+            phone: document.getElementById('phone1_val').value + "-" + document.getElementById('phone2_val').value + "-" + document.getElementById('phone3_val').value,
+            role: document.getElementById('admin2_val').value,
+            recaptcha: this.state.recaptchaValue,
         };
 
         try {
             const result = await postRegister(data);
-        
+
             if (result.success) {
-            Swal.fire('Success', 'You have registered successfully', 'success');
+                Swal.fire('Success', 'You have registered successfully', 'success');
             } else {
-            Swal.fire('Error', result.message, 'error');
+                Swal.fire('Error', result.message, 'error');
             }
         } catch (error) {
             Swal.fire('Error', 'There was an error during registration', 'error');
-        }       
-
-        
+        }
     };
 
     render() {
@@ -108,7 +132,7 @@ class Register extends Component {
                                                             type="text"
                                                             name="is_Userid"
                                                             placeholder="아이디을 입력해주세요."
-                                                        />                                                       
+                                                        />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -175,31 +199,8 @@ class Register extends Component {
                                                     <td>
                                                         <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} />
                                                         <div>{this.state.address}</div>
-                                                        
                                                     </td>
                                                 </tr>
-                                                {/* <tr>
-                                                    <th>소속 기관</th>
-                                                    <td>
-                                                        <input
-                                                            id="org_val"
-                                                            type="text"
-                                                            name="is_Organization"
-                                                            placeholder="소속 기관명을 입력해주세요."
-                                                        />
-                                                    </td>
-                                                </tr> */}
-                                                {/* <tr>
-                                                    <th>전공</th>
-                                                    <td>
-                                                        <input
-                                                            id="major_val"
-                                                            type="text"
-                                                            name="is_Usermajor"
-                                                            placeholder="전공을 입력해주세요."
-                                                        />
-                                                    </td>
-                                                </tr> */}
                                                 <tr className="tr_tel">
                                                     <th>핸드폰</th>
                                                     <td>
