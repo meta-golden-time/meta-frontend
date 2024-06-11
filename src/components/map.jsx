@@ -15,7 +15,7 @@ const Map = () => {
  
   
   useEffect(() => {
-    
+    console.log("ddddasdfasdfadsfasdf")
       const kakao = window.kakao;
       const mapContainer = document.getElementById('map');
       const mapOptions = {
@@ -58,6 +58,7 @@ const Map = () => {
       
       // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
       kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+        console.log("🚀 ~ kakao.maps.event.addListener ~ mouseEvent:", mouseEvent)
         // 클릭한 위치에 마커를 표시합니다 
         addMarker(mouseEvent.latLng);
       });
@@ -139,34 +140,41 @@ const Map = () => {
   // }, [pointObj]);
 
   // 부드럽게 중심점을 이동시키는 메서드
-  const setCenter = ({lat, lng}) => {
+  
 
-    const mapContainer = document.getElementById('map');
-    const mapOptions = {
-      center: new kakao.maps.LatLng(initial.center.lat, initial.center.lng), // 지도의 중심좌표
-      level: 3 // 지도의 레벨(확대, 축소 정도)
-    };
+ 
 
-    const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
-    
-    const moveLatLon = new kakao.maps.LatLng(lat, lng);
-    kakaoMap.panTo(moveLatLon);
-  }
+// }, [map])
+}, [])
 
-  const setPoint = ({lat, lng}, pointType) => {
+const setCenter = ({lat, lng}) => {
 
-    setCenter({lat, lng});
-    const marker = new kakao.maps.Marker({position: new kakao.maps.LatLng(lat, lng)});
-    setPointObj(prev => {
-        if (prev[pointType].marker !== null) {
-          // 주소가 변경되었을 때 기존 marker를 제거
-          prev[pointType].marker.setMap(null);
-        }
-        return {...prev, [pointType]: {marker, lat, lng}};
-    });
-  }
+  const mapContainer = document.getElementById('map');
+  const mapOptions = {
+    center: new kakao.maps.LatLng(initial.center.lat, initial.center.lng), // 지도의 중심좌표
+    level: 3 // 지도의 레벨(확대, 축소 정도)
+  };
 
-}, [map])
+  const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
+  
+  const moveLatLon = new kakao.maps.LatLng(lat, lng);
+  kakaoMap.panTo(moveLatLon);
+}
+
+const setPoint = ({lat, lng}, pointType) => {
+console.log("🚀 ~ setPoint ~ {lat, lng}, pointType:", lat, lng, pointType)
+
+  setCenter({lat, lng});
+  const marker = new kakao.maps.Marker({position: new kakao.maps.LatLng(lat, lng)});
+  console.log("🚀 ~ setPoint ~ marker:", marker)
+  setPointObj(prev => {
+      if (prev[pointType].marker !== null) {
+        // 주소가 변경되었을 때 기존 marker를 제거
+        prev[pointType].marker.setMap(null);
+      }
+      return {...prev, [pointType]: {marker, lat, lng}};
+  });
+}
 
 const handleChange = (event) => {
   const { name, value } = event.target;
