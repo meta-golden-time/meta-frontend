@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Aos from 'aos';
 import 'aos/dist/aos.css'; // AOS 스타일시트
 
-import '../styles/main.scss'; // 커스텀 스타일시트
+import '@styles/main.scss' // 커스텀 스타일시트
 import image from '../testimage/testright.png'; // 이미지 파일 가져오기
 
 function Main() {
@@ -18,7 +18,7 @@ function Main() {
 
   return (
     <div className="app">
-      <header className="header" data-aos="fade-down">
+      <header className="headerTitle" data-aos="fade-down">
         <h1>당신의 바쁜 아침 출근 길을 도와줄 첫 번째 비서 </h1>
       </header>
 
