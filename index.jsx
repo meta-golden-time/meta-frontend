@@ -21,7 +21,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Header/>
+    <Header/>
       <Routes>
         <Route path='/' element={<Main/>}/>
         <Route path='/login' element={<LoginPage/>}/>
@@ -35,7 +35,6 @@ function App() {
     </>
   );
 }
-
 
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);

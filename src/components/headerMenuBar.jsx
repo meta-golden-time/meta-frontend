@@ -23,12 +23,15 @@ import myLogo from '../img/main/goldenTimeLogo.png';
 import { useNavigate } from 'react-router-dom';
 
 // 페이지 메뉴 항목을 정의
-const pages = {weather: 'weather', map: 'map'};
+const pages = { Weather: 'weather', Map: 'map' };
 
 // 사용자 설정 메뉴 항목을 정의
-const settings = {'User Page': 'user/userPage', 'Logout': 'logout'};
+const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
+const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
+let loginCheck = true; // *****  로그인 체크 ***** 
+let settings = loginCheck ? settingsLogin : settingsLogout; 
 
-function MenuBarHeader() {
+function HeaderMenuBar() {
   // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
@@ -122,13 +125,13 @@ function MenuBarHeader() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {Object.keys(pages).map((page) => (
+              { loginCheck ? Object.keys(pages).map((page) => (
                 <MenuItem key={page} 
                 onClick={() => handleMovePage(pages[page])}
                 >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              )) :  null }
             </Menu>
           </Box>
 
@@ -160,7 +163,7 @@ function MenuBarHeader() {
 
           {/* 큰 화면에서는 메뉴 버튼을 표시 */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {Object.keys(pages).map((page) => (
+            { loginCheck ? Object.keys(pages).map((page) => (
               <Button
                 key={page}
                 onClick={() => handleMovePage(pages[page])}
@@ -168,14 +171,14 @@ function MenuBarHeader() {
               >
                 {page}
               </Button>
-            ))}
+            )) : null }
           </Box>
 
           {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
           <Box sx={{ flexGrow: 0, pl: 3 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것*/}
+                <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* ***** 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것 ***** */}
               </IconButton>
             </Tooltip>
             <Menu
@@ -207,4 +210,4 @@ function MenuBarHeader() {
     </AppBar>
   );
 }
-export default MenuBarHeader;
+export default HeaderMenuBar;
