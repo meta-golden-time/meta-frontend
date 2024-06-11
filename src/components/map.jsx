@@ -12,10 +12,10 @@ const Map = () => {
     origin: {marker: null, lat: null, lng: null},
     destination: {marker: null, lat: null, lng: null}
   });
-
-
+ 
+  
   useEffect(() => {
-
+    
       const kakao = window.kakao;
       const mapContainer = document.getElementById('map');
       const mapOptions = {
