@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
 import Aos from 'aos';
 import 'aos/dist/aos.css'; // AOS 스타일시트
-
 import '@styles/main.scss' // 커스텀 스타일시트
 import image from '../testimage/testright.png'; // 이미지 파일 가져오기
 
@@ -19,7 +18,9 @@ function Main() {
   return (
     <div className="app">
       <header className="headerTitle" data-aos="fade-down">
-        <h1>당신의 바쁜 아침 출근 길을 도와줄 첫 번째 비서 </h1>
+        <div>
+          <h1>당신의 바쁜 아침 출근 길을 <p>도와줄 첫 번째 비서</p></h1>
+        </div>
       </header>
 
       <div className="content">

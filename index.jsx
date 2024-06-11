@@ -29,7 +29,6 @@ function App() {
         <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
         <Route path='/map' element={<MapPage/>}/>
         {/* <Route path='/weather' element={<WeatherPage/>}/> */}
-
       </Routes>
     </BrowserRouter>
     </>

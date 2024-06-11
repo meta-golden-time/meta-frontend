@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 // Material UI의 컴포넌트 불러오기
 import AppBar from '@mui/material/AppBar';
@@ -16,11 +18,13 @@ import MenuItem from '@mui/material/MenuItem';
 
 // "디바이스" 자체의 화면폭을 확인해서 true/false를 반환해주는 리액트 전용 훅
 import useMediaQuery from '@mui/material/useMediaQuery';
+
 // 테마 객체를 가져옴 : 어플리케이션의 색상, 폰트 크기, 브레이크포인트 등 다양한 스타일 속성을 포함하고 있음
 import { useTheme } from '@mui/material/styles';
+
 // 이미지 가져오기
-import myLogo from '../img/main/goldenTimeLogo.png';
-import { useNavigate } from 'react-router-dom';
+import myLogo from '@img/main/goldenTimeLogo.png';
+
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'map' };
@@ -31,46 +35,73 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 let loginCheck = true; // *****  로그인 체크 ***** 
 let settings = loginCheck ? settingsLogin : settingsLogout; 
 
+
 function HeaderMenuBar() {
-  // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
+  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
 
-  const handleOpenNavMenu = (event) => {
-    // 내비게이션 메뉴를 여는 함수
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    // 사용자 메뉴를 여는 함수
-    setAnchorElUser(event.currentTarget);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(true); // 스크롤 되면 true로 변경
+      } else {
+        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+      }
+    };
 
-  // 페이지 이동 함수
-  const navigate = useNavigate();
-  const handleMovePage = (page) => {
-    navigate(`/${page}`)
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const handleCloseNavMenu = () => {
-    // 내비게이션 메뉴를 닫는 함수
-    setAnchorElNav(null);
-  };
+    // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleCloseUserMenu = () => {
-    // 사용자 메뉴를 닫는 함수
-    setAnchorElUser(null);
-  };
+    const handleOpenNavMenu = (event) => {
+      // 내비게이션 메뉴를 여는 함수
+      setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+      // 사용자 메뉴를 여는 함수
+      setAnchorElUser(event.currentTarget);
+    };
 
-  const theme = useTheme();
-  // 화면 크기가 'md' (기본적으로 960px) 이하일 때를 의미하는 미디어 쿼리 조건을 생성
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
-  const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
+    const navigate = useNavigate();
+    const handleMovePage = (page) => {
+      // 페이지 이동 함수
+      navigate(`/${page}`)
+    };
+
+    const handleCloseNavMenu = () => {
+      // 내비게이션 메뉴를 닫는 함수
+      setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+      // 사용자 메뉴를 닫는 함수
+      setAnchorElUser(null);
+    };
+
+    const theme = useTheme();
+    // 화면 크기가 'md' (기본적으로 960px) 이하일 때를 의미하는 미디어 쿼리 조건을 생성
+    const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
+    const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
+
 
   return (
-    <AppBar class=".MuiAppBar-colorTransparent" position="static" style={{ width: '100%' }}> {/* AppBar 컴포넌트를 사용하여 상단 바를 생성 */}
+    // AppBar 컴포넌트를 사용하여 상단 바를 생성
+    <AppBar
+    color={isScrolled ? 'inherit' : 'transparent'} // 스크롤 여부에 따라 배경색 변경
+    position="fixed"
+    style={{ width: '100%'}}
+    
+    >
       <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
-        <Toolbar disableGutters> {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성합니다. disableGutters는 패딩을 제거 */}
+        {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
+        <Toolbar disableGutters>
 
           {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
           {!isMobile && (
@@ -210,4 +241,5 @@ function HeaderMenuBar() {
     </AppBar>
   );
 }
+
 export default HeaderMenuBar;
