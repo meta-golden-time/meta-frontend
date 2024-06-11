@@ -4,17 +4,12 @@ import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DaumPostcode from 'react-daum-postcode';
-import Typography from '@mui/material/Typography';
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open, onAddressSelect } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
   };
 
   const style = {
@@ -25,7 +20,12 @@ function SimpleDialog(props) {
 
   const completeHandler = (data) => {
     console.log(data);
-    onAddressSelect(data.autoJibunAddress + ' ' + data.zonecode);
+    if(data.userSelectedType == "R") {
+      onAddressSelect(data.zonecode + '\n' + data.autoJibunAddress );
+    } else {
+      onAddressSelect(data.zonecode + '\n' + data.roadAddress);
+    }
+    handleClose(); // 모달 닫기
   };
 
   return (
