@@ -14,18 +14,18 @@ const Map = () => {
     origin: { marker: null, lat: null, lng: null },
     destination: { marker: null, lat: null, lng: null }
   });
-
-
+ 
+  
   useEffect(() => {
-    {const mapContainer = document.getElementById('map');
-    const mapOptions = {
-      center: new kakao.maps.LatLng(initial.center.lat, initial.center.lng), // 지도의 중심좌표
-      level: 3 // 지도의 레벨(확대, 축소 정도)
-    };
 
-    const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
-    setMap(kakaoMap);
-    }
+    console.log("ddddasdfasdfadsfasdf")
+      const kakao = window.kakao;
+      const mapContainer = document.getElementById('map');
+      const mapOptions = {
+        center: new kakao.maps.LatLng(initial.center.lat, initial.center.lng), // 지도의 중심좌표
+        level: 3 // 지도의 레벨(확대, 축소 정도)
+      };
+
 
     const geocoder = new kakao.maps.services.Geocoder();
     const infowindow = new kakao.maps.InfoWindow({ zindex: 1 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
@@ -46,17 +46,19 @@ const Map = () => {
     // };
 
 
-    // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(kakaoMap, 'click', function (mouseEvent) {
-      markers.push(mouseEvent.latLng)
-      // 클릭한 위치에 마커를 표시합니다
-      // addMarker(mouseEvent.latLng);
-    });
-    console.log(kakao.maps.event)
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(kakaoMap, 'click', function(mouseEvent) {
-      var marker = new kakao.maps.Marker({
-        position: mouseEvent.latLng
+
+      // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+      function setMarkers(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }            
+      }
+      
+      // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+      kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+        console.log("🚀 ~ kakao.maps.event.addListener ~ mouseEvent:", mouseEvent)
+        // 클릭한 위치에 마커를 표시합니다 
+        addMarker(mouseEvent.latLng);
       });
       // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
       infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
@@ -144,36 +146,58 @@ const Map = () => {
         try {
 
 
+  // useEffect(() => {
+    
+  //   for (const point in pointObj) {
+  //     if (pointObj[point].marker) {
+  //       console.log(pointObj[point].marker)
+  //       var markerPosition  = new kakao.maps.LatLng(pointObj[point].lat, pointObj[point].lng); 
+  //       pointObj[point].marker = new kakao.maps.Marker({
+  //         position: markerPosition
+  //     });
+  //       // 마커를 클릭한 위치에 표시합니다 
+  //       // marker.setPosition(mouseEvent.latLng);
+  //       // marker.setMap(kakaoMap);
+  //     }
+  //   }
+  // }, [pointObj]);
 
-        } catch (error) {
-          console.error('Error loading Kakao Maps script:', error);
-        }
+  // 부드럽게 중심점을 이동시키는 메서드
+  
 
-    }, [markers]);
-        
+ 
 
-    // 부드럽게 중심점을 이동시키는 메서드
-    const setCenter = ({ lat, lng }) => {
-      const kakao = window.kakao;
-      const moveLatLon = new kakao.maps.LatLng(lat, lng);
-      if (map) {
-        map.panTo(moveLatLon);
+// }, [map])
+}, [])
+
+const setCenter = ({lat, lng}) => {
+
+  const mapContainer = document.getElementById('map');
+  const mapOptions = {
+    center: new kakao.maps.LatLng(initial.center.lat, initial.center.lng), // 지도의 중심좌표
+    level: 3 // 지도의 레벨(확대, 축소 정도)
+  };
+
+  const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
+  
+  const moveLatLon = new kakao.maps.LatLng(lat, lng);
+  kakaoMap.panTo(moveLatLon);
+}
+
+const setPoint = ({lat, lng}, pointType) => {
+console.log("🚀 ~ setPoint ~ {lat, lng}, pointType:", lat, lng, pointType)
+
+  setCenter({lat, lng});
+  const marker = new kakao.maps.Marker({position: new kakao.maps.LatLng(lat, lng)});
+  console.log("🚀 ~ setPoint ~ marker:", marker)
+  setPointObj(prev => {
+      if (prev[pointType].marker !== null) {
+        // 주소가 변경되었을 때 기존 marker를 제거
+        prev[pointType].marker.setMap(null);
       }
-    };
-
-    const setPoint = ({ lat, lng }, pointType) => {
-      const kakao = window.kakao;
-      setCenter({ lat, lng });
-      const marker = new kakao.maps.Marker({ position: new kakao.maps.LatLng(lat, lng) });
-      setPointObj(prev => {
-        if (prev[pointType].marker !== null) {
-          // 주소가 변경되었을 때 기존 marker를 제거
-          prev[pointType].marker.setMap(null);
-        }
-        return { ...prev, [pointType]: { marker, lat, lng } };
-      });
-      marker.setMap(map);
-    };
+      return {...prev, [pointType]: {marker, lat, lng}};
+  });
+}
 
 
     async function getCarDirection() {    //카카오 모빌리티 길찾기 api로 길찾기
