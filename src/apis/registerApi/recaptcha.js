@@ -11,13 +11,22 @@ export const getData = async() => {
   
     
     const result = await fetchData();
-    console.log("🚀 ~ getData ~ result:", result)
     
     return result;
 };
 
-export const postData = (data) => {
-  return axios.post(`${API_URL}/data`, data);
+export const postData = async (data) => {
+  
+
+  const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=6Len3vQpAAAAAP-ZMeFc_7AwfoL1W7UVPw33Uv-L&response=${data}`);
+  const { success } = response.data;
+  if (!success) {
+    return res.status(400).json({ success: false, message: 'Invalid reCAPTCHA token' });
+  }
+  return response;
+
+        //return axios.post(`${API_URL}/data`, data);
+
 };
 
 export const updateData = (id, data) => {
@@ -28,6 +37,16 @@ export const deleteData = (id) => {
   return axios.delete(`${API_URL}/data/${id}`);
 };
 
+
+const postCaptcha = async (data) => {
+  try{
+    const apiURL = `https://www.google.com/recaptcha/api/siteverify?secret=YOUR_SECRET_KEY&response=${recaptchaToken}`;
+
+  }catch(err){
+    console.error('Error fetching data:', err);
+  }
+
+}
 const fetchData = async () => {
   try {
     const params = {

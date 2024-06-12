@@ -1,6 +1,3 @@
-24.06.10
-package.json
-/////////////////////////
 {
   "scripts": {
     "dev": "vite"
@@ -15,6 +12,7 @@ package.json
     "@vitejs/plugin-react": "^4.3.0",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "jquery": "^3.7.1",
     "mui": "^0.0.1",
     "prop-types": "^15.8.1",
@@ -27,6 +25,7 @@ package.json
     "react-select": "^5.8.0",
     "react-select-async-paginate": "^0.7.4",
     "sass": "^1.77.4",
+    "superagent": "^9.0.2",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.11.1",
     "vite": "^5.2.12"
@@ -36,5 +35,3 @@ package.json
     "vite-plugin-svgr": "^4.2.0"
   }
 }
-
-///////////////////////
