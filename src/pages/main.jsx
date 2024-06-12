@@ -18,13 +18,11 @@ function Main() {
   return (
     <div className="app">
       <header className="headerTitle" data-aos="fade-down">
-        <div>
           <h1>당신의 바쁜 아침 출근 길을 <p>도와줄 첫 번째 비서</p></h1>
-        </div>
       </header>
 
-      <div className="content">
-        <section data-aos="fade-up" data-aos-delay="100">
+      <div className='contentBunch'>
+        <section className="content" data-aos="fade-up" data-aos-delay="900">
           <div>
             <h2>맞춤형 오늘의 날씨 정보</h2>
             <p>당신이 저장한 위치나, 현재 있는 곳의 날씨 정보를 제공해요.</p>
@@ -35,7 +33,7 @@ function Main() {
           </div>
         </section>
 
-        <section data-aos="fade-up" data-aos-delay="100">
+        <section className='content' data-aos="fade-up" data-aos-delay="900">
           <div>
             <h2>편리한 길 찾기 서비스</h2>
             <p>
@@ -49,7 +47,7 @@ function Main() {
           </div>
         </section>
 
-        <section data-aos="fade-up" data-aos-delay="100">
+        <section className='content' data-aos="fade-up" data-aos-delay="900">
           <div>
             <h2>경로 즐겨찾기</h2>
             <p>자주 이용하는 경로를 저장해서 빠르게 확인해보세요.</p>
@@ -60,7 +58,7 @@ function Main() {
           </div>
         </section>
 
-        <section data-aos="fade-up" data-aos-delay="100">
+        <section className='content' data-aos="fade-up" data-aos-delay="900">
           <div>
             <h2>알림 설정</h2>
             <p>

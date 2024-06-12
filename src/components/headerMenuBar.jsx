@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 // Material UI의 컴포넌트 불러오기
-import AppBar from '@mui/material/AppBar';
+import AppBar from '@mui/material/AppBar'; // AppBar를 import해야 다른 라이브러리들이 동작함
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -25,6 +24,9 @@ import { useTheme } from '@mui/material/styles';
 // 이미지 가져오기
 import myLogo from '@img/main/goldenTimeLogo.png';
 
+// css 디자인 가져오기
+import '@styles/headerMenuBar.scss'
+
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/ };
@@ -37,26 +39,9 @@ let settings = loginCheck ? settingsLogin : settingsLogout;
 
 
 function HeaderMenuBar() {
-  
-  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 0) {
-        setIsScrolled(true); // 스크롤 되면 true로 변경
-      } else {
-        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
     // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+
     // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -64,6 +49,7 @@ function HeaderMenuBar() {
       // 내비게이션 메뉴를 여는 함수
       setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event) => {
       // 사용자 메뉴를 여는 함수
       setAnchorElUser(event.currentTarget);
@@ -92,154 +78,150 @@ function HeaderMenuBar() {
 
 
   return (
-    // AppBar 컴포넌트를 사용하여 상단 바를 생성
-    <AppBar
-    color={isScrolled ? 'inherit' : 'transparent'} // 스크롤 여부에 따라 배경색 변경
-    position="fixed"
-    style={{ width: '100%'}}
-    
-    >
+    <section>
+      <div className='headerMenu' style={{ width: '100%' }}>
 
-      <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
-        {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
-        <Toolbar disableGutters>
+        <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
+          {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
+          <Toolbar disableGutters >
 
-          {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
-          {!isMobile && (
-            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
-          )}
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              // letterSpacing: '.1rem', // 문자 간격
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Golden Time
-          </Typography>
-
-          {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon /> {/* 메뉴 아이콘을 표시 */}
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+            {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
+            {!isMobile && (
+              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
+            )}
+            
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
               sx={{
-                display: { xs: 'block', md: 'none' },
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                // letterSpacing: '.1rem', // 문자 간격
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
-              { loginCheck ? Object.keys(pages).map((page) => (
-                <MenuItem key={page} 
-                onClick={() => handleMovePage(pages[page])}
-                >
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              )) :  null }
-            </Menu>
-          </Box>
+              Golden Time
+            </Typography>
 
-          {/* 작은 화면(모바일 화면)이 큰 화면(pc 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
-          {!isPc && (
-            <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 1 }} />
-          )}
-
-          {/* 작은 화면에서는 'Golden Time' 텍스트를 표시 */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 1,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              // letterSpacing: '.1rem', // 문자간격
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Golden Time
-          </Typography>
-
-
-          {/* 큰 화면에서는 메뉴 버튼을 표시 */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            { loginCheck ? Object.keys(pages).map((page) => (
-              <Button
-                key={page}
-                onClick={() => handleMovePage(pages[page])}
-                sx={{ my: 1, color: 'black', display: 'block' }}
+            {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                {page}
-              </Button>
-            )) : null }
-          </Box>
-
-          {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
-          <Box sx={{ flexGrow: 0, pl: 3 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* ***** 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것 ***** */}
+                <MenuIcon /> {/* 메뉴 아이콘을 표시 */}
               </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                { Object.keys(pages).map((page) => (
+                  <MenuItem key={page} 
+                  onClick={() => handleMovePage(pages[page])}
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                )) }
+              </Menu>
+            </Box>
+
+            {/* 작은 화면(모바일 화면)이 큰 화면(pc 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
+            {!isPc && (
+              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 1 }} />
+            )}
+
+            {/* 작은 화면에서는 'Golden Time' 텍스트를 표시 */}
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 1,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                // letterSpacing: '.1rem', // 문자간격
+                color: 'inherit',
+                textDecoration: 'none',
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              {/* 아이콘 버튼 클릭 후 나오는 네비게이션 바 리스트에 대한 페이지 이동 버튼 */}
-              {Object.keys(settings).map((setting) => (
-                <MenuItem key={setting} onClick={() => handleMovePage(settings[setting])}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              Golden Time
+            </Typography>
+
+
+            {/* 큰 화면에서는 메뉴 버튼을 표시 */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+              { Object.keys(pages).map((page) => (
+                <Button
+                  key={page}
+                  onClick={() => handleMovePage(pages[page])}
+                  sx={{ my: 1, color: 'black', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              )) }
+            </Box>
+
+            {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
+            <Box sx={{ flexGrow: 0, pl: 3 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* ***** 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것 ***** */}
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {/* 아이콘 버튼 클릭 후 나오는 네비게이션 바 리스트에 대한 페이지 이동 버튼 */}
+                {Object.keys(settings).map((setting) => (
+                  <MenuItem key={setting} onClick={() => handleMovePage(settings[setting])}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </div>
+    </section>
   );
 }
 

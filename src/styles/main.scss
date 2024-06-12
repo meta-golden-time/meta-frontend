@@ -1,3 +1,37 @@
+
+.app { // 전체 레이아웃
+  font-family: 'Noto Sans KR', sans-serif;
+  width: 100%;
+  // height: 300vh; // 전체 화면 높이 설정
+  .headerTitle {
+    text-align: center;
+    padding: 200px;
+    h1 {
+      font-size: 2.5rem;
+      color: #007bff;
+      }
+      }
+.contentBunch {
+  max-width: 850px; // 최대 가로 폭
+  margin: 0 auto;
+  section {
+    // margin: 40px 20px;
+    padding: 250px 5px;
+    h2 {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin-bottom: 15px;
+      }
+      p {
+        font-size: 2rem;
+        line-height: 1.5;
+        margin-top: 0px;
+        margin-bottom: 50px;
+        }
+        }
+      }
+    }
+          
 .mainImage {
     max-width: 100px;
     height: auto; // 높이를 자동 조절하여 이미지 비율을 유지
@@ -18,32 +52,3 @@
       background-color: #0056b3;
     }
   }
-
-.app {
-  font-family: 'Noto Sans KR', sans-serif;
-  height: 200vh; // 전체 화면 높이 설정
-  .headerTitle {
-    text-align: center;
-    padding: 60px 20px;
-    h1 {
-      font-size: 2.5rem;
-      color: #007bff;
-    }
-  }
-  .content {
-    max-width: 800px;
-    margin: 0 auto;
-    section {
-      margin: 40px 20px;
-      h2 {
-        font-size: 2rem;
-        color: #007bff;
-        margin-bottom: 15px;
-      }
-      p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-      }
-    }
-  }
-}

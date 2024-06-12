@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import Header from '@components/header';
+import HeaderMenuBar from '@components/headerMenuBar';
 import Main from '@pages/main'
 import LoginPage from '@pages/loginPage'
 import RegisterPage from '@pages/register'
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <Header/>
+    <HeaderMenuBar />
       <Routes>
         <Route path='/' element={<Main/>}/>
         <Route path='/login' element={<LoginPage/>}/>
