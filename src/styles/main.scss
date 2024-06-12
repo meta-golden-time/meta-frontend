@@ -5,28 +5,32 @@
   // height: 300vh; // 전체 화면 높이 설정
   .headerTitle {
     text-align: center;
-    padding: 200px;
+    padding: 130px 0px 300px 0px; // 콘텐츠 여백 상 하 간격 조절
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
+      margin-bottom: 0.5rem; // h1 태그와 p 태그 사이의 간격 줄임
       color: #007bff;
       }
+    h1 p {
+      margin-top: 0; // p 태그의 상단 마진 제거
+    }
       }
 .contentBunch {
   max-width: 850px; // 최대 가로 폭
-  margin: 0 auto;
+  margin: 0 auto; // 전체 레이아웃 가운데 정렬
   section {
-    // margin: 40px 20px;
-    padding: 250px 5px;
+    margin: 50px 5px;
+    padding: 200px 0px;
     h2 {
       font-size: 1.5rem;
       color: #007bff;
-      margin-bottom: 15px;
+      margin-bottom: 20px; // 제목과 내용의 간격 조절
       }
       p {
         font-size: 2rem;
         line-height: 1.5;
         margin-top: 0px;
-        margin-bottom: 50px;
+        margin-bottom: 30px; // 내용의 문단 간격 조절
         }
         }
       }
@@ -37,18 +41,18 @@
     height: auto; // 높이를 자동 조절하여 이미지 비율을 유지
   }
 
-  .mainButton {
-    margin-top: 20px; // 이미지와 버튼 사이에 간격 추가
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  
-    &:hover {
-      background-color: #0056b3;
-    }
+.mainButton {
+  margin-top: 20px; // 이미지와 버튼 사이에 간격 추가
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
   }
+}

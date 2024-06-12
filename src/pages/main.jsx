@@ -22,10 +22,11 @@ function Main() {
       </header>
 
       <div className='contentBunch'>
-        <section className="content" data-aos="fade-up" data-aos-delay="900">
+        {/* section의 padding의 높이가 커질 수록 data-aos-delay의 시간을 늘려줘야 자연스러운 애니메이션이 연출됨 */}
+        <section className="content" data-aos="fade-up" data-aos-delay="500">
           <div>
             <h2>맞춤형 오늘의 날씨 정보</h2>
-            <p>당신이 저장한 위치나, 현재 있는 곳의 날씨 정보를 제공해요.</p>
+            <p>당신이 설정한 위치나, 현재 장소의 날씨 정보를 제공해요.</p>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
@@ -33,11 +34,11 @@ function Main() {
           </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="900">
+        <section className='content' data-aos="fade-up" data-aos-delay="550">
           <div>
             <h2>편리한 길 찾기 서비스</h2>
             <p>
-              출발 위치 주소와 도착 위치 주소를 입력하면 이용할 지하철이나 버스 또는 자가용,
+              출발 위치와 도착 위치를 입력하면 이용할 지하철이나 버스 또는 자가용,
               교통편에 따라 최적의 경로를 제공해요.
             </p>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
@@ -47,10 +48,10 @@ function Main() {
           </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="900">
+        <section className='content' data-aos="fade-up" data-aos-delay="500">
           <div>
             <h2>경로 즐겨찾기</h2>
-            <p>자주 이용하는 경로를 저장해서 빠르게 확인해보세요.</p>
+            <p>자주 이용하는 경로를 빠르게 확인해보세요.</p>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
@@ -58,7 +59,7 @@ function Main() {
           </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="900">
+        <section className='content' data-aos="fade-up" data-aos-delay="550">
           <div>
             <h2>알림 설정</h2>
             <p>
