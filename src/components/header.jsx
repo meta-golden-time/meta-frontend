@@ -5,9 +5,8 @@ export default function Header() {
   
   return(
     <>
-    <section >
+    <section className='headerMenu'>
       <HeaderMenuBar />
-      <hr />
     </section>
     </>
   )

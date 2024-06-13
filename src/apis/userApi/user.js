@@ -1,24 +1,23 @@
-import axios from 'axios';
-import superagent from 'superagent';
-import { format } from 'date-fns';
-import Swal from 'sweetalert2';
+import { axiosInstance } from './axiosInstance';
 
-const API_URL = 'http://localhost:4000';
 
 export const postRegister = async (data) => {
   try {
-    const response = await fetch(`${API_URL}/users/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    return result;
+    const response = await axiosInstance.post('/users/register', data);
+    return response.data;
   } catch (error) {
-    console.error('Error during registration:', error);
+    console.error('Error during login:', error);
+    throw error;
+  }
+};
+
+export const postLogin = async (data) => {
+  console.log("🚀 ~ postLogin ~ data:", data)
+  try {
+    const response = await axiosInstance.post('/auth/login', data);
+    return response.data;
+  } catch (error) {
+    console.error('Error during login:', error.response?.data || error.message);
     throw error;
   }
 };
