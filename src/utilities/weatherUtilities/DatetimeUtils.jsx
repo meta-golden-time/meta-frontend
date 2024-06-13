@@ -18,31 +18,46 @@ export function getDayMonthFromDate() {
 }
 
 export function transformDateFormat() {
-  const month = date.toLocaleString('en-US', { month: '2-digit' });
-  const day = date.toLocaleString('en-US', { day: '2-digit' });
-  const year = date.getFullYear();
-  const time = date.toLocaleString('en-US', {
+  const date = new Date();
+  const options = {
+    timeZone: 'Asia/Seoul', // 한국 시간대 설정
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hourCycle: 'h23',
-  });
-
-  const newFormatDate = year.toString().concat('-', month, '-', day, ' ', time);
+    hourCycle: 'h23'
+  };
+  
+  // 한국 시간대로 변환된 날짜와 시간 문자열 생성
+  const year = date.toLocaleString('en-US', { year: 'numeric', timeZone: 'Asia/Seoul' });
+  const month = date.toLocaleString('en-US', { month: '2-digit', timeZone: 'Asia/Seoul' });
+  const day = date.toLocaleString('en-US', { day: '2-digit', timeZone: 'Asia/Seoul' });
+  const time = date.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Seoul' });
+  
+  const newFormatDate = `${year}-${month}-${day} ${time}`;
   return newFormatDate;
 }
 
 export function getUTCDatetime() {
-  const utcTime = date.toLocaleString('en-US', {
+  const date = new Date();
+  const kstTime = date.toLocaleString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     hourCycle: 'h23',
-    timeZone: 'UTC',
+    timeZone: 'Asia/Seoul', // 한국 시간대 설정
   });
 
-  const isoDateString = new Date().toISOString();
-  const utcDate = isoDateString.split('T')[0].concat(' ', utcTime);
-  return utcDate;
+  const kstDateString = date.toLocaleString('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    timeZone: 'Asia/Seoul', // 한국 시간대 설정
+  });
+
+  const kstDate = kstDateString.concat(' ', kstTime);
+  return kstDate;
 }
 
 export function getUTCTime() {

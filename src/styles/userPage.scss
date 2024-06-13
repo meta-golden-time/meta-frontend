@@ -1,77 +1,119 @@
 .user-page {
   font-family: Arial, sans-serif;
-}
-
-.header-links span {
-  margin-left: 10px;
-}
-
-.welcome-message {
-  text-align: right;
-  margin-right: 10px;
-}
-
-main {
   padding: 20px;
-}
+  background-color: #f0f4f8;
+  color: #333;
 
-.user-info {
-  display: flex;
-  justify-content: space-between;
-}
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 
-.weather {
-  display: flex;
-  align-items: center;
-}
+    .weather {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
 
-.weather-icon {
-  font-size: 50px;
-}
+      .weather-icon {
+        font-size: 50px;
+        margin-right: 20px;
+      }
 
-.weather-details {
-  margin-left: 10px;
-}
+      .weather-details {
+        h2 {
+          font-size: 24px;
+          margin: 0;
+        }
 
-.user-details {
-  display: flex;
-  align-items: center;
-}
+        p {
+          margin: 5px 0;
+          font-size: 18px;
+        }
+      }
+    }
 
-.user-photo {
-  width: 50px;
-  height: 50px;
-  background-color: black;
-  margin-right: 10px;
-}
+    .user-details {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
 
-.user-info-text p {
-  margin: 0;
-}
+      .user-photo {
+        width: 60px;
+        height: 60px;
+        background: #ccc;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
 
-.user-info-text button {
-  display: block;
-  margin-top: 5px;
-}
+      .user-info-text {
+        p {
+          margin: 5px 0;
+          font-size: 16px;
+        }
 
-.address {
-  margin: 20px 0;
-}
+        button {
+          display: block;
+          width: 100%;
+          margin: 10px 0;
+          padding: 10px;
+          font-size: 14px;
+          border: none;
+          border-radius: 5px;
+          background-color: #007bff;
+          color: #fff;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
 
-.bookmarks {
-  margin-top: 20px;
-}
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
+      }
+    }
+  }
 
-.bookmark-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .address {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-top: 1px solid #ccc;
-  margin-top: 20px;
+  .bookmarks {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .bookmark-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #e2e6ea;
+      }
+
+      span {
+        font-size: 16px;
+      }
+    }
+  }
 }

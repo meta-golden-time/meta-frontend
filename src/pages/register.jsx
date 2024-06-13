@@ -6,7 +6,7 @@ import $ from 'jquery';
 import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-//////test
+//////api 요청
 import { postRegister } from '../apis/userApi/user';
 /////////////
 import '../styles/users/register.css';  // CSS 파일을 import 합니다.
