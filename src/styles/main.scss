@@ -1,44 +1,66 @@
+// 배경 및 레이아웃
+.headerBack {
+  height: 700px;
+  background-image : url('@img/main/buildings_main_backimg.png'); // 배경이미지
+  background-size : cover
+  }
+.contentBunch {
+  width: 1150px;
+  margin: auto;
+  // margin: 0 auto; // 전체 레이아웃 가운데 정렬
+  section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    // grid-template-rows: 100px 100px;
+    grid-gap: 30px;
+  }
+  // div {
 
+  // }
+
+  }
+
+// 텍스트 배치 및 폰트
 .app { // 전체 레이아웃
   font-family: 'Noto Sans KR', sans-serif;
-  width: 100%;
-  // height: 300vh; // 전체 화면 높이 설정
+  // width: 100%;
+  
+// 헤더
   .headerTitle {
-    text-align: center;
-    padding: 130px 0px 300px 0px; // 콘텐츠 여백 상 하 간격 조절
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem; // h1 태그와 p 태그 사이의 간격 줄임
-      color: #007bff;
-      }
-    h1 p {
-      margin-top: 0; // p 태그의 상단 마진 제거
+    text-align: center; // 텍스트 가운데 정렬
+    margin: 130px 0 300px; // 콘텐츠 여백 상, 좌우, 하 간격 조절
+  }
+  h1 {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 0.5rem; // h1 태그와 p 태그 사이의 간격 줄임
     }
+  h1 p {
+    margin-top: 0; // p 태그의 상단 마진 제거
       }
-.contentBunch {
-  max-width: 850px; // 최대 가로 폭
-  margin: 0 auto; // 전체 레이아웃 가운데 정렬
+
+  // 내용
   section {
-    margin: 50px 5px;
-    padding: 200px 0px;
+    margin: 300px 0;
+    // width: 100%;
+    height: 600px;
     h2 {
       font-size: 1.5rem;
       color: #007bff;
       margin-bottom: 20px; // 제목과 내용의 간격 조절
       }
-      p {
-        font-size: 2rem;
-        line-height: 1.5;
-        margin-top: 0px;
-        margin-bottom: 30px; // 내용의 문단 간격 조절
-        }
-        }
+    p {
+      font-size: 2rem;
+      line-height: 1.3; // 내용의 문단 간격 조절
       }
-    }
-          
+      }
+}
+      // display: inline -> div로 묶인 요소 박스를 한 줄에 출력할 수 있다.
+
+// 임시, 이미지 및 버튼
 .mainImage {
-    max-width: 100px;
-    height: auto; // 높이를 자동 조절하여 이미지 비율을 유지
+    width: 700px;
+    height: 400px; // 높이를 자동 조절하여 이미지 비율을 유지
   }
 
 .mainButton {

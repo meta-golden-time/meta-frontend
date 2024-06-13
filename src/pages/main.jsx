@@ -8,70 +8,88 @@ import { useEffect } from 'react';
 import Aos from 'aos';
 import 'aos/dist/aos.css'; // AOS 스타일시트
 import '@styles/main.scss' // 커스텀 스타일시트
-import image from '../testimage/testright.png'; // 이미지 파일 가져오기
+import image from '@img/main/map_page_img.png'; // 이미지 파일 가져오기
 
 function Main() {
   useEffect(() => {
-    Aos.init({ duration: 1200 }); // AOS 애니메이션 초기화 및 지속시간 설정
+    Aos.init({ duration: 1100 }); // AOS 애니메이션 초기화 및 지속시간 설정
   }, []);
 
   return (
     <div className="app">
-      <header className="headerTitle" data-aos="fade-down">
+      <header className="headerBack">
+        <div className="headerTitle" data-aos="fade-down">
           <h1>당신의 바쁜 아침 출근 길을 <p>도와줄 첫 번째 비서</p></h1>
+        </div>
       </header>
 
       <div className='contentBunch'>
-        {/* section의 padding의 높이가 커질 수록 data-aos-delay의 시간을 늘려줘야 자연스러운 애니메이션이 연출됨 */}
-        <section className="content" data-aos="fade-up" data-aos-delay="500">
-          <div>
+        <section className="content" data-aos="fade-up" data-aos-delay="100">
+          <div className='divWeather'>
             <h2>맞춤형 오늘의 날씨 정보</h2>
             <p>당신이 설정한 위치나, 현재 장소의 날씨 정보를 제공해요.</p>
+          </div>
+          <div className='divWeaterImg'>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
+          </div>
+          <div className='divWeaterBut'>
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
             </button>
           </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="550">
+        <section className='content' data-aos="fade-up" data-aos-delay="100">
           <div>
             <h2>편리한 길 찾기 서비스</h2>
             <p>
               출발 위치와 도착 위치를 입력하면 이용할 지하철이나 버스 또는 자가용,
               교통편에 따라 최적의 경로를 제공해요.
             </p>
+          </div>
+          <div>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
+          </div>
+          <div>
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
             </button>
           </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="500">
+        <section className='content' data-aos="fade-up" data-aos-delay="100">
           <div>
             <h2>경로 즐겨찾기</h2>
             <p>자주 이용하는 경로를 빠르게 확인해보세요.</p>
+          </div>
+          <div>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
+          </div>
+          <div>
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
             </button>
-          </div>
+            </div>
         </section>
 
-        <section className='content' data-aos="fade-up" data-aos-delay="550">
+        <section className='content' data-aos="fade-up" data-aos-delay="100">
           <div>
             <h2>알림 설정</h2>
             <p>
               이제는 졸아도 안심하세요. 원하는 교통 수단으로 경로를 선택하면 도착 10분 전 알림 받을
               수 있어요.
             </p>
+          </div>
+          <div>
             <img src={image} alt="" className="mainImage" data-aos="zoom-out-right" />
+          </div>
+          <div>
             <button className="mainButton" data-aos="fade-up">
               클릭하세요
             </button>
           </div>
         </section>
+
       </div>
     </div>
   );
