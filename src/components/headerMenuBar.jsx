@@ -24,11 +24,11 @@ import { useTheme } from '@mui/material/styles';
 
 // 이미지 가져오기
 import myLogo from '../img/main/goldenTimeLogo.png';
-import { useNavigate } from 'react-router-dom';
+
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/,
-  Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting' };
+  Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting',  고객센터: 'board' };
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
