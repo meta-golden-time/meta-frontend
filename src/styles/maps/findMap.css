@@ -46,8 +46,6 @@ input {
 
 
 .scrollable-results {
-
-
   max-height: 370px; /* 적절한 높이로 설정 */
   overflow-y: auto;
 }

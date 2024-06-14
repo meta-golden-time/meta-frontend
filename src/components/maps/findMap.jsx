@@ -216,37 +216,6 @@ const PathFinder = () => {
   }
 
 
-  const handleSearchAddressChange = (e) => {
-    const { name, value } = e.target;
-    setSearchAddress((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const handleResultClick = (result) => {
-    const lat = result.y;
-    const lng = result.x;
-    setPoint({ lat, lng }, searchType);
-    setSearchResults([]);
-  }
-
-  const openModal = (url) => {
-    setSelectedUrl(url);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setSelectedUrl('');
-    setModalIsOpen(false);
-  };
-
-  const searchMap = (addressType, searchType) => {
-    const ps = new kakao.maps.services.Places();
-    ps.keywordSearch(searchAddress[addressType], (data, status) => {
-      if (status === kakao.maps.services.Status.OK) {
-        setSearchType(searchType);
-        setSearchResults(data);
-      }
-    });
-  }
 
    const handleBookMarkClick = () => {
     console.log(pointObj)
