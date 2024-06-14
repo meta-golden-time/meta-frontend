@@ -1,5 +1,5 @@
 {
-  "scripts": {
+  "scripts": { 
     "dev": "vite"
   },
   "dependencies": {

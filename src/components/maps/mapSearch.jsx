@@ -11,7 +11,7 @@ const MapSearch = () => {
   let markers = []; // markers 배열을 컴포넌트 범위에서 정의
 
   useEffect(() => {
-    const mapContainer = document.getElementById('map-search');
+    const mapContainer = document.getElementById('map'); // 지도 div
     const mapOptions = {
       center: new kakao.maps.LatLng(37.566826, 126.9786567),
       level: 3,
@@ -180,23 +180,33 @@ const MapSearch = () => {
   }, [map, keyword]);
 
   return (
-    <div className="map-search">
-      <div className="left-panel">
-        <TextField
-          label="검색어를 입력하세요"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <Button variant="contained" fullWidth id="searchBtn">
-          검색
-        </Button>
+    <div className="map_wrap">
+      <div id="menu_wrap" className="bg_white">
+        <div className="option">
+          <TextField
+            label="검색어를 입력하세요"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            InputProps={{
+              style: {
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center'
+              }
+            }}
+          />
+          <Button variant="contained" fullWidth id="searchBtn">
+            검색
+          </Button>
+        </div>
+        <hr />
         <ul id="placesList" className="places-list"></ul>
         <div id="pagination"></div>
       </div>
-      <div id="map-search" className="map"></div>
+      <div id="map" className="map"></div>
     </div>
   );
 };

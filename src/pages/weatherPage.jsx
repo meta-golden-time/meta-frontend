@@ -19,7 +19,6 @@ import {
 
 function WeatherMap() {
 
-  console.log('만세만세11111111111111111111111111')
   const [todayWeather, setTodayWeather] = useState(null);
   const [todayForecast, setTodayForecast] = useState([]);
   const [weekForecast, setWeekForecast] = useState(null);
@@ -32,23 +31,34 @@ function WeatherMap() {
     setIsLoading(true);
 
     const currentDate = transformDateFormat();
+    console.log("🚀 ~ searchChangeHandler ~ currentDate:", currentDate)
+    // const date = new Date();
+    // let dt_now = Math.floor(date.getTime() / 1000);
     const date = new Date();
-    let dt_now = Math.floor(date.getTime() / 1000);
+    // 한국 시간대로 변환
+    const kstDate = new Date(date.getTime() + (9 * 60 * 60 * 1000)); // UTC+9 시간대를 반영
+    
+    // 초 단위 타임스탬프 계산
+    const dt_now = Math.floor(kstDate.getTime() / 1000);
 
     try {
       const [todayWeatherResponse, weekForecastResponse] =
-        await fetchWeatherData(latitude, longitude);
+      await fetchWeatherData(latitude, longitude);
+      console.log("🚀 ~ searchChangeHandler ~ todayWeatherResponse:", todayWeatherResponse)
+      console.log("🚀 ~ searchChangeHandler ~ weekForecastResponse:", weekForecastResponse)
       const all_today_forecasts_list = getTodayForecastWeather(
         weekForecastResponse,
         currentDate,
         dt_now
       );
 
+      console.log("🚀 ~ searchChangeHandler ~ all_today_forecasts_list:", all_today_forecasts_list)
       const all_week_forecasts_list = getWeekForecastWeather(
         weekForecastResponse,
         ALL_DESCRIPTIONS
       );
-
+      
+      console.log("🚀 ~ searchChangeHandler ~ all_week_forecasts_list:", all_week_forecasts_list)
       setTodayForecast([...all_today_forecasts_list]);
       setTodayWeather({ city: enteredData.label, ...todayWeatherResponse });
       setWeekForecast({

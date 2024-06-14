@@ -1,16 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Modal from 'react-modal'; // react-modal 임포트
+import Swal from 'sweetalert2';
 import '../../styles/maps/findMap.css'; // 추가: CSS 파일 임포트
 
 const { kakao } = window;
+import { postBookMark } from '../../apis/userApi/bookMark';
+
+Modal.setAppElement('#root'); // Modal 사용을 위한 설정
 
 const PathFinder = () => {
   const [map, setMap] = useState(null);
+  const [polyline, setPolyline] = useState(null); // 라인을 저장할 상태 추가
   const [pointObj, setPointObj] = useState({
     startPoint: { marker: null, lat: null, lng: null },
     endPoint: { marker: null, lat: null, lng: null },
   });
+
+  const [searchAddress, setSearchAddress] = useState({
+    start: '',
+    end: '',
+  });
+  const [searchResults, setSearchResults] = useState([]); // 검색 결과 리스트를 저장할 상태 변수
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 상태 변수
+  const [selectedUrl, setSelectedUrl] = useState(''); // 선택된 URL 상태 변수
+
+  const [bookMarkStart, setBookMarkStart] = useState({
+    startPoint: {name:null, lat: null, lng: null },
+    endPoint: {name:null, lat: null, lng: null },
+  });
+
+  const [searchType, setSearchType] = useState();
 
   async function getCarDirection() {
     const REST_API_KEY = '105cb5cb6a281f8ff2fc11625b323b92';
@@ -40,21 +61,45 @@ const PathFinder = () => {
         });
       });
 
-      const polyline = new kakao.maps.Polyline({
+      // 기존의 라인이 있다면 삭제
+      if (polyline) {
+        polyline.setMap(null);
+      }
+
+      const newPolyline = new kakao.maps.Polyline({
         path: linePath,
-        strokeWeight: 5,
+        strokeWeight: 10,
         strokeColor: '#2d00f3',
         strokeOpacity: 0.7,
         strokeStyle: 'solid',
       });
-      polyline.setMap(map);
+      newPolyline.setMap(map);
+
+      // 새로 생성된 라인을 상태로 저장
+      setPolyline(newPolyline);
+
+      // 출발지와 목적지 초기화
+      setPointObj({
+        startPoint: { marker: null, lat: null, lng: null },
+        endPoint: { marker: null, lat: null, lng: null },
+      });
+
+      // 검색 결과 초기화
+      setSearchResults([]);
+
+      // 검색 주소 초기화
+      setSearchAddress({
+        start: '',
+        end: '',
+      });
+
     } catch (error) {
       console.error('Error:', error);
     }
   }
 
   useEffect(() => {
-    const mapContainer = document.getElementById('map');
+    const mapContainer = document.getElementById('maps');
     const mapOptions = {
       center: new kakao.maps.LatLng(33.452613, 126.570888),
       level: 3,
@@ -94,34 +139,176 @@ const PathFinder = () => {
     });
   }
 
+  const handleSearchAddressChange = (e) => {
+    const { name, value } = e.target;
+    setSearchAddress((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const handleResultClick = (result) => {
+    const lat = result.y;
+    const lng = result.x;
+    setPoint({ lat, lng }, searchType);
+    setSearchResults([]);
+  }
+
+  const openModal = (url) => {
+    setSelectedUrl(url);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedUrl('');
+    setModalIsOpen(false);
+  };
+
+  const searchMap = (addressType, searchType) => {
+    const ps = new kakao.maps.services.Places();
+    ps.keywordSearch(searchAddress[addressType], (data, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        setSearchType(searchType);
+        setSearchResults(data);
+      }
+    });
+  }
+
+  const handleBookMarkClick = () => {
+    console.log(pointObj)
+    if(pointObj.startPoint.lat == null || pointObj.endPoint.lat == null)
+    {
+      Swal.fire({
+        icon: 'warning',
+        title: '정보 체크',
+        text: '출발지 또는 도착지 정보가 없습니다.',
+    });
+    return;
+    }
+    setBookMarkStart({
+      startPoint: {name:searchAddress.start , lat: pointObj.startPoint.lat, lng: pointObj.startPoint.lng },
+      endPoint: {name:searchAddress.end, lat: pointObj.endPoint.lat, lng: pointObj.endPoint.lng },
+    });
+    console.log("BookMarkStartBookMarkStart",bookMarkStart)
+   
+    bookMarkPost();
+  }
+
+  const data = {
+    location_S: bookMarkStart.startPoint.name,
+    lat_S: bookMarkStart.startPoint.lat,
+    lag_S:bookMarkStart.startPoint.lng,
+    location_E: bookMarkStart.endPoint.name,
+    lat_E: bookMarkStart.endPoint.lat,
+    lag_E: bookMarkStart.endPoint.lng,
+  };
+  const bookMarkPost = async () =>{
+    console.log("북마크 전송")
+    const data = {
+      location_S: bookMarkStart.startPoint.name,
+      lat_S: bookMarkStart.startPoint.lat,
+      lag_S:bookMarkStart.startPoint.lng,
+      location_E: bookMarkStart.endPoint.name,
+      lat_E: bookMarkStart.endPoint.lat,
+      lag_E: bookMarkStart.endPoint.lng,
+    };
+    try {
+      const result = await postBookMark(data);
+      console.log("resultresultresultresult",result);
+      Swal.fire({
+          title: '즐겨찾기',
+          text: '즐겨찾기가 되었습니다.',
+          icon: 'success'
+      }).then(() => {
+      });
+    } catch (error) {
+        Swal.fire('Error', '즐겨찾기에 실패하였습니다.', 'error');
+    }
+  }
+
   return (
     <div className="path-finder">
       <div className="left-panel">
         <div className="input-group">
-          <TextField label="출발지" variant="outlined" fullWidth margin="normal" />
-          <Button variant="contained" className="search-button">검색</Button>
+          <TextField
+            label="출발지"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="start"
+            value={searchAddress.start} // value 추가
+            onChange={handleSearchAddressChange}
+            InputProps={{
+              style: {
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center'
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            className="search-button"
+            onClick={() => searchMap('start', 'startPoint')}
+          >
+            검색
+          </Button>
         </div>
         <div className="input-group">
-          <TextField label="목적지" variant="outlined" fullWidth margin="normal" />
-          <Button variant="contained" className="search-button">검색</Button>
+          <TextField
+            label="목적지"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="end"
+            value={searchAddress.end} // value 추가
+            onChange={handleSearchAddressChange}
+            InputProps={{
+              style: {
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center'
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            className="search-button"
+            onClick={() => searchMap('end', 'endPoint')}
+          >
+            검색
+          </Button>
         </div>
-        <Button variant="contained" onClick={() => getCarDirection()} fullWidth>
+        <Button variant="contained" onClick={getCarDirection} fullWidth>
           길찾기
         </Button>
-        <Button variant="contained" color="secondary" fullWidth>
+        <Button variant="contained" color="secondary" onClick={handleBookMarkClick} fullWidth>
           즐겨찾기
         </Button>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <button onClick={() => setPoint({ lat: 33.452613, lng: 126.570888 }, 'startPoint')}>
-            출발지1 지정
-          </button>
-          <button onClick={() => setPoint({ lat: 33.45058, lng: 126.574942 }, 'endPoint')}>
-            목적지1 설정
-          </button>
-          <button onClick={() => getCarDirection()}>경로찾기</button>
+        <div className="scrollable-results">
+          {searchResults.length > 0 && (
+            <ul className="search-results">
+              {searchResults.map((result, index) => (
+                <li key={index}>
+                  <div>{result.place_name}</div>
+                  <button onClick={() => openModal(result.place_url)}>장소 정보보기</button>
+                  <button onClick={() => handleResultClick(result)}>장소 선택</button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
-      <div id="map" className="map" />
+      <div id="maps" className="maps" />
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Place URL"
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <h1>장소 정보보기</h1>
+        <button onClick={closeModal} className="modal-close-button">Close</button>
+        <iframe src={selectedUrl} className="modal-iframe" />
+      </Modal>
     </div>
   );
 };
