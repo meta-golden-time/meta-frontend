@@ -17,7 +17,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         Golden Time
       </Link>{' '}
       {new Date().getFullYear()}
@@ -25,6 +25,54 @@ function Copyright(props) {
     </Typography>
   );
 }
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyBGwGGwfFQ5cz7ml1w_yOWbfrkb7jBtqMU",
+    authDomain: "maps-86696.firebaseapp.com",
+    projectId: "maps-86696",
+    storageBucket: "maps-86696.appspot.com",
+    messagingSenderId: "911910709381",
+    appId: "1:911910709381:web:8f45b08e415af83ef161ec",
+    measurementId: "G-3M4JKBCZTQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+function handleGoogleLogin() {
+  const provider = new GoogleAuthProvider(); // provider 구글 설정
+  signInWithPopup(auth, provider)// 팝업창 띄워서 로그인
+    .then((data) => {
+      setUserData(data.user); // user data 설정
+      console.log(data); // console에 UserCredentialImpl 출력
+      })
+      .catch((err) => {
+      console.log(err);
+      });
+  return (
+    <div>
+      <h3>구글 로그인 테스트</h3>
+      <button onClick={handleGoogleLogin}>로그인</button>
+      <h4>로그인하면 아래쪽에 이름이 나타납니다.</h4>
+        <div>
+          {userData
+          ? "당신의 이름은 : " + userData.displayName
+          : "로그인 버튼을 눌러주세요 :)"}
+        </div>
+    </div>
+  );
+}
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
