@@ -42,6 +42,7 @@ const MapSearch = () => {
       };
 
       const placesSearchCB = (data, status, pagination) => {
+        console.log("🚀 ~ placesSearchCB ~ data:", data)
         if (status === kakao.maps.services.Status.OK) {
           displayPlaces(data);
           displayPagination(pagination);
