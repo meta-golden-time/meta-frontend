@@ -23,8 +23,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 // 이미지 가져오기
-import myLogo from '@img/main/goldenTimeLogo.png';
-
+import myLogo from '../img/main/goldenTimeLogo.png';
+import { useNavigate } from 'react-router-dom';
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/ };
@@ -92,14 +92,7 @@ function HeaderMenuBar() {
 
 
   return (
-    // AppBar 컴포넌트를 사용하여 상단 바를 생성
-    <AppBar
-    color={isScrolled ? 'inherit' : 'transparent'} // 스크롤 여부에 따라 배경색 변경
-    position="fixed"
-    style={{ width: '100%'}}
-    
-    >
-
+    <AppBar className=".MuiAppBar-colorTransparent" position="static" style={{ width: '100%' }}> {/* AppBar 컴포넌트를 사용하여 상단 바를 생성 */}
       <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
         {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
         <Toolbar disableGutters>
