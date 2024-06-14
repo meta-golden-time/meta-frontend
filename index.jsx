@@ -1,13 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
-import Main from '@pages/main'
-import LoginPage from '@pages/loginPage'
-import RegisterPage from '@pages/register'
+import Main from '@pages/main';
+import LoginPage from '@pages/loginPage';
+import RegisterPage from '@pages/register';
+import LoginRyuPage from '@pages/signInPage';
+import RegisterRyuPage from '@pages/signUpPage';
 import UserPage from '@pages/userPage';
-import MapPage from '@pages/map.jsx'
-
+import MapPage from '@pages/map.jsx';
+import WeatherPage from '@pages/weatherPage';
+import ChatPage from '@pages/chatPage';
 
 // userPage에 들어가는 리스트 데이터
 function App() {
@@ -17,23 +20,33 @@ function App() {
     { id: 3, from: '장소 5', to: '장소 6' },
   ];
 
+  const location = useLocation();
+  const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
+
   return (
     <>
-    <BrowserRouter>
-    <Header/>
+      {!noHeaderPaths.includes(location.pathname) && <Header />}
       <Routes>
-        <Route path='/' element={<Main/>}/>
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/register' element={<RegisterPage/>}/>
-        <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />}/>
-        <Route path='/maps' element={<MapPage/>}/>
-        <Route path='/weather' element={<WeatherPage/>}/>
+        <Route path='/' element={<Main />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/login_ryu' element={<LoginRyuPage />} />
+        <Route path='/register_ryu' element={<RegisterRyuPage />} />
+        <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />} />
+        <Route path='/maps' element={<MapPage />} />
+        <Route path='/weather' element={<WeatherPage />} />
+        <Route path='/chatting' element={<ChatPage />} />
       </Routes>
-    </BrowserRouter>
     </>
   );
 }
 
+const AppWrapper = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
-root.render(<App />);
+root.render(<AppWrapper />);

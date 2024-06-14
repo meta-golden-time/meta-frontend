@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Modal from 'react-modal'; // react-modal 임포트
 import Swal from 'sweetalert2';
@@ -18,8 +14,8 @@ const PathFinder = () => {
   const [map, setMap] = useState(null);
   const [polyline, setPolyline] = useState(null); // 라인을 저장할 상태 추가
   const [pointObj, setPointObj] = useState({
-    startPoint: { marker: null, lat: null, lng: null, placeName:'' },
-    endPoint: { marker: null, lat: null, lng: null, placeName:'' },
+    startPoint: { marker: null, lat: null, lng: null },
+    endPoint: { marker: null, lat: null, lng: null },
   });
 
   const [searchAddress, setSearchAddress] = useState({
@@ -27,6 +23,7 @@ const PathFinder = () => {
     end: '',
   });
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 리스트를 저장할 상태 변수
+  const [bookMarkList, setBbookMarkList] = useState([]); // 북마크 리스트 받아오기 
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 상태 변수
   const [selectedUrl, setSelectedUrl] = useState(''); // 선택된 URL 상태 변수
 
@@ -35,22 +32,9 @@ const PathFinder = () => {
     endPoint: {name:null, lat: null, lng: null },
   });
 
-
   const [searchType, setSearchType] = useState();
 
   async function getCarDirection() {
-
-    if(pointObj.startPoint.placeName == '' || pointObj.endPoint.placeName == '')
-      {
-        Swal.fire({
-          icon: 'warning',
-          title: '입력없음',
-          text: '출발지 또는 도착지 정보가 없습니다. ',
-        });
-        return;
-      }
-
-
     const REST_API_KEY = '105cb5cb6a281f8ff2fc11625b323b92';
     const url = 'https://apis-navi.kakaomobility.com/v1/directions';
     const origin = `${pointObj.startPoint.lng},${pointObj.startPoint.lat}`;
@@ -95,14 +79,10 @@ const PathFinder = () => {
       // 새로 생성된 라인을 상태로 저장
       setPolyline(newPolyline);
 
-
-
-      // 출발지와 도착지 초기화
+      // 출발지와 목적지 초기화
       setPointObj({
-        startPoint: { marker: null, lat: null, lng: null, placeName:'' },
-        endPoint: { marker: null, lat: null, lng: null, placeName:'' },
-
-
+        startPoint: { marker: null, lat: null, lng: null },
+        endPoint: { marker: null, lat: null, lng: null },
       });
 
       // 검색 결과 초기화
@@ -148,8 +128,7 @@ const PathFinder = () => {
     }
   }, [map, pointObj]);
 
-  function setPoint({ lat, lng }, pointType, placeName) {
-    console.log("🚀 ~ setPoint ~ placeName:", placeName)
+  function setPoint({ lat, lng }, pointType) {
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.setCenter(moveLatLon);
     let marker = new kakao.maps.Marker({ position: moveLatLon });
@@ -157,7 +136,7 @@ const PathFinder = () => {
       if (prev[pointType].marker !== null) {
         prev[pointType].marker.setMap(null);
       }
-      return { ...prev, [pointType]: { marker, lat, lng, placeName } };
+      return { ...prev, [pointType]: { marker, lat, lng } };
     });
   }
 
@@ -167,20 +146,9 @@ const PathFinder = () => {
   }
 
   const handleResultClick = (result) => {
-
-    console.log("🚀 ~ handleResultClick ~ result:", result)
     const lat = result.y;
     const lng = result.x;
-    const name = result.place_name;
-    if(searchType == 'startPoint'){
-      searchAddress.start = name;
-    }
-    else{
-      searchAddress.end = name;
-    }
-    
-    setPoint({ lat, lng }, searchType, name);
-
+    setPoint({ lat, lng }, searchType);
     setSearchResults([]);
   }
 
@@ -195,17 +163,6 @@ const PathFinder = () => {
   };
 
   const searchMap = (addressType, searchType) => {
-
-    if(searchAddress[addressType] == '')
-    {
-      Swal.fire({
-        icon: 'warning',
-        title: '검색오류',
-        text: '검색어가 없습니다. 다시 확인 해 주세요.',
-      });
-      return;
-    }
-
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(searchAddress[addressType], (data, status) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -215,29 +172,20 @@ const PathFinder = () => {
     });
   }
 
-
-
-   const handleBookMarkClick = () => {
+  const handleBookMarkClick = () => {
     console.log(pointObj)
-
-    if(pointObj.startPoint.name == '' || pointObj.endPoint.name == '')
-
-
+    if(pointObj.startPoint.lat == null || pointObj.endPoint.lat == null)
     {
       Swal.fire({
         icon: 'warning',
         title: '정보 체크',
         text: '출발지 또는 도착지 정보가 없습니다.',
-
-
-      });
+    });
     return;
     }
     setBookMarkStart({
-      startPoint: {name:pointObj.startPoint.placeName , lat: pointObj.startPoint.lat, lng: pointObj.startPoint.lng },
-      endPoint: {name:pointObj.endPoint.placeName, lat: pointObj.endPoint.lat, lng: pointObj.endPoint.lng },
-
-
+      startPoint: {name:searchAddress.start , lat: pointObj.startPoint.lat, lng: pointObj.startPoint.lng },
+      endPoint: {name:searchAddress.end, lat: pointObj.endPoint.lat, lng: pointObj.endPoint.lng },
     });
     console.log("BookMarkStartBookMarkStart",bookMarkStart)
    
@@ -262,11 +210,6 @@ const PathFinder = () => {
       lat_E: bookMarkStart.endPoint.lat,
       lag_E: bookMarkStart.endPoint.lng,
     };
-
-
-    console.log("🚀 ~ bookMarkPost ~ data:", data)
-
-
     try {
       const result = await postBookMark(data);
       console.log("resultresultresultresult",result);
@@ -283,97 +226,15 @@ const PathFinder = () => {
 
   return (
     <div className="path-finder">
-      <div className="left-panel">
-        <div className="input-group">
-          <TextField
-            label="출발지"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="start"
-            value={searchAddress.start} // value 추가
-            onChange={handleSearchAddressChange}
-            InputProps={{
-              style: {
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center'
-              }
-            }}
-          />
-          <Button
-            variant="contained"
-            className="search-button"
-            onClick={() => searchMap('start', 'startPoint')}
-          >
-            검색
-          </Button>
-        </div>
-        <div className="input-group">
-          <TextField
-
-
-            label="도착지"
-
-
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="end"
-            value={searchAddress.end} // value 추가
-            onChange={handleSearchAddressChange}
-            InputProps={{
-              style: {
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center'
-              }
-            }}
-          />
-          <Button
-            variant="contained"
-            className="search-button"
-            onClick={() => searchMap('end', 'endPoint')}
-          >
-            검색
-          </Button>
-
-        </div>
-
-        <div className="button-group">
-          <Button variant="contained" onClick={getCarDirection} fullWidth>
-            길찾기
-          </Button>
-          <Button variant="contained" color="secondary" onClick={handleBookMarkClick} fullWidth>
-            즐겨찾기
-          </Button>
-        </div>
-         
-          <div>출발지: {pointObj.startPoint.placeName}</div>          
-          <div>도착지: {pointObj.endPoint.placeName}</div>          
-        
-        <div className="scrollable-results search-results-container">
-
-
+      <div className="left-panel">        
+        <div className="scrollable-results">
           {searchResults.length > 0 && (
             <ul className="search-results">
               {searchResults.map((result, index) => (
                 <li key={index}>
-
-
-                  <Card sx={{ maxWidth: 345 }}>                    
-                    <CardContent>
-                      <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 'bold' }}>
-                        {result.place_name}
-                      </Typography>                      
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" onClick={() => openModal(result.place_url)}>정보보기</Button>
-                      <Button size="small" onClick={() => handleResultClick(result)}>장소선택</Button>
-                    </CardActions>
-                  </Card>
-
-
+                  <div>{result.place_name}</div>
+                  <button onClick={() => openModal(result.place_url)}>장소 정보보기</button>
+                  <button onClick={() => handleResultClick(result)}>장소 선택</button>
                 </li>
               ))}
             </ul>
