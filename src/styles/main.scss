@@ -8,15 +8,20 @@
   width: 1150px;
   margin: auto;
   // margin: 0 auto; // 전체 레이아웃 가운데 정렬
-  section {
+  content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     // grid-template-rows: 100px 100px;
     grid-gap: 30px;
+    align-items: center;
   }
-  // div {
-
-  // }
+  .divWeather {
+    grid-column: 1 / 3;
+    text-align: left;
+  }
+  .divWeaterImg{
+    grid-column: 2 / 3;
+  }
 
   }
 
