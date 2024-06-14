@@ -288,7 +288,6 @@ const PathFinder = () => {
             label="출발지"
             variant="outlined"
             fullWidth
-            margin="normal"
             name="start"
             value={searchAddress.start} // value 추가
             onChange={handleSearchAddressChange}
@@ -311,14 +310,9 @@ const PathFinder = () => {
         </div>
         <div className="input-group">
           <TextField
-
-
             label="도착지"
-
-
             variant="outlined"
             fullWidth
-            margin="normal"
             name="end"
             value={searchAddress.end} // value 추가
             onChange={handleSearchAddressChange}
