@@ -335,7 +335,7 @@ const PathFinder = () => {
             즐겨찾기
           </Button>
         </div>
-       
+         
           <div>출발지: {pointObj.startPoint.placeName}</div>          
           <div>도착지: {pointObj.endPoint.placeName}</div>          
         
