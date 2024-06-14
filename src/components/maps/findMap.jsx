@@ -94,10 +94,12 @@ const PathFinder = () => {
       // 새로 생성된 라인을 상태로 저장
       setPolyline(newPolyline);
 
+
       // 출발지와 도착지 초기화
       setPointObj({
-        startPoint: { marker: null, lat: null, lng: null, name:'' },
-        endPoint: { marker: null, lat: null, lng: null, name:'' },
+        startPoint: { marker: null, lat: null, lng: null, placeName:'' },
+        endPoint: { marker: null, lat: null, lng: null, placeName:'' },
+
       });
 
       // 검색 결과 초기화
@@ -162,6 +164,7 @@ const PathFinder = () => {
   }
 
   const handleResultClick = (result) => {
+
     console.log("🚀 ~ handleResultClick ~ result:", result)
     const lat = result.y;
     const lng = result.x;
@@ -174,6 +177,7 @@ const PathFinder = () => {
     }
     
     setPoint({ lat, lng }, searchType, name);
+
     setSearchResults([]);
   }
 
@@ -188,6 +192,7 @@ const PathFinder = () => {
   };
 
   const searchMap = (addressType, searchType) => {
+
     if(searchAddress[addressType] == '')
     {
       Swal.fire({
@@ -197,6 +202,7 @@ const PathFinder = () => {
       });
       return;
     }
+
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(searchAddress[addressType], (data, status) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -208,18 +214,22 @@ const PathFinder = () => {
 
   const handleBookMarkClick = () => {
     console.log(pointObj)
+
     if(pointObj.startPoint.name == '' || pointObj.endPoint.name == '')
+
     {
       Swal.fire({
         icon: 'warning',
         title: '정보 체크',
         text: '출발지 또는 도착지 정보가 없습니다.',
+
       });
     return;
     }
     setBookMarkStart({
-      startPoint: {name:pointObj.startPoint.name , lat: pointObj.startPoint.lat, lng: pointObj.startPoint.lng },
-      endPoint: {name:pointObj.endPoint.name, lat: pointObj.endPoint.lat, lng: pointObj.endPoint.lng },
+      startPoint: {name:pointObj.startPoint.placeName , lat: pointObj.startPoint.lat, lng: pointObj.startPoint.lng },
+      endPoint: {name:pointObj.endPoint.placeName, lat: pointObj.endPoint.lat, lng: pointObj.endPoint.lng },
+
     });
     console.log("BookMarkStartBookMarkStart",bookMarkStart)
    
@@ -244,7 +254,9 @@ const PathFinder = () => {
       lat_E: bookMarkStart.endPoint.lat,
       lag_E: bookMarkStart.endPoint.lng,
     };
+
     console.log("🚀 ~ bookMarkPost ~ data:", data)
+
     try {
       const result = await postBookMark(data);
       console.log("resultresultresultresult",result);
@@ -289,7 +301,9 @@ const PathFinder = () => {
         </div>
         <div className="input-group">
           <TextField
+
             label="도착지"
+
             variant="outlined"
             fullWidth
             margin="normal"
@@ -312,6 +326,7 @@ const PathFinder = () => {
             검색
           </Button>
         </div>
+
         <div className="button-group">
           <Button variant="contained" onClick={getCarDirection} fullWidth>
             길찾기
@@ -325,10 +340,12 @@ const PathFinder = () => {
           <div>도착지: {pointObj.endPoint.placeName}</div>          
         
         <div className="scrollable-results search-results-container">
+
           {searchResults.length > 0 && (
             <ul className="search-results">
               {searchResults.map((result, index) => (
                 <li key={index}>
+
                   <Card sx={{ maxWidth: 345 }}>                    
                     <CardContent>
                       <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 'bold' }}>
@@ -340,6 +357,7 @@ const PathFinder = () => {
                       <Button size="small" onClick={() => handleResultClick(result)}>장소선택</Button>
                     </CardActions>
                   </Card>
+
                 </li>
               ))}
             </ul>

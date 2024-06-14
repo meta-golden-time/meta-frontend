@@ -43,7 +43,9 @@ input {
   flex: 1;
 }
 
+
 .scrollable-results {
+
   max-height: 370px; /* 적절한 높이로 설정 */
   overflow-y: auto;
 }
@@ -100,9 +102,11 @@ input {
   cursor: pointer;
 }
 
+
 .button-group {
   display: flex;
   gap: 10px; /* 버튼 사이의 간격 */
   justify-content: space-between;
   margin-top: 10px;
 }
+
