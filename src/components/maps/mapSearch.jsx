@@ -193,7 +193,7 @@ const MapSearch = () => {
             onChange={(e) => setKeyword(e.target.value)}
             InputProps={{
               style: {
-                height: '40px',
+                height: '50px',
                 display: 'flex',
                 alignItems: 'center'
               }

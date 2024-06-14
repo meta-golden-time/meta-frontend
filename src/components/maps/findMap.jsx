@@ -149,7 +149,6 @@ const PathFinder = () => {
   }, [map, pointObj]);
 
   function setPoint({ lat, lng }, pointType, placeName) {
-    console.log("🚀 ~ setPoint ~ placeName:", placeName)
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.setCenter(moveLatLon);
     let marker = new kakao.maps.Marker({ position: moveLatLon });
@@ -168,7 +167,6 @@ const PathFinder = () => {
 
   const handleResultClick = (result) => {
 
-    console.log("🚀 ~ handleResultClick ~ result:", result)
     const lat = result.y;
     const lng = result.x;
     const name = result.place_name;
@@ -183,7 +181,7 @@ const PathFinder = () => {
 
     setSearchResults([]);
   }
-
+  
   const openModal = (url) => {
     setSelectedUrl(url);
     setModalIsOpen(true);
@@ -217,7 +215,9 @@ const PathFinder = () => {
 
 
 
-   const handleBookMarkClick = () => {
+
+
+  const handleBookMarkClick = () => {
     console.log(pointObj)
 
     if(pointObj.startPoint.name == '' || pointObj.endPoint.name == '')
@@ -240,7 +240,7 @@ const PathFinder = () => {
 
     });
     console.log("BookMarkStartBookMarkStart",bookMarkStart)
-   
+
     bookMarkPost();
   }
 
@@ -269,7 +269,6 @@ const PathFinder = () => {
 
     try {
       const result = await postBookMark(data);
-      console.log("resultresultresultresult",result);
       Swal.fire({
           title: '즐겨찾기',
           text: '즐겨찾기가 되었습니다.',
@@ -295,7 +294,8 @@ const PathFinder = () => {
             onChange={handleSearchAddressChange}
             InputProps={{
               style: {
-                height: '40px',
+                height: '50px',
+                width: '230px',
                 display: 'flex',
                 alignItems: 'center'
               }
@@ -324,7 +324,8 @@ const PathFinder = () => {
             onChange={handleSearchAddressChange}
             InputProps={{
               style: {
-                height: '40px',
+                height: '50px',
+                width: '230px',
                 display: 'flex',
                 alignItems: 'center'
               }
@@ -348,7 +349,7 @@ const PathFinder = () => {
             즐겨찾기
           </Button>
         </div>
-         
+        
           <div>출발지: {pointObj.startPoint.placeName}</div>          
           <div>도착지: {pointObj.endPoint.placeName}</div>          
         
