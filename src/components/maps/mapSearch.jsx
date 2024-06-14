@@ -27,7 +27,7 @@ const MapSearch = () => {
     const zoomControl = new kakao.maps.ZoomControl();
     kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
   }, []);
-
+   
   useEffect(() => {
     if (map) {
       const ps = new kakao.maps.services.Places();
