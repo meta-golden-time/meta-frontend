@@ -6,7 +6,8 @@ import Main from '@pages/main'
 import LoginPage from '@pages/loginPage'
 import RegisterPage from '@pages/register'
 import UserPage from '@pages/userPage';
-import MapPage from '@pages/map.jsx'
+import MapPage from '@pages/map.jsx';
+import WeatherPage from '@pages/weatherPage.jsx'
 
 
 // userPage에 들어가는 리스트 데이터
