@@ -1,30 +1,15 @@
-# Base image
-FROM node:20 AS build
-
-# Set working directory
+# 프로젝트 빌드 단계
+FROM node:16-buster AS builder
 WORKDIR /app
-
-# Install dependencies
 COPY package*.json ./
-RUN npm install
-
-# Copy all files
+RUN npm ci
 COPY . .
-
-# Build the project
 RUN npm run build
 
-# Stage 2: Serve the application using nginx
-FROM nginx:1.20-alpine AS serve
+# Production 런타임
+FROM nginxinc/nginx-unprivileged:1.23 AS runner
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /app/build .
 
-# Copy built files from previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port
-EXPOSE 80
-
-# Start nginx
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
