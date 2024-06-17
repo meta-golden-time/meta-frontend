@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal'; // react-modal 임포트
+import Swal from 'sweetalert2';
+import '../../styles/maps/findMap.css'; // 추가: CSS 파일 임포트
+
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Modal from 'react-modal'; // react-modal 임포트
-import Swal from 'sweetalert2';
-import '../../styles/maps/findMap.css'; // 추가: CSS 파일 임포트
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 
 
 
@@ -41,6 +44,13 @@ const PathFinder = () => {
 
 
   const [searchType, setSearchType] = useState();
+
+  const handleKeyDown = (e, type, value) => {
+    if (e.key === 'Enter') {
+      searchMap(type, value);
+    }
+  };
+  
 
   async function getCarDirection() {
 
@@ -287,7 +297,7 @@ const PathFinder = () => {
   return (
     <div className="path-finder">
       <div className="left-panel">
-        <div className="input-group">
+        <Box className="input-group">
           <TextField
             label="출발지"
             variant="outlined"
@@ -296,17 +306,25 @@ const PathFinder = () => {
             value={searchAddress.start} // value 추가
             onChange={handleSearchAddressChange}
             InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    id="searchBtn"
+                  >
+                    <SearchIcon className="search-icon" onClick={() => searchMap('end', searchAddress.end)}
+                    />
+                  </IconButton>
+                </InputAdornment>
+              ),              
               style: {
                 height: '50px',
+                width: '300px',
                 display: 'flex',
                 alignItems: 'center'
               }
             }}
           />
-          <IconButton id="searchBtn" className="search-btn">
-            <SearchIcon className='search-icon'/>
-          </IconButton>
-        </div>
+        </Box>
         <div className="input-group">
           <TextField
             label="도착지"
@@ -316,17 +334,25 @@ const PathFinder = () => {
             value={searchAddress.end} // value 추가
             onChange={handleSearchAddressChange}
             InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    id="searchBtn"
+                  >
+                    <SearchIcon className="search-icon" onClick={() => searchMap('end', searchAddress.end)}
+                    />
+                  </IconButton>
+                </InputAdornment>
+              ),              
+
               style: {
                 height: '50px',
+                width: '300px',
                 display: 'flex',
                 alignItems: 'center'
               }
             }}
           />
-          <IconButton id="searchBtn" className="search-btn">
-            <SearchIcon className='search-icon'/>
-          </IconButton>
-
         </div>
 
         <div className="button-group">

@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import '../../styles/maps/mapSearch.css'; // 추가: CSS 파일 임포트
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 
 
 const { kakao } = window;
@@ -30,7 +31,7 @@ const MapSearch = () => {
     const zoomControl = new kakao.maps.ZoomControl();
     kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
   }, []);
-   
+
   useEffect(() => {
     if (map) {
       const ps = new kakao.maps.services.Places();
@@ -195,6 +196,16 @@ const MapSearch = () => {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    id="searchBtn"
+                  >
+                    <SearchIcon className="search-icon"
+                    />
+                  </IconButton>
+                </InputAdornment>
+              ),
               style: {
                 height: '50px',
                 display: 'flex',
@@ -202,12 +213,7 @@ const MapSearch = () => {
               }
             }}
           />
-          <IconButton id="searchBtn" className='search-btn'>
-            <SearchIcon className='search-icon' />
-          </IconButton>
-          {/* <Button variant="contained" fullWidth id="searchBtn">
-            검색
-          </Button> */}
+
         </div>
         <hr />
         <ul id="placesList" className="places-list"></ul>

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGwGGwfFQ5cz7ml1w_yOWbfrkb7jBtqMU",
@@ -12,4 +12,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-export { app, auth };
+const googleProvider = new GoogleAuthProvider();
+
+const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    // 성공적인 로그인 후 결과 처리
+    console.log(result.user);
+  } catch (error) {
+    console.error(error);
+  }
+};
+export { app, auth, signInWithGoogle };
