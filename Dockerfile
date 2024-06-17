@@ -7,6 +7,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . ./
+RUN npm ci
 RUN npm run build
 
 # Step 2: Serve the Vite app with Nginx
@@ -21,3 +22,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
+
+
+
