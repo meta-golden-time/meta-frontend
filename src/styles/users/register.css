@@ -64,6 +64,22 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
   border-color: #1e90ff;
 }
 
+.email_form input[type="text"] {
+  width: calc(50% - 20px);
+  flex: 1;
+  margin-right: 5px;
+}
+
+.email_form {
+  display: flex;
+  align-items: center;
+}
+
+.email_form select {
+  width: calc( 50% - 20px);
+  flex: none;
+}
+
 .e_goll {
   margin: 0 10px;
   font-weight: bold;

@@ -173,7 +173,7 @@ class Register extends Component {
                                                 </tr>
                                                 <tr className="re_email">
                                                     <th>이메일</th>
-                                                    <td>
+                                                    <td className='email_form'>
                                                         <input
                                                             id="email_val"
                                                             type="text"

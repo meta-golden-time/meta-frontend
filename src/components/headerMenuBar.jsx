@@ -44,12 +44,15 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 function HeaderMenuBar() {
   
   const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
-  const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
+  // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
+  const [loginCheck, setLoginCheck] = useState(true); // 로그인 체크 상태
+
 
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
-      setLoginCheck(result.success);
+      //setLoginCheck(result.success);
+      setLoginCheck(true);
     }catch(err){
       console.log(err)
     }

@@ -305,13 +305,15 @@ const PathFinder = () => {
             name="start"
             value={searchAddress.start} // value 추가
             onChange={handleSearchAddressChange}
+            onKeyDown={(e) => handleKeyDown(e, 'start', searchAddress.start)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
                     id="searchBtn"
+                    onClick={() => searchMap('start', searchAddress.start)}
                   >
-                    <SearchIcon className="search-icon" onClick={() => searchMap('end', searchAddress.end)}
+                    <SearchIcon className="search-icon"
                     />
                   </IconButton>
                 </InputAdornment>
@@ -333,13 +335,15 @@ const PathFinder = () => {
             name="end"
             value={searchAddress.end} // value 추가
             onChange={handleSearchAddressChange}
+            onKeyDown={(e) => handleKeyDown(e, 'end', searchAddress.end)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
                     id="searchBtn"
+                    onClick={() => searchMap('end', searchAddress.end)}
                   >
-                    <SearchIcon className="search-icon" onClick={() => searchMap('end', searchAddress.end)}
+                    <SearchIcon className="search-icon"
                     />
                   </IconButton>
                 </InputAdornment>
