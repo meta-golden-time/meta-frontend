@@ -15,6 +15,7 @@ class Register extends Component {
         this.state = {
             address: '',
             recaptchaValue: null,
+            errorMessage: '', // 오류 메시지 상태 추가
         };
     }
 
@@ -45,23 +46,16 @@ class Register extends Component {
         const { address } = this.state;
 
         if (!userID || !email1 || !email2 || !password || !confirmPassword || !name || !phone1 || !phone2 || !phone3 || !address) {
-            Swal.fire({
-                icon: 'warning',
-                title: '필수 입력 항목 누락',
-                text: '모든 필수 입력 항목을 작성해 주세요.',
-            });
+            this.setState({ errorMessage: '모든 필수 입력 항목을 작성해 주세요.' });
             return false;
         }
 
         if (password !== confirmPassword) {
-            Swal.fire({
-                icon: 'warning',
-                title: '비밀번호 불일치',
-                text: '비밀번호가 다릅니다. 다시 확인해 주세요.',
-            });
+            this.setState({ errorMessage: '비밀번호가 다릅니다. 다시 확인해 주세요.' });
             return false;
         }
 
+        this.setState({ errorMessage: '' });
         return true;
     };
 
@@ -69,11 +63,7 @@ class Register extends Component {
         e.preventDefault();
 
         if (!this.state.recaptchaValue) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'AI 체크',
-                text: '리캡챠 체크가 안되었습니다.',
-            });
+            this.setState({ errorMessage: '리캡챠 체크가 안되었습니다.' });
             return;
         }
 
@@ -119,7 +109,7 @@ class Register extends Component {
                                         <table className="table_ty1">
                                             <tbody>
                                                 <tr className="re_admin">
-                                                    <th>가입유형</th>
+                                                    <th>가입유형 <span className="required">*</span></th>
                                                     <td>
                                                         <select id="admin2_val" name="is_Useradmin2" className="select_ty1">
                                                             <option value="user">user</option>
@@ -128,7 +118,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr className="re_id">
-                                                    <th>아이디</th>
+                                                    <th>아이디 <span className="required">*</span></th>
                                                     <td>
                                                         <input
                                                             id="id_val"
@@ -139,7 +129,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>성명</th>
+                                                    <th>성명 <span className="required">*</span></th>
                                                     <td>
                                                         <input
                                                             id="name_val"
@@ -150,7 +140,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>비밀번호</th>
+                                                    <th>비밀번호 <span className="required">*</span></th>
                                                     <td>
                                                         <input
                                                             id="pwd_val"
@@ -161,7 +151,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>비밀번호 확인</th>
+                                                    <th>비밀번호 확인 <span className="required">*</span></th>
                                                     <td>
                                                         <input
                                                             id="pwd_cnf_val"
@@ -172,8 +162,10 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr className="re_email">
+
                                                     <th>이메일</th>
                                                     <td className='email_form'>
+
                                                         <input
                                                             id="email_val"
                                                             type="text"
@@ -194,14 +186,14 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>주소</th>
+                                                    <th>주소 <span className="required">*</span></th>
                                                     <td>
                                                         <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} />
                                                         <div>{this.state.address}</div>
                                                     </td>
                                                 </tr>
                                                 <tr className="tr_tel">
-                                                    <th>핸드폰</th>
+                                                    <th>핸드폰 <span className="required">*</span></th>
                                                     <td>
                                                         <select id="phone1_val" name="is_Userphone1" className="select_ty1">
                                                             <option value="">선택</option>
@@ -241,6 +233,9 @@ class Register extends Component {
                                     />
                                 </div>
                                 <div className="btn_confirm">
+                                    {this.state.errorMessage && (
+                                        <div className="error-message">{this.state.errorMessage}</div>
+                                    )}
                                     <button className="bt_ty bt_ty2 submit_ty1" onClick={(e) => this.submitClick('signup', e)}>
                                         회원가입
                                     </button>
