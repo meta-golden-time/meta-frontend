@@ -43,7 +43,6 @@ const LoginForm = () => {
 
         try {
             const result = await postLogin(data);
-            console.log("resultresultresultresult",result);
             Swal.fire({
                 title: '성공',
                 text: '로그인에 성공하셨습니다.',
