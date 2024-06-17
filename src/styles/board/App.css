@@ -1,0 +1,31 @@
+.app-container {
+  padding: 20px;
+  background-color: #f4f7f6;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #007bff;
+}
+
+.create-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-size: 16px;
+  display: block;
+  margin: 20px auto;
+}
+
+.create-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.create-button:focus {
+  outline: none;
+}
