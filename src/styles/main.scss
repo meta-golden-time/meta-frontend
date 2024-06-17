@@ -13,13 +13,13 @@
 
 /* 제목 배경화면 설정*/
 .titleBackground {
-  background: url("https://s3-us-west-2.amazonaws.com/files.bradengelhardt.com/brad-bg-main.jpg") no-repeat;
+  background: url("@img/main/buildings_back.png") no-repeat;
   background-size: cover;
 }
 
 /* 제목 위치 설정*/
 .titleDiv {
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 }
 
 /* 제목의 간격 및 폰트 크기 설정 */
