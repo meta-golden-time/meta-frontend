@@ -53,8 +53,38 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:4000', // 백엔드 서버 주소
+      '/users': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/auth': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/weather': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/map': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/bookmark': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/news': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/board': {
+        target: 'https://port-0-node-express-lxio2xjf7d0762ba.sel5.cloudtype.app/', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
