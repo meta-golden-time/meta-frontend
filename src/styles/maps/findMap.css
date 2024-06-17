@@ -20,12 +20,21 @@ input {
 .input-group {
   display: flex;
   align-items: center ;
-  gap: 5px;
+  /* gap: 5px; */
+  position: relative;
 }
 
-.search-button {
-  height: 50px;
+.search-btn {
+  position: absolute;
+  right: 50px; /* TextField의 오른쪽에 배치 */
+  top: 40%;
+  transform: translateY(-50%);
 }
+
+.search-icon {
+  font-size: 60px; /* 아이콘의 크기 */
+}
+
 
 .maps {
   flex: 1;

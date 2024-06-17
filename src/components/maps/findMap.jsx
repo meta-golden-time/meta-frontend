@@ -8,6 +8,10 @@ import TextField from '@mui/material/TextField';
 import Modal from 'react-modal'; // react-modal 임포트
 import Swal from 'sweetalert2';
 import '../../styles/maps/findMap.css'; // 추가: CSS 파일 임포트
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+
+
 
 const { kakao } = window;
 import { postBookMark } from '../../apis/userApi/bookMark';
@@ -294,19 +298,14 @@ const PathFinder = () => {
             InputProps={{
               style: {
                 height: '50px',
-                width: '230px',
                 display: 'flex',
                 alignItems: 'center'
               }
             }}
           />
-          <Button
-            variant="contained"
-            className="search-button"
-            onClick={() => searchMap('start', 'startPoint')}
-          >
-            검색
-          </Button>
+          <IconButton id="searchBtn" className="search-btn">
+            <SearchIcon className='search-icon'/>
+          </IconButton>
         </div>
         <div className="input-group">
           <TextField
@@ -319,19 +318,14 @@ const PathFinder = () => {
             InputProps={{
               style: {
                 height: '50px',
-                width: '230px',
                 display: 'flex',
                 alignItems: 'center'
               }
             }}
           />
-          <Button
-            variant="contained"
-            className="search-button"
-            onClick={() => searchMap('end', 'endPoint')}
-          >
-            검색
-          </Button>
+          <IconButton id="searchBtn" className="search-btn">
+            <SearchIcon className='search-icon'/>
+          </IconButton>
 
         </div>
 

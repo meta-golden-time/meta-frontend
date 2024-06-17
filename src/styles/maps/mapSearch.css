@@ -41,6 +41,18 @@
   /* text-align: center; */
   justify-content: center;
   align-items: center; /* Centers the input and button vertically */
+  position: relative;
+}
+
+.search-btn {
+  position: absolute;
+  right: 50px; /* TextField의 오른쪽에 배치 */
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.search-icon {
+  font-size: 60px; /* 아이콘의 크기 */
 }
 
 #menu_wrap .option p {

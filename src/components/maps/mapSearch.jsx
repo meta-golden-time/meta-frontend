@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import '../../styles/maps/mapSearch.css'; // 추가: CSS 파일 임포트
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const { kakao } = window;
 
@@ -199,9 +202,12 @@ const MapSearch = () => {
               }
             }}
           />
-          <Button variant="contained" fullWidth id="searchBtn">
+          <IconButton id="searchBtn" className='search-btn'>
+            <SearchIcon className='search-icon' />
+          </IconButton>
+          {/* <Button variant="contained" fullWidth id="searchBtn">
             검색
-          </Button>
+          </Button> */}
         </div>
         <hr />
         <ul id="placesList" className="places-list"></ul>
