@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { signInWithGoogle } from '../firebase-config';
 
 function Copyright(props) {
   return (
@@ -29,27 +30,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyBGwGGwfFQ5cz7ml1w_yOWbfrkb7jBtqMU",
-    authDomain: "maps-86696.firebaseapp.com",
-    projectId: "maps-86696",
-    storageBucket: "maps-86696.appspot.com",
-    messagingSenderId: "911910709381",
-    appId: "1:911910709381:web:8f45b08e415af83ef161ec",
-    measurementId: "G-3M4JKBCZTQ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 
 function handleGoogleLogin() {
   const provider = new GoogleAuthProvider(); // provider 구글 설정
@@ -89,6 +69,17 @@ export default function SignIn() {
       password: data.get('password'),
     });
   };
+  function handleGoogleLogin () {
+    const provider = new GoogleAuthProvider(); // provider 구글 설정
+    signInWithPopup(auth, provider)// 팝업창 띄워서 로그인
+      .then((data) => {
+        setUserData(data.user); // user data 설정
+        console.log(data); // console에 UserCredentialImpl 출력
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+      }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -140,6 +131,9 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
+            </Button>
+            <Button>
+              google
             </Button>
             <Grid container>
               <Grid item xs>
