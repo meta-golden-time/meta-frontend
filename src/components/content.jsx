@@ -1,4 +1,4 @@
-import './content.css';
+import '@styles/content.scss';
 
 const Content = ({ title, description, image }) => {
   return (
