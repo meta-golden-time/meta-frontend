@@ -45,7 +45,7 @@ function App() {
 
         {/*board 게시판 */}
         
-        <Route path="/" element={<BoardPage />} />
+        {/* <Route path="/" element={<BoardPage />} /> */}
         <Route path="/board" element={<BoardList />} />
         <Route path="/board/create" element={<BoardForm />} />
         <Route path="/board/edit/:id" element={<BoardForm isEdit={true} />} />

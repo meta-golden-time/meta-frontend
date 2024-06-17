@@ -1,15 +1,13 @@
-// Register.js
 import React, { Component } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import $ from 'jquery';
 import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-//////api 요청
+// api 요청
 import { postRegister } from '../apis/userApi/user';
-/////////////
-import '../styles/users/register.css';  // CSS 파일을 import 합니다.
+
+// CSS 파일을 import 합니다.
+import '../styles/users/register.css';
 
 class Register extends Component {
     constructor(props) {
@@ -27,6 +25,11 @@ class Register extends Component {
 
     onRecaptchaChange = (value) => {
         this.setState({ recaptchaValue: value });
+    };
+
+    mustNumber = (id) => {
+        const input = document.getElementById(id);
+        input.value = input.value.replace(/[^0-9]/g, '');
     };
 
     validateInputs = () => {
@@ -143,7 +146,6 @@ class Register extends Component {
                                                             type="text"
                                                             name="is_Username"
                                                             placeholder="성명을 입력해주세요."
-                                                            onKeyPress={this.nameKeyPress}
                                                         />
                                                     </td>
                                                 </tr>
@@ -155,7 +157,6 @@ class Register extends Component {
                                                             type="password"
                                                             name="is_Password"
                                                             placeholder="비밀번호를 입력해주세요."
-                                                            onKeyPress={this.pwdKeyPress}
                                                         />
                                                     </td>
                                                 </tr>
@@ -167,7 +168,6 @@ class Register extends Component {
                                                             type="password"
                                                             name="is_Password"
                                                             placeholder="비밀번호를 다시 입력해주세요."
-                                                            onKeyPress={this.pwdCnfKeyPress}
                                                         />
                                                     </td>
                                                 </tr>
@@ -179,7 +179,6 @@ class Register extends Component {
                                                             type="text"
                                                             name="is_Useremail1"
                                                             placeholder="이메일을 입력해주세요."
-                                                            onKeyPress={this.emailKeyPress}
                                                         />
                                                         <span className="e_goll">@</span>
                                                         <select id="email2_val" name="is_Useremail2" className="select_ty1">

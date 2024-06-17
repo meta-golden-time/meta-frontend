@@ -1,7 +1,13 @@
 import React from 'react';
 import '@styles/userPage.scss';
 
+import { postLogout } from '../apis/userApi/user'; //로그인체크 진행
+
 const UserPage = ({ bookmarks }) => {
+  const userLogout = async() =>{
+    const result = await postLogout();
+    console.log("🚀 ~ userLogout ~ result:", result)
+  }
   return (
     <div className="user-page">
 
@@ -22,7 +28,7 @@ const UserPage = ({ bookmarks }) => {
               <p>김유저 님</p>
               <p>abcd12345</p>
               <button>수정</button>
-              <button>로그아웃</button>
+              <button onClick={userLogout} >로그아웃</button>
             </div>
           </div>
 
