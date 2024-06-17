@@ -14,7 +14,7 @@ export default function setMap() {
   };
   return (
     <>
-     <div style={{ padding: '20px' }}>     
+     <div style={{ padding: '10px' }}>     
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs">
           <Tab label="길찾기" />
