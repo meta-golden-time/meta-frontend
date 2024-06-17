@@ -1,85 +1,45 @@
-// 배경 및 레이아웃
-.headerBack {
-  height: 700px;
-  background-image : url('@img/main/buildings_main_backimg.png'); // 배경이미지
-  background-size : cover
-  }
-.contentBunch {
-  width: 1150px;
-  margin: auto;
-  // margin: 0 auto; // 전체 레이아웃 가운데 정렬
-  content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    // grid-template-rows: 100px 100px;
-    grid-gap: 30px;
-    align-items: center;
-  }
-  .divWeather {
-    grid-column: 1 / 3;
-    text-align: left;
-  }
-  .divWeaterImg{
-    grid-column: 2 / 3;
-  }
-
-  }
-
-// 텍스트 배치 및 폰트
-.app { // 전체 레이아웃
-  font-family: 'Noto Sans KR', sans-serif;
-  // width: 100%;
-  
-// 헤더
-  .headerTitle {
-    text-align: center; // 텍스트 가운데 정렬
-    margin: 130px 0 300px; // 콘텐츠 여백 상, 좌우, 하 간격 조절
-  }
-  h1 {
-    font-size: 3rem;
-    color: #007bff;
-    margin-bottom: 0.5rem; // h1 태그와 p 태그 사이의 간격 줄임
-    }
-  h1 p {
-    margin-top: 0; // p 태그의 상단 마진 제거
-      }
-
-  // 내용
-  section {
-    margin: 300px 0;
-    // width: 100%;
-    height: 600px;
-    h2 {
-      font-size: 1.5rem;
-      color: #007bff;
-      margin-bottom: 20px; // 제목과 내용의 간격 조절
-      }
-    p {
-      font-size: 2rem;
-      line-height: 1.3; // 내용의 문단 간격 조절
-      }
-      }
+/* 전체 설정 */
+.section {
+  /* 좌우 여백 */
+  padding-left: 100px;
+  padding-right: 100px;
+  /* 위치 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
-      // display: inline -> div로 묶인 요소 박스를 한 줄에 출력할 수 있다.
 
-// 임시, 이미지 및 버튼
-.mainImage {
-    width: 700px;
-    height: 400px; // 높이를 자동 조절하여 이미지 비율을 유지
-  }
+/* 제목 배경화면 설정*/
+.titleBackground {
+  background: url("https://s3-us-west-2.amazonaws.com/files.bradengelhardt.com/brad-bg-main.jpg") no-repeat;
+  background-size: cover;
+}
 
-.mainButton {
-  margin-top: 20px; // 이미지와 버튼 사이에 간격 추가
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* 제목 위치 설정*/
+.titleDiv {
+  margin-bottom: 150px;
+}
 
-  &:hover {
-    background-color: #0056b3;
-  }
+/* 제목의 간격 및 폰트 크기 설정 */
+.mainTitle, .mainTitleP {
+  font-size: 3.5rem;
+  /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
+  margin: 0 auto;
+}
+
+/* 버튼 디자인 기능 설정 */
+.custom-btn {
+  color: #ffffff !important;
+  font-size: 1.3rem !important;
+  width: 100px; /* 버튼의 너비를 고정 */
+  text-align: center; /* 버튼 텍스트를 가운데 정렬 */
+}
+
+/* 캐러셀 가운데 정렬 */
+.carousel {
+  width: 100%; /* 캐러셀 너비 설정 */
+  max-width: 950px; /* 캐러셀 최대 너비 설정 */
+  margin: 0 auto; /* 가로로 가운데 정렬 */
 }
