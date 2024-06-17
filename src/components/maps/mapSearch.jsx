@@ -46,7 +46,6 @@ const MapSearch = () => {
       };
 
       const placesSearchCB = (data, status, pagination) => {
-        console.log("🚀 ~ placesSearchCB ~ data:", data)
         if (status === kakao.maps.services.Status.OK) {
           displayPlaces(data);
           displayPagination(pagination);
@@ -180,7 +179,13 @@ const MapSearch = () => {
         paginationEl.appendChild(fragment);
       };
 
-      document.getElementById('searchBtn').onclick = searchPlaces;
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          searchPlaces();
+        }
+      };
+
+      document.getElementById('searchBtn').onclick = searchPlaces;      
     }
   }, [map, keyword]);
 
@@ -195,6 +200,7 @@ const MapSearch = () => {
             margin="normal"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && document.getElementById('searchBtn').click()}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
