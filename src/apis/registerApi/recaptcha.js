@@ -8,6 +8,7 @@ import  { format } from 'date-fns';
 const API_URL = process.env.REACT_APP_API_USER;
 
 
+
 export const getData = async() => {
   console.log(JSON.stringify());
   

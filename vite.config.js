@@ -58,6 +58,7 @@ export default defineConfig({
 
       '/api': {
         target: 'http://localhost:3000', // 백엔드 서버 주소
+
         changeOrigin: true,
         secure: false,
       },
@@ -93,6 +94,7 @@ export default defineConfig({
       },
       '/board': {
         target: 'http://localhost:3000', // 백엔드 서버 주소
+
 
         changeOrigin: true,
         secure: false,
