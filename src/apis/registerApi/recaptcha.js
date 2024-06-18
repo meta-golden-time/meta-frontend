@@ -4,7 +4,9 @@ import superagent from 'superagent';
 import  { format } from 'date-fns';
 
 
-const API_URL = 'http://localhost:3000';
+
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export const getData = async() => {
   console.log(JSON.stringify());
