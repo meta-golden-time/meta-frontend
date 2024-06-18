@@ -2,7 +2,6 @@
 // data-aos="zoom-out-right" -> 오른쪽으로 줌아웃 하는 모션 설정
 // data-aos="fade-up" -> 아래에서 위로 올라오는 모션
 
-
 import { useEffect } from 'react';
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
 import Aos from 'aos';

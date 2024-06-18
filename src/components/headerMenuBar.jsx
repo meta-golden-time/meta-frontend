@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 // Material UI의 컴포넌트 불러오기
 import AppBar from '@mui/material/AppBar'; // AppBar를 import해야 다른 라이브러리들이 동작함
 import Box from '@mui/material/Box';
@@ -14,42 +13,27 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
 // "디바이스" 자체의 화면폭을 확인해서 true/false를 반환해주는 리액트 전용 훅
 import useMediaQuery from '@mui/material/useMediaQuery';
-
 // 테마 객체를 가져옴 : 어플리케이션의 색상, 폰트 크기, 브레이크포인트 등 다양한 스타일 속성을 포함하고 있음
 import { useTheme } from '@mui/material/styles';
-
 // 이미지 가져오기
 import myLogo from '@img/main/goldenTimeLogo.png';
-
 // css 디자인 가져오기
 import '@styles/headerMenuBar.scss'
-
 import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
-
-
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/,
   Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting',  고객센터: 'board' };
-
-
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-
 const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
-//let loginCheck = true; // *****  로그인 체크 ***** 
-//let settings = loginCheck ? settingsLogin : settingsLogout; 
-
-
+//let loginCheck = true; // *****  로그인 체크 *****
+//let settings = loginCheck ? settingsLogin : settingsLogout;
 function HeaderMenuBar() {
-  
-  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
+  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
   // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
-  const [loginCheck, setLoginCheck] = useState(true); // 로그인 체크 상태
-
-
+  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
@@ -59,78 +43,62 @@ function HeaderMenuBar() {
       console.log(err)
     }
   }
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 0) {
-        setIsScrolled(true); // 스크롤 되면 true로 변경
-      } else {
-        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    checkLoginStatus();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
+  // React.useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.pageYOffset > 0) {
+  //       setIsScrolled(true); // 스크롤 되면 true로 변경
+  //     } else {
+  //       setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   checkLoginStatus();
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
     // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-
     // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
     const handleOpenNavMenu = (event) => {
       // 내비게이션 메뉴를 여는 함수
       setAnchorElNav(event.currentTarget);
     };
-
     const handleOpenUserMenu = (event) => {
       // 사용자 메뉴를 여는 함수
       setAnchorElUser(event.currentTarget);
     };
-
     const navigate = useNavigate();
     const handleMovePage = (page) => {
       // 페이지 이동 함수
       navigate(`/${page}`)
     };
-
     const handleCloseNavMenu = () => {
       // 내비게이션 메뉴를 닫는 함수
       setAnchorElNav(null);
     };
-
     const handleCloseUserMenu = () => {
       // 사용자 메뉴를 닫는 함수
       setAnchorElUser(null);
     };
-
     const theme = useTheme();
     // 화면 크기가 'md' (기본적으로 960px) 이하일 때를 의미하는 미디어 쿼리 조건을 생성
     const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
     const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
-
     const settings = loginCheck ? settingsLogin : settingsLogout;
-    console.log("🚀 ~ HeaderMenuBar ~ loginCheck:", loginCheck)
-    console.log("🚀 ~ HeaderMenuBar ~ settings:", settings)
-
+    console.log(":로켓: ~ HeaderMenuBar ~ loginCheck:", loginCheck)
+    console.log(":로켓: ~ HeaderMenuBar ~ settings:", settings)
   return (
     <section>
       <div className='headerMenu' style={{ width: '100%' }}>
-
         <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
           {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
           <Toolbar disableGutters >
-
             {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
             {!isMobile && (
               <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
             )}
-            
             <Typography
               variant="h6"
               noWrap
@@ -148,7 +116,6 @@ function HeaderMenuBar() {
             >
               Golden Time
             </Typography>
-
             {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -180,7 +147,7 @@ function HeaderMenuBar() {
                 }}
               >
                 { Object.keys(pages).map((page) => (
-                  <MenuItem key={page} 
+                  <MenuItem key={page}
                   onClick={() => handleMovePage(pages[page])}
                   >
                     <Typography textAlign="center">{page}</Typography>
@@ -188,12 +155,10 @@ function HeaderMenuBar() {
                 )) }
               </Menu>
             </Box>
-
             {/* 작은 화면(모바일 화면)이 큰 화면(pc 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
             {!isPc && (
               <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 1 }} />
             )}
-
             {/* 작은 화면에서는 'Golden Time' 텍스트를 표시 */}
             <Typography
               variant="h5"
@@ -213,8 +178,6 @@ function HeaderMenuBar() {
             >
               Golden Time
             </Typography>
-
-
             {/* 큰 화면에서는 메뉴 버튼을 표시 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               { Object.keys(pages).map((page) => (
@@ -227,7 +190,6 @@ function HeaderMenuBar() {
                 </Button>
               )) }
             </Box>
-
             {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
             <Box sx={{ flexGrow: 0, pl: 3 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
               <Tooltip title="Open settings">
@@ -265,5 +227,4 @@ function HeaderMenuBar() {
     </section>
   );
 }
-
 export default HeaderMenuBar;
