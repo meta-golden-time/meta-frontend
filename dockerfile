@@ -9,5 +9,5 @@ FROM node:latest
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 EXPOSE 80
-RUN npm install global serve
+RUN npm install -g serve
 CMD ["serve", "-s", "dist", "-l", "80"]
