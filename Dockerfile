@@ -10,4 +10,6 @@ WORKDIR /app
 COPY --from=build /app/dist ./dist
 EXPOSE 80
 RUN yarn global add serve
+
 CMD ["serve", "-s", "dist", "-l", "80"]
+
