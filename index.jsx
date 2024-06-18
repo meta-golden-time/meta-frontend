@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import Header from '@components/header';
+import Header from '@components/headerMenuBar';
 import Main from '@pages/main';
 import LoginPage from '@pages/loginPage';
 import RegisterPage from '@pages/register';
