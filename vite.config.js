@@ -32,8 +32,8 @@ const createWebSocketServer = (server) => {
     ws.send('Welcome to the WebSocket server!');
   });
 
-  server.listen(8080, () => {
-    console.log('WebSocket server is running on ws://localhost:8080');
+  server.listen(8181, () => {
+    console.log('WebSocket server is running on ws://localhost:8181');
   });
 };
 
