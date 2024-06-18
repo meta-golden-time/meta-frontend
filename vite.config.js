@@ -6,7 +6,8 @@ import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 
 // WebSocket 서버 생성 함수
-const createWebSocketServer = (server) => {
+const createWebSocketServer = () => {
+  const server = createServer();
   const wss = new WebSocketServer({ server });
 
   wss.on('connection', (ws) => {
@@ -32,8 +33,9 @@ const createWebSocketServer = (server) => {
     ws.send('Welcome to the WebSocket server!');
   });
 
-  server.listen(8181, () => {
-    console.log('WebSocket server is running on ws://localhost:8181');
+  server.listen(8080, () => {
+    console.log("safsdafasdfsadfasfd")
+    console.log('WebSocket server is running on ws://localhost:8080');
   });
 };
 
@@ -41,7 +43,8 @@ export default defineConfig({
   plugins: [react(), svgr(),
     {
       name: 'configure-server',
-      configureServer(server) {
+      configureServer(server) {     
+        
         // Vite 개발 서버에 WebSocket 서버 추가
         createWebSocketServer(server.httpServer);
       },
@@ -53,6 +56,11 @@ export default defineConfig({
   server: {
     proxy: {
 
+      '/api': {
+        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
       '/users': {
         target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
         changeOrigin: true,

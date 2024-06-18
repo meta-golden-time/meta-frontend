@@ -16,8 +16,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 
 
-const { kakao } = window;
 import { postBookMark } from '../../apis/userApi/bookMark';
+const { kakao } = window;
 
 Modal.setAppElement('#root'); // Modal 사용을 위한 설정
 
