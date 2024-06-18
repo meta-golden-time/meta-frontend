@@ -171,6 +171,7 @@
 
 #pagination .on {
   font-weight: bold;
+  /* background-color: #f2f2f2; */
   cursor: default;
   color: #777;
 }
@@ -178,4 +179,5 @@
 .map {
   flex: 1; /* 남은 공간을 차지하도록 설정 */
   height: 100%;
+
 }
