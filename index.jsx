@@ -6,7 +6,16 @@ import Main from '@pages/main'
 import LoginPage from '@pages/loginPage'
 import RegisterPage from '@pages/register'
 import UserPage from '@pages/userPage';
-import MapPage from '@pages/map.jsx'
+
+import MapPage from '@pages/map.jsx';
+import WeatherPage from '@pages/weatherPage';
+import ChatPage from '@pages/chatPage';
+import BoardPage from '@pages/boardPage';
+
+import BoardList from '@components/board/BoardList';
+import BoardForm from '@components/board/BoardForm';
+import BoardView from '@components/board/BoardView';
+import MyPosts from '@components/board/MyPosts';
 
 
 // userPage에 들어가는 리스트 데이터
@@ -33,6 +42,16 @@ function App() {
         <Route path='/maps' element={<MapPage />} />
         <Route path='/weather' element={<WeatherPage />} />
         <Route path='/chatting' element={<ChatPage />} />
+
+        {/*board 게시판 */}
+        
+        {/* <Route path="/" element={<BoardPage />} /> */}
+        <Route path="/board" element={<BoardList />} />
+        <Route path="/board/create" element={<BoardForm />} />
+        <Route path="/board/edit/:id" element={<BoardForm isEdit={true} />} />
+        <Route path="/board/view/:id" element={<BoardView />} />
+        <Route path="/board/my-posts" element={<MyPosts />} />
+
       </Routes>
     </>
   );

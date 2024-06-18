@@ -1,12 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chat from '../components/chat/chat';
 import '../styles/chat/chatPage.css';
+import { postLoginCheck } from '../apis/userApi/user';
 
 const chatPage = () => {
   const [messages, setMessages] = useState([]);
+  const [loginUser, setLoginUser] = useState(false); // 로그인 체크 상태
   const ws = useRef(null);
 
+
+  const LoginCheck = async() =>{
+    try{
+      const result = await postLoginCheck();// 로그인 체크 상태
+      setLoginUser(result.user.userID);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
+    LoginCheck()
     ws.current = new WebSocket('ws://localhost:8080');
 
     ws.current.onopen = () => console.log('WebSocket connected');
@@ -27,10 +40,13 @@ const chatPage = () => {
     };
   }, []);
 
-  const sendMessage = (message) => {
+  const sendMessage = (message) => {    
+     // userID를 텍스트에 추가
+      let messageText = ` ${loginUser}:  `;
     if (ws.current.readyState === WebSocket.OPEN) {
       console.log('Message sent:', message); // 메시지 전송 로그
-      ws.current.send(message);
+      messageText += message
+      ws.current.send(messageText);
     }
   };
 

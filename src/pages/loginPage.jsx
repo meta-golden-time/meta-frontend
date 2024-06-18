@@ -9,7 +9,10 @@ import logIcon1 from '../img/main/m_log_i1.png';
 
 import { postLogin } from '../apis/userApi/user';
 
+import { signInWithGoogle } from '../firebase-config';
+
 import '../styles/users/loginForm.css'; // CSS 파일을 import 합니다.
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -42,7 +45,6 @@ const LoginForm = () => {
 
         try {
             const result = await postLogin(data);
-            console.log("resultresultresultresult",result);
             Swal.fire({
                 title: '성공',
                 text: '로그인에 성공하셨습니다.',
@@ -52,6 +54,21 @@ const LoginForm = () => {
             });
         } catch (error) {
             Swal.fire('Error', '아이디와 비밀번호를 확인해주세요', 'error');
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await signInWithGoogle();
+            Swal.fire({
+                title: '성공',
+                text: '구글 로그인에 성공하셨습니다.',
+                icon: 'success'
+            }).then(() => {
+                navigate('/');
+            });
+        } catch (error) {
+            Swal.fire('Error', '구글 로그인에 실패하였습니다.', 'error');
         }
     }
 
@@ -96,7 +113,7 @@ const LoginForm = () => {
                     <li><Link to={'/forgot-password'}>아이디/비밀번호 찾기</Link></li>
                 </ul>
                 <div className="social_login">
-                    <button className="google">구글</button>
+                    <button className="google" onClick={handleGoogleLogin}>구글</button>
                     <button className="kakao">카카오</button>
                     <button className="naver">네이버</button>
                 </div>

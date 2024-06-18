@@ -14,12 +14,12 @@ export default function setMap() {
   };
   return (
     <>
-     <div style={{ padding: '20px' }}>     
+    <div style={{ padding: '10px' }}>     
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs">
-          <Tab label="길찾기" />
-          <Tab label="지도검색" />
-          <Tab label="즐겨찾기" />
+          <Tab className='tabs' label="길찾기" />
+          <Tab className='tabs' label="지도검색" />
+          <Tab className='tabs' label="즐겨찾기" />
         </Tabs>
       </Box>
       {tabIndex === 0 && <PathFinder />}

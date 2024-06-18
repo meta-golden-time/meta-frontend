@@ -27,20 +27,56 @@ import myLogo from '@img/main/goldenTimeLogo.png';
 // css 디자인 가져오기
 import '@styles/headerMenuBar.scss'
 
+import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
+
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/,
-  Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting' };
+  Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting',  고객센터: 'board' };
 
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-const settingsLogout = { 'Log in': 'login', 'Sign up': 'register' }; // 로그인 전
-let loginCheck = true; // *****  로그인 체크 ***** 
-let settings = loginCheck ? settingsLogin : settingsLogout; 
+
+const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
+//let loginCheck = true; // *****  로그인 체크 ***** 
+//let settings = loginCheck ? settingsLogin : settingsLogout; 
 
 
 function HeaderMenuBar() {
+  
+  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
+  // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
+  const [loginCheck, setLoginCheck] = useState(true); // 로그인 체크 상태
+
+
+  const checkLoginStatus  = async() =>{
+    try{
+      const result = await postLoginCheck();// 로그인 체크 상태
+      //setLoginCheck(result.success);
+      setLoginCheck(true);
+    }catch(err){
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(true); // 스크롤 되면 true로 변경
+      } else {
+        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    checkLoginStatus();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
     // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -78,6 +114,9 @@ function HeaderMenuBar() {
     const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
     const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
 
+    const settings = loginCheck ? settingsLogin : settingsLogout;
+    console.log("🚀 ~ HeaderMenuBar ~ loginCheck:", loginCheck)
+    console.log("🚀 ~ HeaderMenuBar ~ settings:", settings)
 
   return (
     <section>

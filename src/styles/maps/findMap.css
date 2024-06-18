@@ -4,21 +4,30 @@
 }
 
 .left-panel {
+  margin-top: 10px;
   width: 300px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  flex: 1;
 }
 
-.search-button {
-  height: 40px;
+.input-group {
+  display: flex;
+  align-items: center ;
+  gap: 5px;
+  position: relative;
 }
+
+.search-icon {
+  font-size: 20px; /* 아이콘의 크기 */
+}
+
 
 .maps {
   flex: 1;
@@ -36,13 +45,6 @@ button {
 button:hover {
   /* background-color: #e0e0e0; */
 }
-
-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  flex: 1;
-}
-
 
 
 .scrollable-results {
@@ -102,8 +104,6 @@ input {
   cursor: pointer;
 }
 
-
-
 .button-group {
   display: flex;
   gap: 10px; /* 버튼 사이의 간격 */
@@ -111,3 +111,22 @@ input {
   margin-top: 10px;
 }
 
+.MuiInputBase-input {
+  padding-top: 0px; /* 위쪽 패딩 */
+  padding-right: 0px; /* 오른쪽 패딩 */
+  padding-bottom: 0px; /* 아래쪽 패딩 */
+  padding-left: 0px; /* 왼쪽 패딩 */
+  box-sizing: border-box; /* 박스 사이즈를 조정 */
+}
+
+.MuiInputLabel-root {
+  font-size: 16px; /* 라벨 텍스트 크기 조정 */
+  line-height: 1.5; /* 라벨 텍스트 라인 높이 조정 */
+}
+
+.MuiInputBase-root {
+  padding-top: 0px; /* 위쪽 패딩 */
+  padding-right: 0px; /* 오른쪽 패딩 */
+  padding-bottom: 0px; /* 아래쪽 패딩 */
+  padding-left: 0px; /* 왼쪽 패딩 */
+}
