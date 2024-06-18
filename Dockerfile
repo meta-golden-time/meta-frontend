@@ -1,8 +1,12 @@
-# 프로젝트 빌드 단계
-FROM node:16-buster AS builder
+# Node.js 20 버전 사용
+FROM node:20 AS builder
 WORKDIR /app
+
+# 패키지 설치 및 동기화
 COPY package*.json ./
-RUN npm ci
+RUN npm install
+
+# 나머지 파일 복사 및 빌드
 COPY . .
 RUN npm run build
 
