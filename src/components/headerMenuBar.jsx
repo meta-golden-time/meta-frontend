@@ -31,9 +31,12 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 //let loginCheck = true; // *****  로그인 체크 *****
 //let settings = loginCheck ? settingsLogin : settingsLogout;
 function HeaderMenuBar() {
-  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
+  
+  const [isScrolled, setIsScrolled] = useState(false); // 스크롤 여부를 나타내는 state
   // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
-  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
+  const [loginCheck, setLoginCheck] = useState(true); // 로그인 체크 상태
+
+
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
@@ -43,20 +46,24 @@ function HeaderMenuBar() {
       console.log(err)
     }
   }
-  // React.useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.pageYOffset > 0) {
-  //       setIsScrolled(true); // 스크롤 되면 true로 변경
-  //     } else {
-  //       setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
-  //     }
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   checkLoginStatus();
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(true); // 스크롤 되면 true로 변경
+      } else {
+        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    checkLoginStatus();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
     // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
