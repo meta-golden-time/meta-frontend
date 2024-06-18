@@ -54,7 +54,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000', // 백엔드 서버 주소
+        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000/', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },

@@ -1,13 +1,13 @@
 # Build stage
 FROM node:latest AS build
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn
+COPY package.json package-lock.json ./
+RUN npm install --production
 COPY . .
-RUN yarn build
+RUN npm run build
 FROM node:latest
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 EXPOSE 80
-RUN yarn global add serve
+RUN npm install global serve
 CMD ["serve", "-s", "dist", "-l", "80"]
