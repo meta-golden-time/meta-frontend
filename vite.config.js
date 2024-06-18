@@ -6,9 +6,7 @@ import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 
 // WebSocket 서버 생성 함수
-// WebSocket 서버 생성 함수
-const createWebSocketServer = () => {
-  const server = createServer();
+const createWebSocketServer = (server) => {
   const wss = new WebSocketServer({ server });
 
   wss.on('connection', (ws) => {
@@ -16,7 +14,6 @@ const createWebSocketServer = () => {
 
     ws.on('message', (message) => {
       console.log(`Received: ${message}`);
-      // 모든 클라이언트에게 메시지 브로드캐스트
       wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(message);
@@ -35,11 +32,10 @@ const createWebSocketServer = () => {
     ws.send('Welcome to the WebSocket server!');
   });
 
-  server.listen(8080, () => {
-    console.log('WebSocket server is running on ws://localhost:8080');
+  server.listen(8181, () => {
+    console.log('WebSocket server is running on ws://localhost:8181');
   });
 };
-
 
 export default defineConfig({
   plugins: [react(), svgr(),
@@ -51,10 +47,43 @@ export default defineConfig({
       },
     },
   ],
+  build: {
+    outDir: 'dist', // 기본 빌드 디렉토리 설정
+  },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:4000', // 백엔드 서버 주소
+      '/users': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/auth': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/weather': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/map': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/bookmark': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/news': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
+        changeOrigin: true,
+        secure: false,
+      },
+      '/board': {
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
