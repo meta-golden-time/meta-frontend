@@ -1,3 +1,5 @@
+@import './weather.scss';
+
 /* 전체 설정 */
 .section {
   /* 좌우 여백 */
@@ -18,15 +20,50 @@
 }
 
 /* 제목 위치 설정*/
-.titleDiv {
-  margin-bottom: 100px;
-}
+// .titleDiv {
+//   margin-bottom: 100px;
+// }
 
 /* 제목의 간격 및 폰트 크기 설정 */
 .mainTitle, .mainTitleP {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
   margin: 0 auto;
+  opacity: .8;
+}
+
+.mainBtn {
+  margin-top: 80px;
+  display: flex; justify-content: center; gap: 16px;
+  button {
+    padding: 24px 60px;
+    background: #1c1c22;
+    width: inherit;
+    opacity: .7;
+    &:hover {
+      opacity: 1;
+      background: #000;
+      color: white;
+    }
+  }
+}
+
+.weatherPage {
+  height: 100vh;
+  // background-color: #ccc;
+  background: rgba(0, 0, 0, 0.2705882353);
+  &>div {
+    &:nth-of-type(1) {
+      display: flex; justify-content: center; align-items: center;
+    }
+  }
+}
+
+// 배경 파란색 #081b38
+.weatherBg {
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 
 /* 버튼 디자인 기능 설정 */

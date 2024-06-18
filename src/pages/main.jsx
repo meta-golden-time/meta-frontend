@@ -2,6 +2,7 @@
 // data-aos="zoom-out-right" -> 오른쪽으로 줌아웃 하는 모션 설정
 // data-aos="fade-up" -> 아래에서 위로 올라오는 모션
 
+
 import { useEffect } from 'react';
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
 import Aos from 'aos';
@@ -12,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap 스타일시트
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JavaScript
 import Content from '@components/content.jsx';
 import image from '@img/main/map_page_img.png';
-import '@styles/main.scss';
+import '@styles/main/main.scss';
 
 const Main = () => {
 
@@ -37,7 +38,7 @@ const Main = () => {
                   당신의 바쁜 아침 출근 길을 <p className='mainTitleP'>도와줄 <span style={{ color: '#007bff' }}>첫 번째 비서</span></p>
                 </h1>
                 {/* 버튼과 제목 사이의 간격을 위한 스타일 */}
-                <div style={{ marginTop: '50px' }}>
+                <div className='mainBtn'>
                   <button type="button" className="btn custom-btn same-size-btn">weather</button>
                   <button type="button" className="btn custom-btn same-size-btn">map</button>
                 </div>

@@ -16,6 +16,7 @@ import {
   getTodayForecastWeather,
   getWeekForecastWeather,
 } from '../utilities/weatherUtilities/DataUtils';
+import { WeatherBg } from './weatherBg';
 
 function WeatherMap() {
 
@@ -98,7 +99,7 @@ function WeatherMap() {
           fontFamily: 'Poppins',
           textAlign: 'center',
           margin: '2rem 0',
-          maxWidth: '80%',
+          maxWidth: '100%',
           lineHeight: '22px',
         }}
       >
@@ -163,69 +164,46 @@ function WeatherMap() {
   }
 
   return (
-    <>
-    <Container
-      sx={{
-        maxWidth: { xs: '95%', sm: '80%', md: '1100px' },
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'black',
-        margin: '0 auto',
-        padding: '1rem 0 3rem',
-        marginBottom: '1rem',
-        borderRadius: {
-          xs: 'none',
-          sm: '0 0 1rem 1rem',
-        },
-        boxShadow: {
-          xs: 'none',
-          sm: 'rgba(0,0,0, 0.5) 0px 10px 15px -3px, rgba(0,0,0, 0.5) 0px 4px 6px -2px',
-        },
-      }}
+    <div
+      className='weatherPage'
     >
-      <Grid container columnSpacing={2}>
-        <Grid item xs={12}>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{
-              width: '100%',
-              marginBottom: '1rem',
-            }}
-          >
+      <Container
+        sx={{
+          maxWidth: { xs: '95%', sm: '80%', md: '1200px' },
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'none',
+          margin: '0 auto',
+          padding: '1rem 0 3rem',
+          marginBottom: '1rem',
+          borderRadius: {
+            xs: 'none',
+            sm: '0 0 1rem 1rem',
+          },
+        }}
+      >
+        <Grid container columnSpacing={2}>
+          <Grid item xs={12}>
             <Box
-              component="img"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
               sx={{
-                height: { xs: '16px', sm: '22px', md: '26px' },
-                width: 'auto',
+                width: '100%',
+                marginBottom: '1rem',
               }}
-              alt="logo"
-              src={Logo}
-            />
-
-            <UTCDatetime />
-            <Link
-              href="https://github.com/Amin-Awinti"
-              target="_blank"
-              underline="none"
-              sx={{ display: 'flex' }}
             >
-              <GitHubIcon
-                sx={{
-                  fontSize: { xs: '20px', sm: '22px', md: '26px' },
-                  color: 'white',
-                  '&:hover': { color: '#2d95bd' },
-                }}
-              />
-            </Link>
-          </Box>
-          <Search onSearchChange={searchChangeHandler} />
+              <UTCDatetime />
+            </Box>
+            <Search onSearchChange={searchChangeHandler} />
+          </Grid>
+          {appContent}
         </Grid>
-        {appContent}
-      </Grid>
-    </Container>
-    </>
+      </Container>
+      <div className='weatherBg'>
+        <WeatherBg />
+      </div>
+    </div>
   );
 }
 

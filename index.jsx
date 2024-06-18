@@ -1,10 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-
-import HeaderMenuBar from '@components/headerMenuBar';
-// import Header from '@components/headerMenuBar';
-
+import Header from '@components/headerMenuBar';
 import Main from '@pages/main';
 import LoginPage from '@pages/loginPage';
 import RegisterPage from '@pages/register';
@@ -19,6 +16,8 @@ import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
 import MyPosts from '@components/board/MyPosts';
 
+//
+
 // userPage에 들어가는 리스트 데이터
 function App() {
   const bookmarks = [
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <>
-      {!noHeaderPaths.includes(location.pathname) && <HeaderMenuBar />}
+      {!noHeaderPaths.includes(location.pathname) && <Header />}
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/login' element={<LoginPage />} />

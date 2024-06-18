@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
+import glsl from 'vite-plugin-glsl';
 
 // WebSocket 서버 생성 함수
 // WebSocket 서버 생성 함수
@@ -42,7 +43,7 @@ const createWebSocketServer = () => {
 
 
 export default defineConfig({
-  plugins: [react(), svgr(),
+  plugins: [react(), svgr(), glsl(),
     {
       name: 'configure-server',
       configureServer(server) {
