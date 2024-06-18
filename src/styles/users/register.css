@@ -65,7 +65,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .email_form input[type="text"] {
-  width: calc(50% - 20px);
+  width: auto;
   flex: 1;
   margin-right: 5px;
 }
@@ -76,7 +76,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .email_form select {
-  width: calc( 50% - 20px);
+  width: auto;
   flex: none;
 }
 
@@ -128,17 +128,3 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
       width: calc(100% - 18px);
   }
 }
-
-/* register.css */
-.required {
-  color: red;
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
