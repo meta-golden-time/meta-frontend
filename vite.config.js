@@ -47,6 +47,9 @@ export default defineConfig({
       },
     },
   ],
+  build: {
+    outDir: 'dist', // 기본 빌드 디렉토리 설정
+  },
   server: {
     proxy: {
       '/users': {
