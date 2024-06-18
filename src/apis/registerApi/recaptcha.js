@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import  { format } from 'date-fns';
 
 
-const API_URL = 'http://localhost:4000';
+const API_URL = 'http://localhost:3000';
 
 export const getData = async() => {
   console.log(JSON.stringify());
