@@ -5,8 +5,6 @@ import Header from '@components/header';
 import Main from '@pages/main';
 import LoginPage from '@pages/loginPage';
 import RegisterPage from '@pages/register';
-import LoginRyuPage from '@pages/signInPage';
-import RegisterRyuPage from '@pages/signUpPage';
 import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
@@ -38,8 +36,6 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/login_ryu' element={<LoginRyuPage />} />
-        <Route path='/register_ryu' element={<RegisterRyuPage />} />
         <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />} />
         <Route path='/maps' element={<MapPage />} />
         <Route path='/weather' element={<WeatherPage />} />

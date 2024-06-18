@@ -63,7 +63,7 @@ export default function SimpleDialogDemo({ onAddressSelect }) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" size='small' onClick={handleClickOpen}>
         주소 찾기
       </Button>
       <SimpleDialog

@@ -119,7 +119,7 @@ class Register extends Component {
                                         <table className="table_ty1">
                                             <tbody>
                                                 <tr className="re_admin">
-                                                    <th>가입유형</th>
+                                                    {/* <th>가입유형</th> */}
                                                     <td>
                                                         <select id="admin2_val" name="is_Useradmin2" className="select_ty1">
                                                             <option value="user">user</option>
@@ -128,7 +128,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr className="re_id">
-                                                    <th>아이디</th>
+                                                    {/* <th>아이디</th> */}
                                                     <td>
                                                         <input
                                                             id="id_val"
@@ -139,7 +139,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>성명</th>
+                                                    {/* <th>성명</th> */}
                                                     <td>
                                                         <input
                                                             id="name_val"
@@ -150,7 +150,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>비밀번호</th>
+                                                    {/* <th>비밀번호</th> */}
                                                     <td>
                                                         <input
                                                             id="pwd_val"
@@ -161,7 +161,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>비밀번호 확인</th>
+                                                    {/* <th>비밀번호 확인</th> */}
                                                     <td>
                                                         <input
                                                             id="pwd_cnf_val"
@@ -172,7 +172,7 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr className="re_email">
-                                                    <th>이메일</th>
+                                                    {/* <th>이메일</th> */}
                                                     <td>
                                                         <input
                                                             id="email_val"
@@ -194,14 +194,14 @@ class Register extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>주소</th>
+                                                    {/* <th>주소</th> */}
                                                     <td>
                                                         <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} />
-                                                        <div>{this.state.address}</div>
+                                                        <div className='address_out'>{this.state.address}</div>
                                                     </td>
                                                 </tr>
                                                 <tr className="tr_tel">
-                                                    <th>핸드폰</th>
+                                                    {/* <th>핸드폰</th> */}
                                                     <td>
                                                         <select id="phone1_val" name="is_Userphone1" className="select_ty1">
                                                             <option value="">선택</option>

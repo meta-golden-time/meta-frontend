@@ -15,10 +15,9 @@ body {
 }
 
 .s_cnt {
-  background-color: #ffffff;
+  background-color: #f0f8ff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* border-radius: 10px; */
   max-width: 600px;
   width: 100%;
 }
@@ -32,13 +31,13 @@ body {
 
 .table_ty1 {
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
   margin-bottom: 20px;
 }
 
 .table_ty1 th, .table_ty1 td {
   padding: 10px;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 
 .table_ty1 th {
@@ -55,7 +54,7 @@ input[type="text"], input[type="password"], select {
   width: calc(100% - 22px);
   padding: 10px;
   margin: 5px 0;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -65,7 +64,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .email_form input[type="text"] {
-  width: auto;
+  width: 50%;
   flex: 1;
   margin-right: 5px;
 }
@@ -73,6 +72,8 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 .email_form {
   display: flex;
   align-items: center;
+  flex-direction: row;
+
 }
 
 .email_form select {
@@ -87,6 +88,12 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 
 .tel_dot {
   margin: 0 5px;
+}
+
+.address_out {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px;
 }
 
 .btn_confirm {
