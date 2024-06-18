@@ -48,7 +48,7 @@ const Main = () => {
           
           {/* 첫 번째 페이지 */}
           <FullpageSection style={{ height: '100vh' }}>
-            <div className="section container" data-aos="fade-up" data-aos-delay="600">
+            <div className="section container" data-aos="fade-up" data-aos-delay="450">
               <div className="row">
                 <div className="col-md-6">
                   {/* 텍스트 콘텐츠 */}
@@ -64,14 +64,14 @@ const Main = () => {
 
           {/* 두 번째 페이지 */}
           <FullpageSection style={{ height: '100vh' }}>
-            <div className="section" data-aos="fade-up" data-aos-delay="600">
+            <div className="section" data-aos="fade-up" data-aos-delay="450">
               <Content title="편리한 길 찾기 서비스" description="출발 위치와 도착 위치를 입력하면 이용할 지하철이나 버스 또는 자가용, 교통편에 따라 최적의 경로를 제공해요." />
             </div>
           </FullpageSection>
 
           {/* 세 번째 페이지 */}
           <FullpageSection style={{ height: '100vh' }}>
-            <div className="section" data-aos="fade-up" data-aos-delay="600">
+            <div className="section" data-aos="fade-up" data-aos-delay="450">
               <Content title="경로 즐겨찾기" description="자주 이용하는 경로를 빠르게 확인해보세요." />
             </div>
           </FullpageSection>
@@ -86,8 +86,8 @@ const Main = () => {
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
-                <div className="carousel-inner" data-aos="fade-up" data-aos-delay="600">
-                  <div className="carousel-item active" data-bs-interval="6000">
+                <div className="carousel-inner" data-aos="fade-up" data-aos-delay="450">
+                  <div className="carousel-item active" data-bs-interval="4500">
                     <Content title="편리한 길 찾기" image={image} />
                   </div>
                   <div className="carousel-item" data-bs-interval="2000">
