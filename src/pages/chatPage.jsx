@@ -20,7 +20,7 @@ const chatPage = () => {
 
   useEffect(() => {
     LoginCheck()
-    ws.current = new WebSocket('ws://localhost:8080');
+    ws.current = new WebSocket('ws://localhost:8181');
 
     ws.current.onopen = () => console.log('WebSocket connected');
     ws.current.onclose = () => console.log('WebSocket disconnected');
