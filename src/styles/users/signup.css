@@ -1,0 +1,116 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.content {
+  flex: 1 1 auto;
+  padding-top: 30px;
+}
+
+.form_content {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.form_section {
+  display: block;
+  padding: 0 20px;
+}
+
+.form_list {
+  position: relative;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.btn_confirm {
+  text-align: center;
+}
+
+.bt_ty {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bt_ty:hover {
+  background-color: #1c86ee;
+}
+
+/* ReCAPTCHA 스타일 */
+.re1_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 미디어 쿼리 */
+@media (min-width: 768px) {
+  .inner {
+      width: 500px;
+      margin: 0 auto;
+  }
+
+  .title {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .form_section {
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .table_ty1 th, .table_ty1 td {
+      padding: 8px;
+  }
+
+  input[type="text"], input[type="password"], select {
+      width: calc(100% - 18px);
+  }
+}
