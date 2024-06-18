@@ -2,12 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/header';
-import Main from '@pages/main';
-import LoginPage from '@pages/loginPage';
-import RegisterPage from '@pages/register';
-import LoginRyuPage from '@pages/signInPage';
-import RegisterRyuPage from '@pages/signUpPage';
+import Main from '@pages/main'
+import LoginPage from '@pages/loginPage'
+import RegisterPage from '@pages/register'
 import UserPage from '@pages/userPage';
+
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
 import ChatPage from '@pages/chatPage';
@@ -17,6 +16,7 @@ import BoardList from '@components/board/BoardList';
 import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
 import MyPosts from '@components/board/MyPosts';
+
 
 // userPage에 들어가는 리스트 데이터
 function App() {
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      {!noHeaderPaths.includes(location.pathname) && <Header />}
+    <Header/>
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/login' element={<LoginPage />} />

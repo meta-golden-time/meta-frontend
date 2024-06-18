@@ -1,7 +1,6 @@
 /* CSS 파일 (예: Register.css) */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
   margin: 0;
   padding: 0;
 }
@@ -11,11 +10,11 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f8ff;
+  /* background-color: #f0f8ff; */
 }
 
 .s_cnt {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -42,13 +41,13 @@ body {
 }
 
 .table_ty1 th {
-  background-color: #1e90ff;
+  /* background-color: #1e90ff; */
   color: white;
   text-align: left;
 }
 
 .table_ty1 td {
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
 }
 
 input[type="text"], input[type="password"], select {
@@ -94,7 +93,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .bt_ty {
-  background-color: #1e90ff;
+  /* background-color: #1e90ff; */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -104,7 +103,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .bt_ty:hover {
-  background-color: #1c86ee;
+  /* background-color: #1c86ee; */
 }
 
 /* ReCAPTCHA 스타일 */
