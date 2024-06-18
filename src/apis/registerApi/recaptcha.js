@@ -5,7 +5,7 @@ import  { format } from 'date-fns';
 
 
 
-const API_URL = 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000';
+const API_URL = process.env.REACT_APP_API_USER;
 
 
 export const getData = async() => {

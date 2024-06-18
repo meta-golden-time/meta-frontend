@@ -57,42 +57,42 @@ export default defineConfig({
     proxy: {
 
       '/api': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/users': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/auth': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/weather': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/map': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/bookmark': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/news': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
         changeOrigin: true,
         secure: false,
       },
       '/board': {
-        target: 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000', // 백엔드 서버 주소
+        target: 'http://localhost:3000', // 백엔드 서버 주소
 
         changeOrigin: true,
         secure: false,
