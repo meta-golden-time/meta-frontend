@@ -6,6 +6,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ap.cx/react-fullpage": "^0.3.0",
     "@babel/cli": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@emotion/react": "^11.11.4",
@@ -15,6 +16,7 @@
     "@vitejs/plugin-react": "^4.3.0",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
     "firebase": "^10.12.2",
     "jquery": "^3.7.1",

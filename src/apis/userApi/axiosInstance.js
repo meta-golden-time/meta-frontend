@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+
+
+const API_URL = 'http://ec2-43-203-242-73.ap-northeast-2.compute.amazonaws.com:3000';
+
+
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
