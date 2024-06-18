@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useState } from 'react-router-dom';
 
 // Material UI의 컴포넌트 불러오기
 import AppBar from '@mui/material/AppBar'; // AppBar를 import해야 다른 라이브러리들이 동작함
