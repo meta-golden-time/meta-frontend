@@ -1,6 +1,4 @@
 import { axiosInstance } from './axiosInstance';
-import useLoginStore from '../../components/zustandValue.jsx'
-
 
 export const postRegister = async (data) => {
   try {
@@ -12,36 +10,33 @@ export const postRegister = async (data) => {
   }
 };
 
-
 export const postLogin = async (data) => {
+  console.log("🚀 ~ postLogin ~ data:", data)
   try {
     const response = await axiosInstance.post('/auth/login', data);
-    console.log("🚀 ~ postLogin ~ response:", response.data.success)
-    
     return response.data;
   } catch (error) {
     console.error('Error during login:', error.response?.data || error.message);
-    
     throw error;
   }
 };
 
-export const postLoginCheck= async () => {
+export const postLoginCheck = async () => {
   try {
-    const response = await axiosInstance.get('/auth/loginCheck');    
+    const response = await axiosInstance.get('/auth/loginCheck');
     return response.data;
   } catch (error) {
-    console.error('Error during login:', error.response?.data || error.message);    
+    console.error('Error during login:', error.response?.data || error.message);
     throw error;
   }
 };
 
-export const postLogout= async () => {
+export const postLogout = async () => {
   try {
-    const response = await axiosInstance.post('/auth/logout');    
+    const response = await axiosInstance.post('/auth/logout');
     return response.data;
   } catch (error) {
-    console.error('Error during login:', error.response?.data || error.message);    
+    console.error('Error during login:', error.response?.data || error.message);
     throw error;
   }
 };
