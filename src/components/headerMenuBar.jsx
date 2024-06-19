@@ -46,7 +46,9 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 function HeaderMenuBar() {
   
   const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
+  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
   // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
+  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
   const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
 
 
@@ -70,7 +72,13 @@ function HeaderMenuBar() {
     
   //   window.addEventListener('scroll', handleScroll);
   //   checkLoginStatus();
+  //   window.addEventListener('scroll', handleScroll);
+  //   checkLoginStatus();
 
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
   //   return () => {
   //     window.removeEventListener('scroll', handleScroll);
   //   };
