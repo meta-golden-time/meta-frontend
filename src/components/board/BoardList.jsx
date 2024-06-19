@@ -8,7 +8,7 @@ const BoardList = () => {
   const [posts, setPosts] = useState([]);
   const [searchType, setSearchType] = useState('title');
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [loginUser, setLoginUser] = useState(''); // 로그인 체크 상태
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -16,7 +16,8 @@ const BoardList = () => {
   const fetchPosts = async () => {
     try {
       const response = await getPosts();
-      setPosts(response.data);
+      setLoginUser(response.data.userID)
+      setPosts(response.data.result);
     } catch (error) {
       console.error('Error fetching posts', error);
     }

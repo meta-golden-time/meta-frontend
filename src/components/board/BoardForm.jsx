@@ -22,10 +22,10 @@ const BoardForm = ({ isEdit }) => {
   const fetchPost = async (postId) => {
     try {
       const response = await getPosts();
-      const post = response.data.find((p) => p.id == postId);
+      const post = response.data.result.find((p) => p.id == postId);
       setTitle(post.title);
       setContent(post.content);
-      setAuthor(post.author);
+      // setAuthor(post.author);
       setIsPrivate(post.isPrivate);
     } catch (error) {
       console.error('Error fetching post', error);
@@ -38,7 +38,6 @@ const BoardForm = ({ isEdit }) => {
       title,
       content,
       password,
-      author,
       isPrivate,
     };
 

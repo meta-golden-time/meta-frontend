@@ -21,7 +21,7 @@ const BoardDetail = () => {
   const fetchPost = async () => {
     try {
       const response = await getPosts();
-      const post = response.data.find((p) => p.id == id);
+      const post = response.data.result.find((p) => p.id == id);
       setPost(post || { error: 'Post not found' });
     } catch (error) {
       console.error('Error fetching post', error);

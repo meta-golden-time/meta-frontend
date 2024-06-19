@@ -14,6 +14,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JavaScript
 import Content from '@components/content.jsx';
 import image from '@img/main/map_page_img.png';
 import '@styles/main.scss';
+import buildingsBack from '@img/main/buildings_back.png';
 
 const Main = () => {
 

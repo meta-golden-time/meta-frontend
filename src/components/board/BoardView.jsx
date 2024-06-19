@@ -20,7 +20,8 @@ const BoardView = () => {
     try {
       const response = await getPosts();
       console.log("🚀 ~ fetchPost ~ response:", response)
-      const fetchedPost = response.data.find(p => p.id == postId);
+      const fetchedPost = response.data.result.find(p => p.id == postId);
+      console.log("🚀 ~ fetchPost ~ fetchedPost:", fetchedPost)
       setPost(fetchedPost);
     } catch (error) {
       console.error('Error fetching post', error);
@@ -29,6 +30,7 @@ const BoardView = () => {
 
   const handleDelete = async () => {
     try {
+      console.log("삭제할껀데 아이디 머임?",id)
       await deletePost(id, password);
       Swal.fire('삭제 완료', '게시물이 삭제되었습니다.', 'success');
       navigate('/board');
@@ -36,6 +38,7 @@ const BoardView = () => {
       console.error('Error deleting post', error);
       Swal.fire('Error', '게시물 삭제 중 오류가 발생했습니다.', 'error');
     }
+      console.log("🚀 ~ handleDelete ~ password:", password)
   };
 
   const handlePasswordSubmit = () => {
