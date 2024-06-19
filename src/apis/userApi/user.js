@@ -1,5 +1,4 @@
 import { axiosInstance } from './axiosInstance';
-import useLoginStore from '../../components/zustandValue.jsx';
 
 export const postRegister = async (data) => {
   try {
@@ -12,6 +11,7 @@ export const postRegister = async (data) => {
 };
 
 export const postLogin = async (data) => {
+  console.log("🚀 ~ postLogin ~ data:", data)
   try {
     const response = await axiosInstance.post('/auth/login', data);
     return response.data;
