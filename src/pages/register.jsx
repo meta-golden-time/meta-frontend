@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Button from '@mui/material/Button';
+import logImg from '../img/main/goldenTimeLogo.png';
 
 // api 요청
 import { postRegister } from '../apis/userApi/user';
@@ -113,14 +114,18 @@ class Register extends Component {
                 <section className="sub_wrap">
                     <article className="s_cnt re_1 ct1">
                         <div className="li_top">
-                            <h2 className="s_tit1">회원가입</h2>
+                            <h2 className="s_tit1">
+                                <a href='/'>
+                                    <img src={logImg} alt="login logo" />
+                                </a>
+                            회원가입</h2>
                             <form method="post" name="frm">
                                 <div className="re1_wrap">
                                     <div className="re_cnt ct2">
                                         <div className='form_list'>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="id_val">아이디</label>
-                                                <Button variant="outlined" className='id_validation'>아이디 중복 확인</Button>
                                             </div>
                                             <div className='form_item'>
                                                 <input
@@ -129,8 +134,12 @@ class Register extends Component {
                                                     name="is_Userid"
                                                     placeholder="아이디을 입력해주세요."
                                                 />
+                                                <div className='btn'>
+                                                    <Button variant="outlined" className='id_validation'>중복 확인</Button>
+                                                </div>
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="pwd_val">비밀번호</label>
                                             </div>
                                             <div className='form_item'>
@@ -142,6 +151,7 @@ class Register extends Component {
                                                 />
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="pwd_cnf_val">비밀번호 확인</label>
                                             </div>
                                             <div className='form_item'>
@@ -153,6 +163,7 @@ class Register extends Component {
                                                 />
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="name_val">이름</label>
                                             </div>
                                             <div className='form_item'>
@@ -164,6 +175,7 @@ class Register extends Component {
                                                 />
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="email_val">이메일</label>
                                             </div>
                                             <div className='form_item'>
@@ -186,6 +198,7 @@ class Register extends Component {
                                                 </select>
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label>주소</label>
                                                 <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} />
                                             </div>
@@ -193,6 +206,7 @@ class Register extends Component {
                                                 <div className='address_out'>{this.state.address}</div>
                                             </div>
                                             <div className='form_item_top'>
+                                                <span>*</span>
                                                 <label htmlFor="phone1_val">전화번호</label>
                                             </div>
                                             <div className='form_item'>
