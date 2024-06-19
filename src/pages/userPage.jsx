@@ -1,5 +1,5 @@
 import React from 'react';
-import '@styles/userPage.scss';
+import '@styles/users/userPage.scss';
 
 import { postLogout } from '../apis/userApi/user'; //로그인체크 진행
 

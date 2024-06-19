@@ -22,10 +22,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 // 이미지 가져오기
-import myLogo from '@img/main/goldenTimeLogo.png';
+import myLogo from '@img/main/1teamlogo.png';
 
 // css 디자인 가져오기
-import '@styles/headerMenuBar.scss'
+import '@styles/headerMenuBar/headerMenuBar.scss'
 
 import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
 
@@ -37,19 +37,13 @@ const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'reg
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-
-const settingsLogout = { 'Log in': 'login', 'Sign up': 'register' }; // 로그인 전
-//let loginCheck = true; // *****  로그인 체크 ***** 
-//let settings = loginCheck ? settingsLogin : settingsLogout; 
+const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
 
 
 function HeaderMenuBar() {
   
-  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
   // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
   const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
-
-
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
@@ -59,28 +53,24 @@ function HeaderMenuBar() {
       console.log(err)
     }
   }
-  // React.useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.pageYOffset > 0) {
-  //       setIsScrolled(true); // 스크롤 되면 true로 변경
-  //     } else {
-  //       setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
-  //     }
-  //   };
-    
-  //   window.addEventListener('scroll', handleScroll);
-  //   checkLoginStatus();
-  //   window.addEventListener('scroll', handleScroll);
-  //   checkLoginStatus();
 
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(true); // 스크롤 되면 true로 변경
+      } else {
+        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    checkLoginStatus();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
 
     // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
@@ -126,17 +116,13 @@ function HeaderMenuBar() {
 
   return (
     <section>
-      <div className='headerMenu' style={{ width: '100%' }}>
+      <div className='headerMenu' style={{ width: '100%', backgroundColor: isScrolled ? '#ffffff' : 'transparent' }}>
 
         <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
           {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
           <Toolbar disableGutters >
 
             {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
-            {!isMobile && (
-              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
-            )}
-            
             <Typography
               variant="h6"
               noWrap
@@ -152,7 +138,10 @@ function HeaderMenuBar() {
                 textDecoration: 'none',
               }}
             >
-              Golden Time
+            {!isMobile && (
+              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 150 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
+            )}
+            
             </Typography>
 
             {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
