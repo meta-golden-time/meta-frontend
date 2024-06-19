@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from "axios";
-import logImg from '../img/main/log_img.png';
+import logImg from '../img/main/goldenTimeLogo.png';
 import logIcon3 from '../img/main/m_log_i3.png';
 import logIcon2 from '../img/main/m_log_i2.png';
 import logIcon1 from '../img/main/m_log_i1.png';
+import googleIcon from '../img/main/icons8-google-logo.svg'
 
 import { postLogin } from '../apis/userApi/user';
 
@@ -78,10 +79,12 @@ const LoginForm = () => {
                 
             </section>
             <section className="main">
-                <div className="m_login signin">
+                <div className="m_login">
                     <h3>
                         <span>
+                            <a href='/'>
                             <img src={logImg} alt="login logo" />
+                            </a>
                         </span>
                         <p>LOGIN</p>
                     </h3>
@@ -117,9 +120,8 @@ const LoginForm = () => {
                         <li><Link to={'/forgot-password'}>아이디/비밀번호 찾기</Link></li>
                     </ul>
                     <div className="social_login">
+                        <img src={googleIcon} />
                         <button className="google" onClick={handleGoogleLogin}>구글</button>
-                        <button className="kakao">카카오</button>
-                        <button className="naver">네이버</button>
                     </div>
                 </div>
             </section>
