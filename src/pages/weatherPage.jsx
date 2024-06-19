@@ -16,7 +16,7 @@ import {
   getTodayForecastWeather,
   getWeekForecastWeather,
 } from '../utilities/weatherUtilities/DataUtils';
-// import { WeatherBg } from './weatherBg';
+import { WeatherBg } from './weatherBg';
 
 function WeatherMap() {
 
@@ -200,9 +200,9 @@ function WeatherMap() {
           {appContent}
         </Grid>
       </Container>
-      {/* <div className='weatherBg'>
+      <div className='weatherBg'>
         <WeatherBg />
-      </div> */}
+      </div>
     </div>
   );
 }
