@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
+import glsl from 'vite-plugin-glsl';
 
 // WebSocket 서버 생성 함수
 const createWebSocketServer = () => {
@@ -40,7 +41,7 @@ const createWebSocketServer = () => {
 };
 
 export default defineConfig({
-  plugins: [react(), svgr(),
+  plugins: [react(), svgr(), glsl(),
     {
       name: 'configure-server',
       configureServer(server) {     
@@ -50,20 +51,19 @@ export default defineConfig({
       },
     },
   ],
-  build: {
-    outDir: 'dist', // 기본 빌드 디렉토리 설정
-  },
-  server: {
-    proxy: {
+  // build: {
+  //   outDir: 'dist', // 기본 빌드 디렉토리 설정
+  // },
+  // server: {
+  //   proxy: {
 
-      '/api': {
-        target: 'http://localhost:3000', // 백엔드 서버 주소
-        changeOrigin: true,
-        secure: false,
-      },
-      
-    },
-  },
+  //     '/api': {
+  //       target: 'http://localhost:3000', // 백엔드 서버 주소
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },      
+  //   },
+  // },
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),

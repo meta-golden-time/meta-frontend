@@ -17,7 +17,7 @@ export const postRegister = async (data) => {
 export const postLogin = async (data) => {
   try {
     const response = await axiosInstance.post('/auth/login', data);
-    console.log("🚀 ~ postLogin ~ response:", response.data.success)
+    console.log("🚀 ~ postLogin ~ response:", response.data)
     
     return response.data;
   } catch (error) {
