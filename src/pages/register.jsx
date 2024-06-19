@@ -24,6 +24,7 @@ class Register extends Component {
     };
 
     onRecaptchaChange = (value) => {
+        console.log("🚀 ~ Register ~ value:", value)
         this.setState({ recaptchaValue: value });
     };
 
@@ -92,6 +93,7 @@ class Register extends Component {
             role: document.getElementById('admin2_val').value,
             recaptcha: this.state.recaptchaValue,
         };
+        console.log("🚀 ~ Register ~ submitClick= ~ data:", data)
 
         try {
             const result = await postRegister(data);

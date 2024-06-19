@@ -3,6 +3,7 @@ import useLoginStore from '../../components/zustandValue.jsx'
 
 
 export const postRegister = async (data) => {
+  console.log("🚀 ~ postRegister ~ data:", data)
   try {
     const response = await axiosInstance.post('/users/register', data);
     return response.data;
