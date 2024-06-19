@@ -1,6 +1,7 @@
 import { axiosInstance } from './axiosInstance';
 
 export const postBookMark = async (data) => {
+  console.log("🚀 ~ postBookMark ~ data:", data)
   try {
     const response = await axiosInstance.post('/bookmark/add', data);
     console.log("🚀 ~ postBookMark ~ response:", response)
