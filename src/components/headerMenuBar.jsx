@@ -32,13 +32,13 @@ import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
 
 // 페이지 메뉴 항목을 정의
 const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/,
-  Login_Ryu: 'login_ryu', registe_Ryu: 'register_ryu', chat: 'chatting',  고객센터: 'board' };
+  chat: 'chatting',  고객센터: 'board' };
 
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
 
-const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
+const settingsLogout = { 'Log in': 'login', 'Sign up': 'register' }; // 로그인 전
 //let loginCheck = true; // *****  로그인 체크 ***** 
 //let settings = loginCheck ? settingsLogin : settingsLogout; 
 
@@ -46,9 +46,7 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 function HeaderMenuBar() {
   
   const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
-  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
   // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
-  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
   const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
 
 
