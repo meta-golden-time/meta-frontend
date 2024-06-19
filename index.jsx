@@ -9,7 +9,7 @@ import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
 import ChatPage from '@pages/chatPage';
-import BoardPage from '@pages/boardPage';
+
 
 import BoardList from '@components/board/BoardList';
 import BoardForm from '@components/board/BoardForm';

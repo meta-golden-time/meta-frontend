@@ -10,49 +10,85 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* background-color: #f0f8ff; */
+  background-color: #f0f8ff;
 }
 
 .s_cnt {
   background-color: #f0f8ff;
   padding: 20px;
   /* border-radius: 10px; */
-  max-width: 600px;
+  max-width: 460px;
   width: 100%;
 }
 
+
 .s_tit1 {
+  display: flex;
+  flex-direction: column;
   color: #1e90ff;
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
 }
 
-.table_ty1 {
+.s_tit1 img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.ct2 {
+  margin-top: 10px;
+}
+
+.form_list {
+  display: flex;
   width: 100%;
   /* border-collapse: collapse; */
   margin-bottom: 20px;
+  margin-top: 60px;
+  flex-direction: column;
 }
 
-.table_ty1 th, .table_ty1 td {
-  padding: 10px;
+.form_item {
+  display: flex;
   /* border: 1px solid #ddd; */
+  margin-bottom: 30px;
+  margin-right: 10px;
+  align-items: center;
+  height: 45px;
 }
 
-.table_ty1 th {
-  /* background-color: #1e90ff; */
-  color: white;
-  text-align: left;
+.form_item_top {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
 }
 
-.table_ty1 td {
-  /* background-color: #f9f9f9; */
+.form_item_top label {
+  font-weight: bold; /* 폰트 굵기 */
+  font-size: 16px; /* 폰트 크기 */
+  margin-right: 10px;
+}
+
+.form_item_top span {
+  color: red;
+}
+
+.btn {
+  display: flex;
+  margin-left: 10px;
+  padding: 0px;
+}
+
+.id_validation {
+  width: 112px;
+  height: 45.6px;
 }
 
 input[type="text"], input[type="password"], select {
-  width: calc(100% - 22px);
+  width: 30%;
   padding: 10px;
-  margin: 5px 0;
+  margin: 0px 0px 0px 0px;
   /* border: 1px solid #ddd; */
   border-radius: 5px;
   box-sizing: border-box;
@@ -60,24 +96,6 @@ input[type="text"], input[type="password"], select {
 
 input[type="text"]:focus, input[type="password"]:focus, select:focus {
   border-color: #1e90ff;
-}
-
-.email_form input[type="text"] {
-  width: 50%;
-  flex: 1;
-  margin-right: 5px;
-}
-
-.email_form {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-}
-
-.email_form select {
-  width: auto;
-  flex: none;
 }
 
 .e_goll {
@@ -90,9 +108,12 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .address_out {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px;
+  background-color: #ffffff; /* 원하는 배경색 */
+  padding: 10px; /* 패딩을 추가하여 내부 여백을 줌 */
+  border-radius: 5px; /* 모서리를 둥글게 만듦 */
+  border: 1px solid #ccc; /* 테두리를 추가함 */
+  width: 100%;
+  height: inherit;
 }
 
 .btn_confirm {
@@ -110,18 +131,18 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .bt_ty:hover {
-  /* background-color: #1c86ee; */
+  background-color: #1c86ee;
 }
 
 /* ReCAPTCHA 스타일 */
 .re1_wrap {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 /* 미디어 쿼리 */
-@media (max-width: 600px) {
+@media (max-width: 460px) {
   .s_cnt {
       padding: 15px;
   }

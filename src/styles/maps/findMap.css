@@ -31,7 +31,7 @@ input {
 
 .maps {
   flex: 1;
-  height: 600px;
+  height: 100vh;
   border: 1px solid #ccc;
 }
 

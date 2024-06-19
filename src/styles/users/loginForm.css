@@ -10,13 +10,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
   text-align: center;
-  width: 300px;
+  width: 460px;
 }
 
 .m_login h3 {
   margin-bottom: 30px;
   font-size: 24px;
   color: #333;
+}
+
+.m_login h3 img {
+  width: 50px;
 }
 
 .m_login .log_box {
@@ -78,6 +82,12 @@
   text-decoration: underline;
 }
 
+.social_login {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .social_login button {
   width: 100%;
   padding: 10px;
@@ -85,8 +95,15 @@
   background: none;
   color: #333;
   border-radius: 5px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   cursor: pointer;
+}
+
+.social_login img {
+  position: absolute;
+  left: 5%;
+  height: 40px;
+  width: 40px;
 }
 
 .social_login button.google {
@@ -94,15 +111,7 @@
   color: #db4437;
 }
 
-.social_login button.kakao {
-  border-color: #ffeb00;
-  color: #ffeb00;
-}
 
-.social_login button.naver {
-  border-color: #03c75a;
-  color: #03c75a;
-}
 
 .social_login button:hover {
   opacity: 0.8;

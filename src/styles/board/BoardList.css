@@ -57,11 +57,16 @@
   border-radius: 4px;
 }
 
+.search-container select {
+  width: 100px;
+}
+
 .search-container button {
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
+  width: 100px;
 }
 
 .search-container button:hover {
@@ -72,6 +77,10 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+}
+
+table tbody {
+  height: 50vh;
 }
 
 table th,

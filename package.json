@@ -23,6 +23,7 @@
     "font-awesome": "^4.7.0",
     "fullpage.js": "^4.0.22",
     "glsl": "^0.0.1",
+    "glslify": "^7.1.1",
     "gsap": "^3.12.5",
     "jquery": "^3.7.1",
     "mui": "^0.0.1",
