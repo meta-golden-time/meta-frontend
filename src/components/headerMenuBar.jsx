@@ -37,10 +37,7 @@ const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'reg
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-
 const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
-//let loginCheck = true; // *****  로그인 체크 ***** 
-//let settings = loginCheck ? settingsLogin : settingsLogout; 
 
 
 function HeaderMenuBar() {
