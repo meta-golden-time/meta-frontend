@@ -40,8 +40,8 @@ const Main = () => {
                 </h1>
                 {/* 버튼과 제목 사이의 간격을 위한 스타일 */}
                 <div className='mainBtn'>
-                  <button type="button" className="btn custom-btn same-size-btn">weather</button>
-                  <button type="button" className="btn custom-btn same-size-btn">map</button>
+                  <button type="button">weather</button>
+                  <button type="button">map</button>
                 </div>
               </div>
             </div>

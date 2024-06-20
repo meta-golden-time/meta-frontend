@@ -193,7 +193,7 @@ function HeaderMenuBar() {
               href="/"
               sx={{
                 mr: 1,
-                display: { xs: 'flex', md: 'none'},
+                // display: { xs: 'flex', md: 'none'},
                 // flexGrow: 1,
                 // fontFamily: 'monospace',
                 // fontWeight: 700,

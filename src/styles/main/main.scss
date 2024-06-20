@@ -1,5 +1,25 @@
 @import './weather.scss';
 
+/* weader page에 대한 스타일 */
+.weatherPage {
+  height: 100vh;
+  // background-color: #ccc;
+  background: rgba(0, 0, 0, 0.2705882353);
+  &>div {
+    &:nth-of-type(1) {
+      display: flex; justify-content: center; align-items: center;
+    }
+  }
+}
+
+/* 배경 파란색 #081b38 */
+.weatherBg {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+/* main page에 대한 설정 */
 /* 전체 설정 */
 .section {
   /* 좌우 여백 */
@@ -48,31 +68,14 @@
   }
 }
 
-.weatherPage {
-  height: 100vh;
-  // background-color: #ccc;
-  background: rgba(0, 0, 0, 0.2705882353);
-  &>div {
-    &:nth-of-type(1) {
-      display: flex; justify-content: center; align-items: center;
-    }
-  }
-}
 
-// 배경 파란색 #081b38
-.weatherBg {
-  position: absolute;
-  top: 0;
-  z-index: -1;
-}
-
-/* 버튼 디자인 기능 설정 */
-.custom-btn {
-  color: #ffffff !important;
-  font-size: 1.3rem !important;
-  width: 100px; /* 버튼의 너비를 고정 */
-  text-align: center; /* 버튼 텍스트를 가운데 정렬 */
-}
+// /* 버튼 디자인 기능 설정 */
+// .custom-btn {
+//   color: #ffffff !important;
+//   font-size: 1.3rem !important;
+//   width: 100px; /* 버튼의 너비를 고정 */
+//   text-align: center; /* 버튼 텍스트를 가운데 정렬 */
+// }
 
 /* 캐러셀 가운데 정렬 */
 .carousel {
