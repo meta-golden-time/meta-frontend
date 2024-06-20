@@ -8,7 +8,7 @@ import { random, chance } from './random';
 
 import DropColor from '@img/weather/img/drop-color.png';
 import DropAlpha from '@img/weather/img/drop-alpha.png';
-import TextureGrass from '@img/weather/img/grass01.webp';
+import TextureGrass from '@img/weather/img/city copy.jpg';
 
 const images = [
   { name: "dropAlpha", src: DropAlpha },

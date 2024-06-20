@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from "axios";
-import logImg from '../img/main/goldenTimeLogo.png';
-import logIcon3 from '../img/main/m_log_i3.png';
-import logIcon2 from '../img/main/m_log_i2.png';
+
+import logImg from '../img/main/golden_time_logo.svg';
+import logIcon3 from '../img/main/m_log_i3.svg';
+import logIcon2 from '../img/main/m_log_i2.svg';
+
 import logIcon1 from '../img/main/m_log_i1.png';
 import googleIcon from '../img/main/icons8-google-logo.svg'
 
