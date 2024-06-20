@@ -1,0 +1,42 @@
+// message.scss
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  width: 100%;
+
+  &.own {
+    justify-content: flex-end;
+  }
+
+  .message-content {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .message-user {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .message-text {
+      background-color: #e6f7ff;
+      padding: 10px;
+      border-radius: 5px;
+      word-wrap: break-word;
+      max-height: 100px; // 메시지 박스 최대 높이
+      overflow-y: auto; // 메시지 박스 내 스크롤
+    }
+
+    &.own .message-text {
+      background-color: #007bff;
+      color: white;
+    }
+  }
+}

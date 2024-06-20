@@ -12,9 +12,9 @@ export const postBookMark = async (data) => {
   }
 };
 
-export const getBookMark = async (data) => {
+export const getBookMark = async () => {
   try {
-    const response = await axiosInstance.get('/bookmark/list', data);
+    const response = await axiosInstance.get('/bookmark/list', );
     console.log("🚀 ~ postBookMark ~ response:", response)
     return response.data;
   } catch (error) {
