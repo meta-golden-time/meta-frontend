@@ -4,6 +4,13 @@ import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Button from '@mui/material/Button';
 import logImg from '../img/main/goldenTimeLogo.png';
+import logIcon from '../img/main/user_icon.svg'
+import idIcon from '../img/main/user_icon.svg'
+import pwIcon from '../img/main/lock_icon.svg'
+import nameIcon from '../img/main/user_icon.svg'
+import emailIcon from '../img/main/email_icon.svg'
+import addrIcon from '../img/main/home_icon.svg'
+import phoneIcon from '../img/main/new_phone_icon.svg'
 
 // api 요청
 import { postRegister } from '../apis/userApi/user';
@@ -91,7 +98,6 @@ class Register extends Component {
             name: document.getElementById('name_val').value,
             address: this.state.address,
             phone: document.getElementById('phone1_val').value + "-" + document.getElementById('phone2_val').value + "-" + document.getElementById('phone3_val').value,
-            role: document.getElementById('admin2_val').value,
             recaptcha: this.state.recaptchaValue,
         };
 
@@ -123,67 +129,62 @@ class Register extends Component {
                                 <div className="re1_wrap">
                                     <div className="re_cnt ct2">
                                         <div className='form_list'>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="id_val">아이디</label>
-                                            </div>
-                                            <div className='form_item'>
+                                            <div className='form_item id'>
+                                                <span className="icon">
+                                                    <img src={idIcon} alt="id icon" />
+                                                </span>
                                                 <input
                                                     id="id_val"
                                                     type="text"
                                                     name="is_Userid"
-                                                    placeholder="아이디을 입력해주세요."
+                                                    placeholder="아이디"
                                                 />
                                                 <div className='btn'>
                                                     <Button variant="outlined" className='id_validation'>중복 확인</Button>
                                                 </div>
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="pwd_val">비밀번호</label>
-                                            </div>
                                             <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={pwIcon} alt="pw icon" />
+                                                </span>
                                                 <input
                                                     id="pwd_val"
                                                     type="password"
                                                     name="is_Password"
-                                                    placeholder="비밀번호를 입력해주세요."
+                                                    placeholder="비밀번호"
                                                 />
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="pwd_cnf_val">비밀번호 확인</label>
-                                            </div>
                                             <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={pwIcon} alt="pw icon" />
+                                                </span>
                                                 <input
                                                     id="pwd_cnf_val"
                                                     type="password"
                                                     name="is_Password"
-                                                    placeholder="비밀번호를 다시 입력해주세요."
+                                                    placeholder="비밀번호 확인"
                                                 />
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="name_val">이름</label>
-                                            </div>
                                             <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={nameIcon} alt="name icon" />
+                                                </span>
                                                 <input
                                                     id="name_val"
                                                     type="text"
                                                     name="is_Username"
-                                                    placeholder="성명을 입력해주세요."
+                                                    placeholder="이름"
                                                 />
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="email_val">이메일</label>
-                                            </div>
                                             <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={emailIcon} alt="email icon" />
+                                                </span>
                                                 <input
                                                     id="email_val"
                                                     type="text"
                                                     name="is_Useremail1"
-                                                    placeholder="이메일을 입력해주세요."
+                                                    placeholder="이메일"
                                                 />
                                                 <span className="e_goll">@</span>
                                                 <select id="email2_val" name="is_Useremail2" className="select_ty1">
@@ -197,32 +198,23 @@ class Register extends Component {
                                                     <option value="yahoo.com">yahoo.com</option>
                                                 </select>
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label>주소</label>
-                                                <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} />
-                                            </div>
                                             <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={addrIcon} alt="addr icon" />
+                                                </span>
+                                                <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} /> 
                                                 <div className='address_out'>{this.state.address}</div>
                                             </div>
-                                            <div className='form_item_top'>
-                                                <span>*</span>
-                                                <label htmlFor="phone1_val">전화번호</label>
-                                            </div>
                                             <div className='form_item'>
-                                                {/* <select id="phone1_val" name="is_Userphone1" className="select_ty1">
-                                                    <option value="">선택</option>
-                                                    <option value="010">010</option>
-                                                    <option value="011">011</option>
-                                                    <option value="016">016</option>
-                                                    <option value="017">017</option>
-                                                    <option value="018">018</option>
-                                                    <option value="019">019</option>
-                                                </select> */}
+                                                <span className="icon">
+                                                    <img src={phoneIcon} alt="phone icon" />
+                                                </span>
                                                 <input
                                                     id="phone1_val"
                                                     type="text"
                                                     name="is_Userphone1"
+                                                    maxLength="3"
+                                                    placeholder='010'
                                                 />
                                                 <span className="tel_dot">-</span>
                                                 <input
