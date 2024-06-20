@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from "axios";
 import logImg from '../img/main/log_img.png';
-import logIcon3 from '../img/main/m_log_i3.png';
-import logIcon2 from '../img/main/m_log_i2.png';
+import logIcon3 from '../img/main/m_log_i3.svg';
+import logIcon2 from '../img/main/m_log_i2.svg';
 import logIcon1 from '../img/main/m_log_i1.png';
 
 import { postLogin } from '../apis/userApi/user';

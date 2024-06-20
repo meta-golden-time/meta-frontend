@@ -22,12 +22,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 // 이미지 가져오기
-import myLogo from '@img/main/1teamlogo.png';
+import myLogo from '@img/main/new_golden_time_logo4.svg';
 
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
 
-import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
+//로그인체크 진행
+import { postLoginCheck } from '../apis/userApi/user';
 
 
 // 페이지 메뉴 항목을 정의
@@ -37,11 +38,7 @@ const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'reg
 
 // 사용자 설정 메뉴 항목을 정의
 const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-
 const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
-//let loginCheck = true; // *****  로그인 체크 ***** 
-//let settings = loginCheck ? settingsLogin : settingsLogout; 
-
 
 function HeaderMenuBar() {
   
@@ -125,29 +122,30 @@ function HeaderMenuBar() {
           {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
           <Toolbar disableGutters >
 
-            {/* 큰 화면(pc 화면)이 작은 화면(모바일 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
+            {/* 모바일 화면 메뉴 바 설정 */}
             <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
               sx={{
-                mr: 2,
+                mr: 0,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
+                // fontFamily: 'monospace',
+                // fontWeight: 700,
                 // letterSpacing: '.1rem', // 문자 간격
-                color: 'inherit',
-                textDecoration: 'none',
+                // color: 'inherit',
+                // textDecoration: 'none',
               }}
-            >
+              >
+            {/* 모바일 화면이 아닐 때 */}
             {!isMobile && (
-              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 150 }, height: { xs: 25, sm: 30, md: 33 }, mr: 0.5 }} />
+              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, mr: 3 }} />
             )}
-            
+              {/* Golden Time */}
             </Typography>
 
-            {/* 작은 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
+            {/* 모바일 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -187,12 +185,7 @@ function HeaderMenuBar() {
               </Menu>
             </Box>
 
-            {/* 작은 화면(모바일 화면)이 큰 화면(pc 화면)으로 전환 될 때 아이콘 표시 여부를 나타내줌 */}
-            {!isPc && (
-              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { xs: 25, sm: 30, md: 33 }, height: { xs: 25, sm: 30, md: 33 }, mr: 1 }} />
-            )}
-
-            {/* 작은 화면에서는 'Golden Time' 텍스트를 표시 */}
+          {/* PC 화면 메뉴 바 설정 */}
             <Typography
               variant="h5"
               noWrap
@@ -200,26 +193,29 @@ function HeaderMenuBar() {
               href="/"
               sx={{
                 mr: 1,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
+                display: { xs: 'flex', md: 'none'},
+                // flexGrow: 1,
+                // fontFamily: 'monospace',
+                // fontWeight: 700,
                 // letterSpacing: '.1rem', // 문자간격
-                color: 'inherit',
-                textDecoration: 'none',
+                // color: 'inherit',
+                // textDecoration: 'none',
               }}
-            >
-              Golden Time
+              >
+                {/* pc 화면이 아닐 때*/}
+                  {!isPc && (
+                    <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, ml: 35, mr: 35 }} />
+                  )}
+              {/* Golden Time */}
             </Typography>
 
-
-            {/* 큰 화면에서는 메뉴 버튼을 표시 */}
+            {/* pc 화면 메뉴 버튼 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               { Object.keys(pages).map((page) => (
                 <Button
                   key={page}
                   onClick={() => handleMovePage(pages[page])}
-                  sx={{ my: 1, color: 'black', display: 'block' }}
+                  sx={{ my: 1, color: 'black', display: 'block', p: 1.5}}
                 >
                   {page}
                 </Button>

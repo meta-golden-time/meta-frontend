@@ -4,6 +4,7 @@
 
 
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
 import Aos from 'aos';
 import 'aos/dist/aos.css'; // AOS 스타일시트
@@ -53,6 +54,10 @@ const Main = () => {
                 <div className="col-md-6">
                   {/* 텍스트 콘텐츠 */}
                   <Content className="display-4" title="맞춤형 오늘의 날씨 정보" description="당신이 설정한 위치나, 현재 장소의 날씨 정보를 제공해요." />
+                  {/* 링크 추가 */}
+                  <div className="link-container">
+                    <Link to='/weather' className="custom-link">weader →</Link>
+                  </div>
                 </div>
                 <div className="col-md-6">
                   {/* 이미지 콘텐츠 */}
@@ -74,6 +79,10 @@ const Main = () => {
             <div className="section" data-aos="fade-up" data-aos-delay="450">
               <Content title="경로 즐겨찾기" description="자주 이용하는 경로를 빠르게 확인해보세요." />
             </div>
+            {/* 링크 추가 */}
+            <div className="link-container">
+              <a href='/maps' className="custom-link">map →</a>
+            </div>
           </FullpageSection>
 
           {/* 네 번째 페이지 */}
@@ -84,7 +93,6 @@ const Main = () => {
                 <div className="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                   <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div className="carousel-inner" data-aos="fade-up" data-aos-delay="450">
                   <div className="carousel-item active" data-bs-interval="4500">
@@ -92,9 +100,6 @@ const Main = () => {
                   </div>
                   <div className="carousel-item" data-bs-interval="2000">
                     <Content title="경로 즐겨찾기" image={image} />
-                  </div>
-                  <div className="carousel-item">
-                    <Content title="알림 설정" image={image} />
                   </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -106,6 +111,13 @@ const Main = () => {
                   <span className="visually-hidden">Next</span>
                 </button>
               </div>
+            </div>
+          </FullpageSection>
+
+          {/* 두 번째 페이지 */}
+          <FullpageSection style={{ height: '100vh' }}>
+            <div className="section" data-aos="fade-up" data-aos-delay="450">
+              <Content title="오늘의 교통정보 공유" description="채팅을 통해 오늘의 교통 및 날씨 상황을 공유할 수 있어요." />
             </div>
           </FullpageSection>
 

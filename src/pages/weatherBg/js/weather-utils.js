@@ -8,7 +8,7 @@ import { random, chance } from './random';
 
 import DropColor from '@img/weather/img/drop-color.png';
 import DropAlpha from '@img/weather/img/drop-alpha.png';
-import TextureGrass from '@img/weather/img/grass01.webp';
+import TextureGrass from '@img/weather/img/city copy.jpg';
 
 const images = [
   { name: "dropAlpha", src: DropAlpha },
@@ -109,11 +109,11 @@ function setupParallax() {
 }
 
 function setupFlash() {
-  intervalId = setInterval(() => {
-    if (chance(curWeatherData.flashChance)) {
-      flash(curWeatherData.bg, curWeatherData.fg, curWeatherData.flashBg, curWeatherData.flashFg);
-    }
-  }, 500);
+  // intervalId = setInterval(() => {
+  //   if (chance(curWeatherData.flashChance)) {
+  //     flash(curWeatherData.bg, curWeatherData.fg, curWeatherData.flashBg, curWeatherData.flashFg);
+  //   }
+  // }, 500);
 }
 
 function setupWeather() {
@@ -137,7 +137,7 @@ function setupWeatherData() {
     bg: textures.textureRainBg.img,
     flashFg: null,
     flashBg: null,
-    flashChance: 0
+    // flashChance: 0
   };
 
   function weather(data) {
@@ -166,7 +166,7 @@ function setupWeatherData() {
       bg: textures.textureRainBg.img,
       flashFg: textures.textureStormLightningFg.img,
       flashBg: textures.textureStormLightningBg.img,
-      flashChance: 0.1
+      // flashChance: 0.1
     }),
     fallout: weather({
       rainChance: 0.35,
@@ -193,39 +193,39 @@ function setupWeatherData() {
 }
 
 function updateWeather() {
-  var hash = window.location.hash;
-  var currentSlide = null;
-  var currentNav = null;
-  if (hash !== "") {
-    currentSlide = document.querySelector(hash);
-  }
-  if (currentSlide == null) {
-    currentSlide = document.querySelector(".slide");
-    hash = "#" + currentSlide.getAttribute("id");
-  }
-  currentNav = document.querySelector("[href='" + hash + "']");
-  var data = weatherData[currentSlide.getAttribute('data-weather')];
-  curWeatherData = data;
-  raindrops.options = Object.assign(raindrops.options, data);
-  raindrops.clearDrops();
+  // var hash = window.location.hash;
+  // var currentSlide = null;
+  // var currentNav = null;
+  // if (hash !== "") {
+  //   currentSlide = document.querySelector(hash);
+  // }
+  // if (currentSlide == null) {
+  //   currentSlide = document.querySelector(".slide");
+  //   hash = "#" + currentSlide.getAttribute("id");
+  // }
+  // currentNav = document.querySelector("[href='" + hash + "']");
+  // var data = weatherData[currentSlide.getAttribute('data-weather')];
+  // curWeatherData = data;
+  // raindrops.options = Object.assign(raindrops.options, data);
+  // raindrops.clearDrops();
 
-  TweenLite.fromTo(blend, 1, {
-    v: 0
-  }, {
-    v: 1,
-    onUpdate: () => {
-      generateTextures(data.fg, data.bg, blend.v);
-      renderer.updateTextures();
-    }
-  });
+  // TweenLite.fromTo(blend, 1, {
+  //   v: 0
+  // }, {
+  //   v: 1,
+  //   onUpdate: () => {
+  //     generateTextures(data.fg, data.bg, blend.v);
+  //     renderer.updateTextures();
+  //   }
+  // });
 
-  var lastSlide = document.querySelector(".slide--current");
-  if (lastSlide != null) lastSlide.classList.remove("slide--current");
+  // var lastSlide = document.querySelector(".slide--current");
+  // if (lastSlide != null) lastSlide.classList.remove("slide--current");
 
-  var lastNav = document.querySelector(".nav-item--current");
-  if (lastNav != null) lastNav.classList.remove("nav-item--current");
+  // var lastNav = document.querySelector(".nav-item--current");
+  // if (lastNav != null) lastNav.classList.remove("nav-item--current");
 
-  currentSlide.classList.add("slide--current");
+  // currentSlide.classList.add("slide--current");
   // currentNav.classList.add("nav-item--current");
 }
 

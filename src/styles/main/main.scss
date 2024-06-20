@@ -80,3 +80,20 @@
   max-width: 950px; /* 캐러셀 최대 너비 설정 */
   margin: 0 auto; /* 가로로 가운데 정렬 */
 }
+
+/* 링크 스타일 설정 */
+.link-container {
+  margin-top: 20px; /* 상단 마진 설정 */
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+}
+
+.custom-link {
+  font-size: 1.2rem; /* 폰트 크기 설정 */
+  color: #007bff; /* 링크 색상 설정 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+.custom-link:hover {
+  text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
