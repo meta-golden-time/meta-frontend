@@ -1,0 +1,31 @@
+// chatPage.scss
+
+.chat-container {
+  width: 100%;
+  max-width: 600px; // 20% 더 크게
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; // 메시지가 아래에 정렬되도록 함
+
+  .message-box-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}

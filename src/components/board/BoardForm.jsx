@@ -8,7 +8,6 @@ const BoardForm = ({ isEdit }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [password, setPassword] = useState('');
-  const [author, setAuthor] = useState(''); // Assume this gets set from logged-in user context
   const [isPrivate, setIsPrivate] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -25,7 +24,7 @@ const BoardForm = ({ isEdit }) => {
       const post = response.data.result.find((p) => p.id == postId);
       setTitle(post.title);
       setContent(post.content);
-      // setAuthor(post.author);
+      setPassword(post.password || ''); // 기존 비밀번호를 설정합니다.
       setIsPrivate(post.isPrivate);
     } catch (error) {
       console.error('Error fetching post', error);
@@ -34,6 +33,11 @@ const BoardForm = ({ isEdit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!password && !isEdit) {
+      Swal.fire('Error', '비밀번호를 입력해야 합니다.', 'error');
+      return;
+    }
+
     const formData = {
       title,
       content,
@@ -85,17 +89,16 @@ const BoardForm = ({ isEdit }) => {
             onChange={(e) => setIsPrivate(e.target.checked)}
           />
         </div>
-        {isPrivate && (
-          <div className="form-group">
-            <label>비밀번호</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-        )}
+        <div className="form-group">
+          <label>비밀번호</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={isEdit} // 수정 모드일 때 비밀번호 필드를 비활성화
+          />
+        </div>
         <button type="submit">{isEdit ? '수정' : '등록'}</button>
       </form>
     </div>
