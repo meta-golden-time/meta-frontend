@@ -3,11 +3,13 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #f0f8ff;
 }
 
 .m_login {
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* border: 1px solid #ccc; */
   padding: 40px;
   text-align: center;
   width: 460px;
@@ -16,29 +18,34 @@
 .m_login h3 {
   margin-bottom: 30px;
   font-size: 24px;
-  color: #333;
+  color: #1e90ff;
+  font-weight: bold;
 }
 
 .m_login h3 img {
   width: 50px;
+  margin-bottom: 20px;
 }
 
 .m_login .log_box {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .m_login .in_ty1 {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 10px;
-  /* background: #f9f9f9; */
+  padding: 5px;
+  background-color: #ffffff;
+  height: inherit;
 }
 
+
 .m_login .in_ty1 span {
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .m_login .in_ty1 input {
@@ -47,6 +54,7 @@
   background: none;
   outline: none;
 }
+
 
 .s_bt {
   width: 100%;
@@ -65,12 +73,13 @@
 
 .additional_links {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
 }
 
-.additional_links li {
-  list-style: none;
+.additional_links p {
+  margin-right: 10px;
 }
 
 .additional_links a {
@@ -92,7 +101,7 @@
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
-  background: none;
+  background-color: #ffffff;
   color: #333;
   border-radius: 5px;
   /* margin-top: 10px; */

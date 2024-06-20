@@ -18,7 +18,6 @@ body {
   padding: 20px;
   /* border-radius: 10px; */
   max-width: 460px;
-  width: 100%;
 }
 
 
@@ -29,6 +28,8 @@ body {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
+  font-weight: bold;
+  gap: 20px;
 }
 
 .s_tit1 img {
@@ -42,56 +43,63 @@ body {
 
 .form_list {
   display: flex;
-  width: 100%;
-  /* border-collapse: collapse; */
-  margin-bottom: 20px;
-  margin-top: 60px;
   flex-direction: column;
+  gap: 10px;
 }
 
 .form_item {
   display: flex;
-  /* border: 1px solid #ddd; */
-  margin-bottom: 30px;
-  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #ffffff;
+  /* margin-bottom: 20px; */
   align-items: center;
-  height: 45px;
+  height: inherit;
+  gap: 8px;
+  transition: border-color 0.3s;
 }
 
-.form_item_top {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 10px;
+.form_item:focus-within {
+  border-color: #007bff; /* 원하는 색상으로 변경 */
 }
 
-.form_item_top label {
-  font-weight: bold; /* 폰트 굵기 */
-  font-size: 16px; /* 폰트 크기 */
-  margin-right: 10px;
-}
-
-.form_item_top span {
-  color: red;
+.form_item span {
+  margin-left: 10px;
+  margin-bottom: 4px;
 }
 
 .btn {
   display: flex;
   margin-left: 10px;
-  padding: 0px;
+  margin-right: 10px;
+  padding: 4px;
 }
 
 .id_validation {
-  width: 112px;
-  height: 45.6px;
+  width: 94px;
+  height: 30.35px;
+
 }
 
-input[type="text"], input[type="password"], select {
+input[type="text"], input[type="password"] {
   width: 30%;
   padding: 10px;
-  margin: 0px 0px 0px 0px;
-  /* border: 1px solid #ddd; */
+  border: none;
   border-radius: 5px;
   box-sizing: border-box;
+  flex-grow: 1; /* input이 flex 컨테이너 내에서 공간을 차지하도록 설정 */
+}
+
+.form_item select {
+  width: 0px;
+  padding: 10px;
+  border: none;
+  /* box-sizing: border-box; */
+  flex-grow: 1; /* input이 flex 컨테이너 내에서 공간을 차지하도록 설정 */
+}
+
+input:focus {
+  outline: #1e90ff;
 }
 
 input[type="text"]:focus, input[type="password"]:focus, select:focus {
@@ -111,9 +119,8 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
   background-color: #ffffff; /* 원하는 배경색 */
   padding: 10px; /* 패딩을 추가하여 내부 여백을 줌 */
   border-radius: 5px; /* 모서리를 둥글게 만듦 */
-  border: 1px solid #ccc; /* 테두리를 추가함 */
-  width: 100%;
-  height: inherit;
+  border: none;
+  height: 45px;
 }
 
 .btn_confirm {
@@ -138,17 +145,13 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 .re1_wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 /* 미디어 쿼리 */
 @media (max-width: 460px) {
   .s_cnt {
       padding: 15px;
-  }
-
-  .table_ty1 th, .table_ty1 td {
-      padding: 8px;
   }
 
   input[type="text"], input[type="password"], select {

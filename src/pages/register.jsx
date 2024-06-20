@@ -4,7 +4,17 @@ import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Button from '@mui/material/Button';
 import logImg from '../img/main/goldenTimeLogo.png';
+
+import logIcon from '../img/main/user_icon.svg'
+import idIcon from '../img/main/user_icon.svg'
+import pwIcon from '../img/main/lock_icon.svg'
+import nameIcon from '../img/main/user_icon.svg'
+import emailIcon from '../img/main/email_icon.svg'
+import addrIcon from '../img/main/home_icon.svg'
+import phoneIcon from '../img/main/new_phone_icon.svg'
+
 import { Link, useNavigate } from 'react-router-dom';
+
 
 // api 요청
 import { postRegister } from '../apis/userApi/user';
@@ -88,7 +98,9 @@ const Register = () => {
             name: document.getElementById('name_val').value,
             address: address,
             phone: document.getElementById('phone1_val').value + "-" + document.getElementById('phone2_val').value + "-" + document.getElementById('phone3_val').value,
-            recaptcha: recaptchaValue,
+
+            recaptcha: this.state.recaptchaValue,
+
         };
 
         try {
@@ -105,34 +117,128 @@ const Register = () => {
         }
     };
 
-    return (
-        <div>
-            <section className="sub_wrap">
-                <article className="s_cnt re_1 ct1">
-                    <div className="li_top">
-                        <h2 className="s_tit1">
-                            <a href='/'>
-                                <img src={logImg} alt="login logo" />
-                            </a>
-                            회원가입
-                        </h2>
-                        <form method="post" name="frm">
-                            <div className="re1_wrap">
-                                <div className="re_cnt ct2">
-                                    <div className='form_list'>
-                                        <div className='form_item_top'>
-                                            <span>*</span>
-                                            <label htmlFor="id_val">아이디</label>
-                                        </div>
-                                        <div className='form_item'>
-                                            <input
-                                                id="id_val"
-                                                type="text"
-                                                name="is_Userid"
-                                                placeholder="아이디을 입력해주세요."
-                                            />
-                                            <div className='btn'>
-                                                <Button variant="outlined" className='id_validation'>중복 확인</Button>
+
+    render() {
+        return (
+            <div>
+                <section className="sub_wrap">
+                    <article className="s_cnt re_1 ct1">
+                        <div className="li_top">
+                            <h2 className="s_tit1">
+                                <a href='/'>
+                                    <img src={logImg} alt="login logo" />
+                                </a>
+                            회원가입</h2>
+                            <form method="post" name="frm">
+                                <div className="re1_wrap">
+                                    <div className="re_cnt ct2">
+                                        <div className='form_list'>
+                                            <div className='form_item id'>
+                                                <span className="icon">
+                                                    <img src={idIcon} alt="id icon" />
+                                                </span>
+                                                <input
+                                                    id="id_val"
+                                                    type="text"
+                                                    name="is_Userid"
+                                                    placeholder="아이디"
+                                                />
+                                                <div className='btn'>
+                                                    <Button variant="outlined" className='id_validation'>중복 확인</Button>
+                                                </div>
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={pwIcon} alt="pw icon" />
+                                                </span>
+                                                <input
+                                                    id="pwd_val"
+                                                    type="password"
+                                                    name="is_Password"
+                                                    placeholder="비밀번호"
+                                                />
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={pwIcon} alt="pw icon" />
+                                                </span>
+                                                <input
+                                                    id="pwd_cnf_val"
+                                                    type="password"
+                                                    name="is_Password"
+                                                    placeholder="비밀번호 확인"
+                                                />
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={nameIcon} alt="name icon" />
+                                                </span>
+                                                <input
+                                                    id="name_val"
+                                                    type="text"
+                                                    name="is_Username"
+                                                    placeholder="이름"
+                                                />
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={emailIcon} alt="email icon" />
+                                                </span>
+                                                <input
+                                                    id="email_val"
+                                                    type="text"
+                                                    name="is_Useremail1"
+                                                    placeholder="이메일"
+                                                />
+                                                <span className="e_goll">@</span>
+                                                <select id="email2_val" name="is_Useremail2" className="select_ty1">
+                                                    <option value="">선택하세요</option>
+                                                    <option value="naver.com">naver.com</option>
+                                                    <option value="hanmail.net">hanmail.net</option>
+                                                    <option value="nate.com">nate.com</option>
+                                                    <option value="hotmail.com">hotmail.com</option>
+                                                    <option value="gmail.com">gmail.com</option>
+                                                    <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                    <option value="yahoo.com">yahoo.com</option>
+                                                </select>
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={addrIcon} alt="addr icon" />
+                                                </span>
+                                                <SimpleDialogDemo onAddressSelect={this.handleAddressSelect} /> 
+                                                <div className='address_out'>{this.state.address}</div>
+                                            </div>
+                                            <div className='form_item'>
+                                                <span className="icon">
+                                                    <img src={phoneIcon} alt="phone icon" />
+                                                </span>
+                                                <input
+                                                    id="phone1_val"
+                                                    type="text"
+                                                    name="is_Userphone1"
+                                                    maxLength="3"
+                                                    placeholder='010'
+                                                />
+                                                <span className="tel_dot">-</span>
+                                                <input
+                                                    id="phone2_val"
+                                                    name="is_Userphone2"
+                                                    type='text'
+                                                    max="9999"
+                                                    maxLength="4"
+                                                    onChange={(e) => this.mustNumber('phone2_val')}
+                                                />
+                                                <span className="tel_dot">-</span>
+                                                <input
+                                                    id="phone3_val"
+                                                    name="is_Userphone3"
+                                                    type='text'
+                                                    max="9999"
+                                                    maxLength="4"
+                                                    onChange={(e) => this.mustNumber('phone3_val')}
+                                                />
+
                                             </div>
                                         </div>
                                         <div className='form_item_top'>

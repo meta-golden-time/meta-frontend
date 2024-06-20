@@ -279,119 +279,113 @@ const PathFinder = () => {
   }
 
   return (
-    <div className="path-finder">
-      <div className="left-panel">
-        <Box className="input-group">
-          <TextField
-            label="출발지"
-            variant="outlined"
-            fullWidth
-            name="start"
-            value={searchAddress.start} // value 추가
-            onChange={handleSearchAddressChange}
-            onKeyDown={(e) => handleKeyDown(e, 'start', searchAddress.start)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    id="searchBtn"
-                    onClick={() => searchMap('start', 'startPoint')}
-                  >
-                    <SearchIcon className="search-icon"
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),              
-              style: {
-                height: '50px',
-                width: '300px',
-                display: 'flex',
-                alignItems: 'center'
-              }
-            }}
-          />
-        </Box>
-        <div className="input-group">
-          <TextField
-            label="도착지"
-            variant="outlined"
-            fullWidth
-            name="end"
-            value={searchAddress.end} // value 추가
-            onChange={handleSearchAddressChange}
-            onKeyDown={(e) => handleKeyDown(e, 'end', searchAddress.end)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    id="searchBtn"
-                    onClick={() => searchMap('end', 'endPoint')}
-                  >
-                    <SearchIcon className="search-icon"
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),              
-
-              style: {
-                height: '50px',
-                width: '300px',
-                display: 'flex',
-                alignItems: 'center'
-              }
-            }}
-          />
-
+    <>
+      <div className="path-finder">
+        <div className="left-panel">
+          <Box className="input-group">
+            <TextField
+              label="출발지"
+              variant="outlined"
+              fullWidth
+              name="start"
+              value={searchAddress.start} // value 추가
+              onChange={handleSearchAddressChange}
+              onKeyDown={(e) => handleKeyDown(e, 'start', searchAddress.start)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      id="searchBtn"
+                      onClick={() => searchMap('start', 'startPoint')}
+                    >
+                      <SearchIcon className="search-icon"
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                ),              
+                style: {
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }
+              }}
+            />
+          </Box>
+          <div className="input-group">
+            <TextField
+              label="도착지"
+              variant="outlined"
+              fullWidth
+              name="end"
+              value={searchAddress.end} // value 추가
+              onChange={handleSearchAddressChange}
+              onKeyDown={(e) => handleKeyDown(e, 'end', searchAddress.end)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      id="searchBtn"
+                      onClick={() => searchMap('end', 'endPoint')}
+                    >
+                      <SearchIcon className="search-icon"
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                ),              
+                style: {
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }
+              }}
+            />
+          </div>
+          <div className="button-group">
+            <Button variant="contained" onClick={getCarDirection} fullWidth>
+              길찾기
+            </Button>
+            <Button variant="contained" color="secondary" onClick={handleBookMarkClick} fullWidth>
+              즐겨찾기
+            </Button>
+          </div>
+          <div>출발지: {pointObj.startPoint.placeName}</div>
+          <div>도착지: {pointObj.endPoint.placeName}</div>
+          <div className="scrollable-results search-results-container">
+            {searchResults.length > 0 && (
+              <ul className="search-results">
+                {searchResults.map((result, index) => (
+                  <li key={index}>
+                    <Card sx={{ maxWidth: 345 }}>
+                      <CardContent>
+                        <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 'bold' }}>
+                          {result.place_name}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={() => openModal(result.place_url)}>정보보기</Button>
+                        <Button size="small" onClick={() => handleResultClick(result)}>장소선택</Button>
+                      </CardActions>
+                    </Card>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-
-        <div className="button-group">
-          <Button variant="contained" onClick={getCarDirection} fullWidth>
-            길찾기
-          </Button>
-          <Button variant="contained" color="secondary" onClick={handleBookMarkClick} fullWidth>
-            즐겨찾기
-          </Button>
-        </div>
-
-        <div>출발지: {pointObj.startPoint.placeName}</div>
-        <div>도착지: {pointObj.endPoint.placeName}</div>
-
-        <div className="scrollable-results search-results-container">
-          {searchResults.length > 0 && (
-            <ul className="search-results">
-              {searchResults.map((result, index) => (
-                <li key={index}>
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardContent>
-                      <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 'bold' }}>
-                        {result.place_name}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" onClick={() => openModal(result.place_url)}>정보보기</Button>
-                      <Button size="small" onClick={() => handleResultClick(result)}>장소선택</Button>
-                    </CardActions>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <div id="maps" className="maps" />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Place URL"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <h1>장소 정보보기</h1>
+          <button onClick={closeModal} className="modal-close-button">Close</button>
+          <iframe src={selectedUrl} className="modal-iframe" />  
+        </Modal>
       </div>
-      <div id="maps" className="maps" />
-
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Place URL"
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <h1>장소 정보보기</h1>
-        <button onClick={closeModal} className="modal-close-button">Close</button>
-        <iframe src={selectedUrl} className="modal-iframe" />
-      </Modal>
-    </div>
+    </>
   );
 };
 

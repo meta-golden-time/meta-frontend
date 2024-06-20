@@ -61,6 +61,8 @@ const LoginForm = () => {
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithGoogle();
+            console.log(result);
+            console.log(typeof(result));
             Swal.fire({
                 title: '성공',
                 text: '구글 로그인에 성공하셨습니다.',
@@ -74,10 +76,6 @@ const LoginForm = () => {
     }
 
     return (
-        <>
-            <section>
-                
-            </section>
             <section className="main">
                 <div className="m_login">
                     <h3>
@@ -113,19 +111,20 @@ const LoginForm = () => {
                                 onChange={(e) => setPassword(e.target.value)} 
                             />
                         </div>
+                    </div>
+                    <div>
                         <button className="s_bt" type="button" onClick={submitClick}>로그인</button>
                     </div>
-                    <ul className="additional_links">
-                        <li><Link to={'/register'}>회원가입</Link></li>
-                        <li><Link to={'/forgot-password'}>아이디/비밀번호 찾기</Link></li>
-                    </ul>
+                    <div className="additional_links">
+                        <p>아직 계정이 없으신가요?</p>
+                        <Link to={'/register'}>회원가입  -&raquo;</Link>
+                    </div>
                     <div className="social_login">
                         <img src={googleIcon} />
                         <button className="google" onClick={handleGoogleLogin}>구글</button>
                     </div>
                 </div>
             </section>
-        </>
     );
 }
 
