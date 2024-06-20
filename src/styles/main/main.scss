@@ -1,13 +1,15 @@
 @import './weather.scss';
 
-/* weader page에 대한 스타일 */
+// weatherPage 스타일 적용
 .weatherPage {
   height: 100vh;
   // background-color: #ccc;
   background: rgba(0, 0, 0, 0.2705882353);
   &>div {
     &:nth-of-type(1) {
-      display: flex; justify-content: center; align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -19,17 +21,17 @@
   z-index: -1;
 }
 
-/* main page에 대한 설정 */
+// main page 스타일 적용
 /* 전체 설정 */
 .section {
   /* 좌우 여백 */
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 10%;
+  padding-right: 10%;
   /* 위치 설정 */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   text-align: center;
 }
 
@@ -39,27 +41,28 @@
   background-size: cover;
 }
 
-/* 제목 위치 설정*/
-// .titleDiv {
-//   margin-bottom: 100px;
-// }
+/* 대표 제목 위치 설정 */
 
-/* 제목의 간격 및 폰트 크기 설정 */
+/* 대표 제목의 간격 및 폰트 크기 설정 */
 .mainTitle, .mainTitleP {
   font-size: 4.5rem;
   /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
   margin: 0 auto;
   opacity: .8;
 }
-
+  
+/* 대표 제목 아래 버튼 디자인 기능 설정 */
 .mainBtn {
   margin-top: 80px;
   display: flex; justify-content: center; gap: 16px;
   button {
-    padding: 24px 60px;
+    padding: 20px 60px;
     background: #1c1c22;
     width: inherit;
     opacity: .7;
+    /* 폰트 색 및 크기 */
+    color: #ffffff;
+    font-size: 1.3rem;
     &:hover {
       opacity: 1;
       background: #000;
@@ -68,14 +71,34 @@
   }
 }
 
+/* 내용 레이아웃 */
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
 
-// /* 버튼 디자인 기능 설정 */
-// .custom-btn {
-//   color: #ffffff !important;
-//   font-size: 1.3rem !important;
-//   width: 100px; /* 버튼의 너비를 고정 */
-//   text-align: center; /* 버튼 텍스트를 가운데 정렬 */
-// }
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.col {
+  flex: 1;
+  padding: 15px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.four-page {
+  position: relative;
+}
 
 /* 캐러셀 가운데 정렬 */
 .carousel {
@@ -85,14 +108,22 @@
 }
 
 /* 링크 스타일 설정 */
-.link-container {
-  margin-top: 20px; /* 상단 마진 설정 */
+.link-weader {
+  /* 마진 설정 */
+  margin-top: 50px;
+  margin-right: 20px; 
   display: flex;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: end; /* 왼쪽 정렬 */
+}
+
+.link-map {
+  position: absolute;
+  bottom: 20%;
+  left: 28%;
 }
 
 .custom-link {
-  font-size: 1.2rem; /* 폰트 크기 설정 */
+  font-size: 1.5rem; /* 폰트 크기 설정 */
   color: #007bff; /* 링크 색상 설정 */
   text-decoration: none; /* 밑줄 제거 */
 }
