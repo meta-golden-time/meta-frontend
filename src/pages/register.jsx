@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import SimpleDialogDemo from '../components/Modal/addressSearch';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Button from '@mui/material/Button';
-import logImg from '../img/main/goldenTimeLogo.png';
+import logImg from '../img/main/golden_time_logo.svg';
 
 import logIcon from '../img/main/user_icon.svg';
 import idIcon from '../img/main/user_icon.svg';

@@ -51,7 +51,7 @@ const ChatPage = () => {
     }
   };
 
-  return <Chat messages={messages} sendMessage={sendMessage} loginUser={loginUser} />;
+  return <div style={{paddingTop: '65px'}}> <Chat messages={messages} sendMessage={sendMessage} loginUser={loginUser} /> </div>;
 };
 
 export default ChatPage;

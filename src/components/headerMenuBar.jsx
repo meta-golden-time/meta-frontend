@@ -22,7 +22,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 // 이미지 가져오기
-import myLogo from '@img/main/new_golden_time_logo4.svg';
+import myLogo from '@img/main/golden_time_logo.svg';
 
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
@@ -131,28 +131,14 @@ function HeaderMenuBar() {
           {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
           <Toolbar disableGutters >
 
-            {/* 모바일 화면 메뉴 바 설정 */}
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 0,
-                display: { xs: 'none', md: 'flex' },
-                // fontFamily: 'monospace',
-                // fontWeight: 700,
-                // letterSpacing: '.1rem', // 문자 간격
-                // color: 'inherit',
-                // textDecoration: 'none',
-              }}
-              >
-            {/* 모바일 화면이 아닐 때 */}
+            {/* pc 화면 메뉴 바 설정 */}
+            <div style={{marginRight: "6%"}}>
+            <Typography component="a" href="/">
             {!isMobile && (
-              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, mr: 3 }} />
+              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 } }} />
             )}
-              {/* Golden Time */}
             </Typography>
+            </div>
 
             {/* 모바일 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -200,28 +186,11 @@ function HeaderMenuBar() {
               </Menu>
             </Box>
 
-          {/* PC 화면 메뉴 바 설정 */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 1,
-                // display: { xs: 'flex', md: 'none'},
-                // flexGrow: 1,
-                // fontFamily: 'monospace',
-                // fontWeight: 700,
-                // letterSpacing: '.1rem', // 문자간격
-                // color: 'inherit',
-                // textDecoration: 'none',
-              }}
-              >
-                {/* pc 화면이 아닐 때*/}
-                  {!isPc && (
-                    <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, ml: 35, mr: 35 }} />
-                  )}
-              {/* Golden Time */}
+          {/* 모바일 화면 메뉴 바 설정 */}
+            <Typography component="a" href="/">
+              {!isPc && (
+                <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, ml: 35, mr: 35 }} />
+              )}
             </Typography>
 
             {/* pc 화면 메뉴 버튼 */}
@@ -246,9 +215,9 @@ function HeaderMenuBar() {
             </Box>
 
             {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
-            <Box sx={{ flexGrow: 0, pl: 3 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
+            <Box sx={{ flexGrow: 0, ml: 10 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
                   <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* ***** 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것 ***** */}
                 </IconButton>
               </Tooltip>

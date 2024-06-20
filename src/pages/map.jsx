@@ -14,20 +14,21 @@ export default function setMap() {
   };
   return (
     <>
-    <div style={{ padding: '10px' }} className="box_container">     
-      <Box  sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs" className='tab'>
+    <div style={{paddingTop: '65px'}}>
+      <div style={{ padding: '10px' }} className="box_container">     
+        <Box  sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs" className='tab'>
 
-          <Tab className='tabs' label="길찾기" />
-          <Tab className='tabs' label="지도검색" />
-          <Tab className='tabs' label="즐겨찾기" />
-        </Tabs> 
-      </Box>
-      
-      {tabIndex === 0 && <PathFinder />}
-      {tabIndex === 1 && <MapSearch />}
-      {tabIndex === 2 && <MapBookMark />}
-
+            <Tab className='tabs' label="길찾기" />
+            <Tab className='tabs' label="지도검색" />
+            <Tab className='tabs' label="즐겨찾기" />
+          </Tabs> 
+        </Box>
+        
+        {tabIndex === 0 && <PathFinder />}
+        {tabIndex === 1 && <MapSearch />}
+        {tabIndex === 2 && <MapBookMark />}
+      </div>
     </div>
     </>
   );
