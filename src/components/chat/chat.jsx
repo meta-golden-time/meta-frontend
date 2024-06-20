@@ -9,7 +9,6 @@ const Chat = ({ messages, sendMessage, loginUser }) => {
       <div className="messages">
         {messages.length === 0 ? (
           <div className="message-box-placeholder">
-            <Message message={{ user: '', text: '여기에 메시지가 표시됩니다.' }} loginUser={loginUser} />
           </div>
         ) : (
           messages.map((msg, index) => (
