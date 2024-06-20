@@ -41,18 +41,22 @@ const Register = () => {
     };
 
     const validateInputs = () => {
-        const userID = document.getElementById('id_val').value.trim();
-        const email1 = document.getElementById('email_val').value.trim();
-        const email2 = document.getElementById('email2_val').value.trim();
-        const password = document.getElementById('pwd_val').value.trim();
-        const confirmPassword = document.getElementById('pwd_cnf_val').value.trim();
-        const name = document.getElementById('name_val').value.trim();
-        const phone1 = document.getElementById('phone1_val').value.trim();
-        const phone2 = document.getElementById('phone2_val').value.trim();
-        const phone3 = document.getElementById('phone3_val').value.trim();
-        const userAddress = address;
+        const data = {
+            userID: document.getElementById('id_val').value.trim(),
+            email1: document.getElementById('email_val').value.trim(),
+            email2: document.getElementById('email2_val').value.trim(),
+            password: document.getElementById('pwd_val').value.trim(),
+            confirmPassword: document.getElementById('pwd_cnf_val').value.trim(),
+            name: document.getElementById('name_val').value.trim(),
+            phone1: document.getElementById('phone1_val').value.trim(),
+            phone2: document.getElementById('phone2_val').value.trim(),
+            phone3: document.getElementById('phone3_val').value.trim(),
+            userAddress: address,
+        }
+        console.log("🚀 ~ validateInputs ~ data:", data)
+        
 
-        if (!userID || !email1 || !email2 || !password || !confirmPassword || !name || !phone1 || !phone2 || !phone3 || !address || !userAddress) {
+        if (!data.userID || !data.email1 || !data.email2 || !data.password || !data.confirmPassword || !data.name || !data.phone1 || !data.phone2 || !data.phone3 || !data.userAddress) {
             Swal.fire({
                 icon: 'warning',
                 title: '필수 입력 항목 누락',
@@ -61,7 +65,7 @@ const Register = () => {
             return false;
         }
 
-        if (password !== confirmPassword) {
+        if (data.password !== data.confirmPassword) {
             Swal.fire({
                 icon: 'warning',
                 title: '비밀번호 불일치',
