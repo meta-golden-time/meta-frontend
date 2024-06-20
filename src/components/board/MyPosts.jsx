@@ -17,8 +17,8 @@ const MyPosts = () => {
   const fetchPosts = async () => {
     try {
       const response = await getPosts();
-      const myPosts = response.data.result.filter(post => post.userID === response.data.userID); // 실제 로그인된 사용자 이름으로 변경
-      setLoginUser(response.data.userID);
+      const myPosts = response.data.result.filter(post => post.userID === response.data.user.userID); // 실제 로그인된 사용자 이름으로 변경
+      setLoginUser(response.data.user.userID);
       setPosts(myPosts);
     } catch (error) {
       console.error('Error fetching posts', error);

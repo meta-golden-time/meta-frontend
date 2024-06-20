@@ -23,7 +23,7 @@ const BoardView = () => {
       console.log("🚀 ~ fetchPost ~ fetchedPost:", fetchedPost)
       setPost(fetchedPost);
 
-      setCurrentUser({ id: response.data.userID }); // response.data.userID로 유저 ID 설정
+      setCurrentUser({ id: response.data.user.userID }); // response.data.userID로 유저 ID 설정
     } catch (error) {
       console.error('Error fetching post', error);
     }

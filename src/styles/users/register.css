@@ -16,10 +16,8 @@ body {
 .s_cnt {
   background-color: #f0f8ff;
   padding: 20px;
-  /* border-radius: 10px; */
   max-width: 460px;
 }
-
 
 .s_tit1 {
   display: flex;
@@ -52,7 +50,6 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #ffffff;
-  /* margin-bottom: 20px; */
   align-items: center;
   height: inherit;
   gap: 8px;
@@ -60,7 +57,7 @@ body {
 }
 
 .form_item:focus-within {
-  border-color: #007bff; /* 원하는 색상으로 변경 */
+  border-color: #007bff;
 }
 
 .form_item span {
@@ -78,7 +75,6 @@ body {
 .id_validation {
   width: 94px;
   height: 30.35px;
-
 }
 
 input[type="text"], input[type="password"] {
@@ -87,15 +83,14 @@ input[type="text"], input[type="password"] {
   border: none;
   border-radius: 5px;
   box-sizing: border-box;
-  flex-grow: 1; /* input이 flex 컨테이너 내에서 공간을 차지하도록 설정 */
+  flex-grow: 1;
 }
 
 .form_item select {
   width: 0px;
   padding: 10px;
   border: none;
-  /* box-sizing: border-box; */
-  flex-grow: 1; /* input이 flex 컨테이너 내에서 공간을 차지하도록 설정 */
+  flex-grow: 1;
 }
 
 input:focus {
@@ -116,9 +111,9 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .address_out {
-  background-color: #ffffff; /* 원하는 배경색 */
-  padding: 10px; /* 패딩을 추가하여 내부 여백을 줌 */
-  border-radius: 5px; /* 모서리를 둥글게 만듦 */
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
   border: none;
   height: 45px;
 }
@@ -128,7 +123,6 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 }
 
 .bt_ty {
-  /* background-color: #1e90ff; */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -141,20 +135,36 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
   background-color: #1c86ee;
 }
 
-/* ReCAPTCHA 스타일 */
 .re1_wrap {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-/* 미디어 쿼리 */
+.terms_wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.terms_details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terms_details label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @media (max-width: 460px) {
   .s_cnt {
-      padding: 15px;
+    padding: 15px;
   }
 
   input[type="text"], input[type="password"], select {
-      width: calc(100% - 18px);
+    width: calc(100% - 18px);
   }
 }
