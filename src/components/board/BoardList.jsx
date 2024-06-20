@@ -18,7 +18,7 @@ const BoardList = () => {
   const fetchPosts = async () => {
     try {
       const response = await getPosts();
-      setLoginUser(response.data.userID);
+      setLoginUser(response.data.user.userID);
       setPosts(response.data.result);
       setAllPosts(response.data.result); // 모든 게시물을 저장
     } catch (error) {
