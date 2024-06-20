@@ -27,16 +27,17 @@ import myLogo from '@img/main/1teamlogo.png';
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
 
-import { postLoginCheck } from '../apis/userApi/user'; //로그인체크 진행
+import { postLoginCheck, postLogout } from '../apis/userApi/user'; // 로그인체크와 로그아웃 진행
 
 
 // 페이지 메뉴 항목을 정의
-const pages = { Weather: 'weather', Map: 'maps',  Login: 'login', register: 'register'/*login, register page test를 위해서 넣어두었어요.*/,
-  chat: 'chatting',  고객센터: 'board' };
+const pages = { 날씨: 'weather', 지도: 'maps',  
+  커뮤니티채팅: 'chatting',  고객센터: 'board' };
+const logoutPages = { 로그인: 'login', 회원가입: 'register' };
 
 
 // 사용자 설정 메뉴 항목을 정의
-const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
+const settingsLogin = { 'User Page': 'user/userPage', 'Logout': 'logout' }; // 로그인 후
 const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
 
 
@@ -47,10 +48,19 @@ function HeaderMenuBar() {
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
-      //setLoginCheck(result.success);
-      setLoginCheck(true);
+      setLoginCheck(result.success);
     }catch(err){
       console.log(err)
+    }
+  }
+
+  const handleLogout = async () => {
+    try {
+      await postLogout(); // 로그아웃 API 호출
+      setLoginCheck(false); // 로그인 상태 업데이트
+      navigate('/'); // 홈으로 이동 또는 필요한 페이지로 이동
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -174,9 +184,15 @@ function HeaderMenuBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                { Object.keys(pages).map((page) => (
+                { loginCheck ? Object.keys(pages).map((page) => (
                   <MenuItem key={page} 
                   onClick={() => handleMovePage(pages[page])}
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                )):  Object.keys(logoutPages).map((page) => (
+                  <MenuItem key={page} 
+                  onClick={() => handleMovePage(logoutPages[page])}
                   >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -212,7 +228,7 @@ function HeaderMenuBar() {
 
             {/* 큰 화면에서는 메뉴 버튼을 표시 */}
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              { Object.keys(pages).map((page) => (
+              { loginCheck ? Object.keys(pages).map((page) => (
                 <Button
                   key={page}
                   onClick={() => handleMovePage(pages[page])}
@@ -220,7 +236,15 @@ function HeaderMenuBar() {
                 >
                   {page}
                 </Button>
-              )) }
+              )) : Object.keys(logoutPages).map((page) => (
+                <Button
+                  key={page}
+                  onClick={() => handleMovePage(logoutPages[page])}
+                  sx={{ my: 1, color: 'black', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
             </Box>
 
             {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
@@ -248,7 +272,16 @@ function HeaderMenuBar() {
               >
                 {/* 아이콘 버튼 클릭 후 나오는 네비게이션 바 리스트에 대한 페이지 이동 버튼 */}
                 {Object.keys(settings).map((setting) => (
-                  <MenuItem key={setting} onClick={() => handleMovePage(settings[setting])}>
+                  <MenuItem 
+                    key={setting} 
+                    onClick={() => {
+                      if (setting === 'Logout') {
+                        handleLogout(); // 로그아웃 처리
+                      } else {
+                        handleMovePage(settings[setting]);
+                      }
+                    }}
+                  >
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}

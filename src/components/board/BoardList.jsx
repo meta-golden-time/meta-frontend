@@ -6,9 +6,11 @@ import '../../styles/board/BoardList.css';
 
 const BoardList = () => {
   const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]); // 모든 게시물을 저장하기 위한 상태
   const [searchType, setSearchType] = useState('title');
   const [searchQuery, setSearchQuery] = useState('');
   const [loginUser, setLoginUser] = useState(''); // 로그인 체크 상태
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -16,22 +18,30 @@ const BoardList = () => {
   const fetchPosts = async () => {
     try {
       const response = await getPosts();
-      setLoginUser(response.data.userID)
+      setLoginUser(response.data.userID);
       setPosts(response.data.result);
+      setAllPosts(response.data.result); // 모든 게시물을 저장
     } catch (error) {
       console.error('Error fetching posts', error);
     }
   };
 
   const handleSearch = () => {
-    const filteredPosts = posts.filter(post => {
-      if (searchType === 'title') {
-        return post.title.includes(searchQuery);
-      } else {
-        return post.content.includes(searchQuery);
-      }
-    });
-    setPosts(filteredPosts);
+    if (searchQuery.trim() === '') {
+      setPosts(allPosts); // 검색어가 없으면 모든 게시물을 표시
+    } else {
+      const filteredPosts = allPosts.filter(post => {
+        if (searchType === 'title') {
+          return post.title.includes(searchQuery);
+        } else if (searchType === 'content') {
+          return post.content.includes(searchQuery);
+        } else if (searchType === 'author') {
+          return post.name.includes(searchQuery);
+        }
+        return false;
+      });
+      setPosts(filteredPosts);
+    }
   };
 
   return (
@@ -43,6 +53,7 @@ const BoardList = () => {
           <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
             <option value="title">제목</option>
             <option value="content">내용</option>
+            <option value="author">작성자</option> {/* 작성자 옵션 추가 */}
           </select>
           <input
             type="text"
@@ -69,7 +80,7 @@ const BoardList = () => {
                     {post.isPrivate ? '비밀글입니다.' : post.title}
                   </Link>
                 </td>
-                <td>{post.author}</td>
+                <td>{post.name}</td>
                 <td>{new Date(post.createdAt).toLocaleDateString()}</td>
                 <td>{post.isPrivate ? 'Lock' : 'unLock'}</td>
               </tr>

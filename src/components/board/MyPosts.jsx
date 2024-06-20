@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getPosts } from '../../apis/board/api';
 import Swal from 'sweetalert2';
-import '../../styles/board/MyPosts.css';
+import Sidebar from './Sidebar';
+import '../../styles/board/MyPosts.scss';
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -45,34 +46,38 @@ const MyPosts = () => {
   };
 
   return (
-    <div className="my-posts">
-      <h2>내가 쓴 글</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>비밀글 여부</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map(post => (
-            <tr key={post.id}>
-              <td>
-                {post.isPrivate ? (
-                  <Link to={`/board/view/${post.id}`}>비밀글입니다.</Link>     
-                ) : (
-                  <Link to={`/board/view/${post.id}`}>{post.title}</Link>
-                )}
-              </td>
-              <td>{post.name}</td>
-              <td>{new Date(post.createdAt).toLocaleDateString()}</td>
-              <td>{post.isPrivate ? 'Lock' : 'unLock'}</td>
+    <div className="board-page">
+      <Sidebar />
+      <div className="my-posts">
+        <h2>나의 문의사항</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>비밀글 여부</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {posts.map(post => (
+              <tr key={post.id}>
+                <td>
+                  {post.isPrivate ? (
+                    <Link to={`/board/view/${post.id}`}>비밀글입니다.</Link>
+                  ) : (
+                    <Link to={`/board/view/${post.id}`}>{post.title}</Link>
+                  )}
+                </td>
+                <td>{post.name}</td>
+                <td>{new Date(post.createdAt).toLocaleDateString()}</td>
+                <td>{post.isPrivate ? 'Lock' : 'unLock'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button className="back-button" onClick={() => navigate(-1)}>뒤로가기</button>
+      </div>
     </div>
   );
 };
