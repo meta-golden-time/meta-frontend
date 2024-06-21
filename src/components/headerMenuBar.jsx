@@ -42,11 +42,12 @@ const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 
 
 function HeaderMenuBar() {
   
-  // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
-  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
+   const [loginCheck, setLoginCheck] = React.useState(false); // 로그인 체크 상태
+  //const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
+      console.log("🚀 ~ checkLoginStatus ~ result:", result)
       setLoginCheck(result.success);
     }catch(err){
       console.log(err)
