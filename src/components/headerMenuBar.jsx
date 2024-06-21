@@ -57,7 +57,7 @@ function HeaderMenuBar() {
   const handleLogout = async () => {
     try {
       await postLogout(); // 로그아웃 API 호출
-      setLoginCheck(true); // 로그인 상태 업데이트
+      setLoginCheck(false); // 로그인 상태 업데이트
       navigate('/'); // 홈으로 이동 또는 필요한 페이지로 이동
     } catch (err) {
       console.log(err);
