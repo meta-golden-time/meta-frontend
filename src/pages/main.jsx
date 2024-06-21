@@ -1,9 +1,13 @@
+
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 // 적용한 AOS 애니메이션
 // data-aos="zoom-out-right" -> 오른쪽으로 줌아웃 하는 모션 설정
 // data-aos="fade-up" -> 아래에서 위로 올라오는 모션
 
 
-import { useEffect } from 'react';
+
 import Content from '@components/content.jsx';
 import '@styles/main/main.scss';
 import image from '@img/main/map_page_img.png';
@@ -17,10 +21,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap JavaScript
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+import image1 from  '@img/main/buildings_back.jpg';
+import image2 from  '@img/main/buildings_morning_back1.jpg';
+import image3 from  '@img/main/buildings_morning_back2.jpg';
+import image4 from  '@img/main/buildings_night_back.jpg';
+
+const images = [
+  image1,
+  image2,
+  image3,
+  image4
+];
+
 const Main = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     Aos.init({ duration: 1100 }); // AOS 애니메이션 초기화 및 지속시간 설정
+    
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 6000); // 1분(60초)마다 이미지 변경
+
+    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 타이머 정리
   }, []);
 
   return (
@@ -34,7 +57,7 @@ const Main = () => {
           
           {/* 제목 섹션 */}
           <FullpageSection style={{ height: '100vh' }}>
-            <div className="section titleBackground">
+            <div className={`section titleBackground`} style={{ backgroundImage: `url(${images[currentImageIndex]})` }}>
               <div className="titleDiv" data-aos="fade-down">
                 <h1 className="mainTitle" style={{ color: 'white' }}>
                   당신의 바쁜 아침 출근 길을 <p className='mainTitleP'>도와줄 <span style={{ color: '#007bff' }}>첫 번째 비서</span></p>
@@ -60,7 +83,9 @@ const Main = () => {
                   </div>
                   {/* 링크 추가 */}
                   <div className="link-weader">
-                    <a href='/weather'className="custom-link">날씨 보러가기 →</a>
+
+                    <Link to='/weather'className="custom-link">날씨 바로가기 →</Link>
+
                   </div>
                 </div>
                 {/* 이미지 콘텐츠 */}

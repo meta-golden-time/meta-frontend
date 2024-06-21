@@ -50,22 +50,40 @@ const PathFinder = () => {
     };
     fetchBookMarks();
 
-    const mapContainer = document.getElementById('maps');
-    const mapOptions = {
-      center: new kakao.maps.LatLng(33.452613, 126.570888),
-      level: 3,
+    const initializeMap = (lat, lng) => {
+      const mapContainer = document.getElementById('maps');
+      const mapOptions = {
+        center: new kakao.maps.LatLng(lat, lng),
+        level: 3,
+      };
+      const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
+      setMap(kakaoMap);
+
+      // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+      const mapTypeControl = new kakao.maps.MapTypeControl();
+      kakaoMap.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+      // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
+      const zoomControl = new kakao.maps.ZoomControl();
+      kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
     };
-    const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
-    setMap(kakaoMap);
 
-    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-    const mapTypeControl = new kakao.maps.MapTypeControl();
-    kakaoMap.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
-    const zoomControl = new kakao.maps.ZoomControl();
-    kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          initializeMap(lat, lng);
+        },
+        () => {
+          // 위치를 가져올 수 없을 때 기본 위치 설정
+          initializeMap(33.452613, 126.570888);
+        }
+      );
+    } else {
+      // Geolocation API를 지원하지 않는 브라우저의 경우 기본 위치 설정
+      initializeMap(33.452613, 126.570888);
+    }
   }, []);
 
   useEffect(() => {
