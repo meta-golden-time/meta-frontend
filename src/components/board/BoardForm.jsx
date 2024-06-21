@@ -61,6 +61,7 @@ const BoardForm = ({ isEdit }) => {
   };
 
   return (
+    <div style={{paddingTop:'65px'}}>
     <div className="board-form">
       <h2>{isEdit ? '게시물 수정' : '게시물 작성'}</h2>
       <form onSubmit={handleSubmit}>
@@ -101,6 +102,7 @@ const BoardForm = ({ isEdit }) => {
         </div>
         <button type="submit">{isEdit ? '수정' : '등록'}</button>
       </form>
+    </div>
     </div>
   );
 };

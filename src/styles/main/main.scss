@@ -72,6 +72,10 @@
 }
 
 /* 내용 레이아웃 */
+.one-screen {
+  background-color: #e8f6ff;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -96,7 +100,15 @@
   height: auto;
 }
 
-.four-page {
+.three-screen {
+  background-color: #e8f6ff;
+}
+
+.four-screen {
+  position: relative;
+}
+
+.five-screen {
   position: relative;
 }
 
@@ -119,6 +131,12 @@
 .link-map {
   position: absolute;
   bottom: 20%;
+  left: 28%;
+}
+
+.link-chatting {
+  position: absolute;
+  bottom: 38%;
   left: 28%;
 }
 

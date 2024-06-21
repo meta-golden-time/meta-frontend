@@ -32,18 +32,17 @@ import { postLoginCheck, postLogout } from '../apis/userApi/user';
 
 
 // 페이지 메뉴 항목을 정의
-const pages = { 날씨: 'weather', 지도: 'maps',  
-  커뮤니티채팅: 'chatting',  고객센터: 'board' };
-const logoutPages = { 로그인: 'login', 회원가입: 'register' };
+const pages = { 날씨: 'weather', 지도: 'maps', 커뮤니티: 'chatting',  고객센터: 'board' };
 
 // 사용자 설정 메뉴 항목을 정의
-const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
-const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
+const settingsLogin = { 마이페이지: 'user/userPage', 로그아웃: 'logout' }; // 로그인 후
+const settingsLogout = { 로그인: 'login', 회원가입: 'register' }; // 로그인 전
 
 function HeaderMenuBar() {
-  
-  // const [loginCheck, setLoginCheck] = useState(false); // 로그인 체크 상태
+  // 임시 테스트 코드
+  // const [loginCheck, setLoginCheck] = React.useState(false); // 로그인 체크 상태
   const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
+  
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
@@ -176,13 +175,7 @@ function HeaderMenuBar() {
                   >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
-                )):  Object.keys(logoutPages).map((page) => (
-                  <MenuItem key={page} 
-                  onClick={() => handleMovePage(logoutPages[page])}
-                  >
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                )) }
+                )): null }
               </Menu>
             </Box>
 
@@ -203,15 +196,7 @@ function HeaderMenuBar() {
                 >
                   {page}
                 </Button>
-              )) : Object.keys(logoutPages).map((page) => (
-                <Button
-                  key={page}
-                  onClick={() => handleMovePage(logoutPages[page])}
-                  sx={{ my: 1, color: 'black', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
+              )) : null }
             </Box>
 
             {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}

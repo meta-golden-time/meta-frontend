@@ -46,7 +46,7 @@ const MyPosts = () => {
   };
 
   return (
-    <div className="board-page">
+    <div className="board-page" style={{paddingTop:'65px'}}>
       <Sidebar />
       <div className="my-posts">
         <h2>나의 문의사항</h2>
