@@ -37,9 +37,11 @@
 
 /* 제목 배경화면 설정*/
 .titleBackground {
-  background: url("@img/main/buildings_back.png") no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
 }
+
 
 /* 대표 제목 위치 설정 */
 
