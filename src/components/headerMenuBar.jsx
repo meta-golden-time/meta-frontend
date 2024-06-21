@@ -39,13 +39,15 @@ const settingsLogin = { 마이페이지: 'user/userPage', 로그아웃: 'logout'
 const settingsLogout = { 로그인: 'login', 회원가입: 'register' }; // 로그인 전
 
 function HeaderMenuBar() {
-  // 임시 테스트 코드
-  // const [loginCheck, setLoginCheck] = React.useState(false); // 로그인 체크 상태
-  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 체크 상태
+
+  // 로그인 체크 상태 임시 테스트 코드
+  // const [loginCheck, setLoginCheck] = React.useState(false); // 로그인 전
+  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 후
   
   const checkLoginStatus  = async() =>{
     try{
       const result = await postLoginCheck();// 로그인 체크 상태
+      console.log("🚀 ~ checkLoginStatus ~ result:", result)
       setLoginCheck(result.success);
     }catch(err){
       console.log(err)
@@ -118,6 +120,7 @@ function HeaderMenuBar() {
     const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
     const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
 
+    // 로그인 여부에 따라 보여지는 항목 다르게 보이게하기
     const settings = loginCheck ? settingsLogin : settingsLogout;
     console.log("🚀 ~ HeaderMenuBar ~ loginCheck:", loginCheck)
     console.log("🚀 ~ HeaderMenuBar ~ settings:", settings)

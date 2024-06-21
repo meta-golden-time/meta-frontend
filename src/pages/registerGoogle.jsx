@@ -30,33 +30,6 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
 
-    const handlePasswordChange = (e) => {
-        const newPassword = e.target.value;
-        setPassword(newPassword);
-        checkPasswordMatch(newPassword, confirmPassword);
-    };
-
-    const handleConfirmPasswordChange = (e) => {
-        const newConfirmPassword = e.target.value;
-        setConfirmPassword(newConfirmPassword);
-        checkPasswordMatch(password, newConfirmPassword);
-    };
-
-    const checkPasswordMatch = (password, confirmPassword) => {
-        setPasswordMatch(password === confirmPassword);
-    };  
-
-    const showError = () => {
-        const passwordInput = document.getElementById('pwd_val');
-        const confirmPasswordInput = document.getElementById('pwd_cnf_val');
-        const formControl = confirmPasswordInput.parentElement;
-    
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            formControl.classList.add('error');
-        } else {
-            formControl.classList.remove('error');
-        }
-    };
     const handleAddressSelect = (address) => {
         console.log("🚀 ~ Register ~ address:", address);
         setAddress(address);
@@ -181,6 +154,16 @@ const Register = () => {
 
     }
 
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setPasswordMatch(e.target.value === confirmPassword);
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        setPasswordMatch(password === e.target.value);
+    };
+
     const submitClick = async (type, e) => {
         e.preventDefault();
 
@@ -270,11 +253,7 @@ const Register = () => {
                                                 name="is_Password"
                                                 placeholder="비밀번호"
                                                 value={password}
-                                                onChange={(e) => {
-                                                    handlePasswordChange(e);
-                                                    showError();
-                                                }}
-                                                
+                                                onChange={handlePasswordChange}
                                             />
                                         </div>
                                         <div className='form_item'>
@@ -287,18 +266,15 @@ const Register = () => {
                                                 name="is_Password"
                                                 placeholder="비밀번호 확인"
                                                 value={confirmPassword}
-                                                onChange={(e) => {
-                                                    handleConfirmPasswordChange(e);
-                                                    showError();
-                                                }}
+                                                onChange={handleConfirmPasswordChange}
                                             />
-                                        </div>
-                                        {!passwordMatch && (
-                                                <p className='pwd_err_msg'>
+                                            {!passwordMatch && (
+                                                <span style={{ color: 'red', marginLeft: '10px' }}>
                                                     비밀번호가 일치하지 않습니다.
-                                                </p>
+                                                </span>
                                             )}
-                                        <div className='form_item'> 
+                                        </div>
+                                        <div className='form_item'>
                                             <span className="icon">
                                                 <img src={nameIcon} alt="name icon" />
                                             </span>
@@ -321,7 +297,7 @@ const Register = () => {
                                             />
                                             <span className="e_goll">@</span>
                                             <select id="email2_val" name="is_Useremail2" className="select_ty1">
-                                                <option value="">도메인</option>
+                                                <option value="">선택하세요</option>
                                                 <option value="naver.com">naver.com</option>
                                                 <option value="hanmail.net">hanmail.net</option>
                                                 <option value="nate.com">nate.com</option>
@@ -350,6 +326,7 @@ const Register = () => {
                                                 type="text"
                                                 name="is_Userphone1"
                                                 maxLength="3"
+                                                placeholder='010'
                                             />
                                             <span className="tel_dot">-</span>
                                             <input

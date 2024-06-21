@@ -1,5 +1,7 @@
 .board-page {
   display: flex;
+  padding-top: 65px;
+  justify-content: center;
 }
 
 .sidebar {
@@ -31,6 +33,7 @@
 .board-list {
   flex: 1;
   padding: 20px;
+  margin-top: 40px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
