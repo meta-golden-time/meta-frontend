@@ -8,6 +8,7 @@
 
 .tab {
   width: 21%;
+  overflow: scroll;
 }
 
 .tabs {

@@ -45,7 +45,7 @@ const BoardList = () => {
   };
 
   return (
-    <div className="board-page" style={{paddingTop:'65px'}}>
+    <div className="board-page">
       <Sidebar />
       <div className="board-list">
         <h2>고객센터</h2>

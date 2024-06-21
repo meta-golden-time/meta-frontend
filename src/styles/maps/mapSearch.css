@@ -11,7 +11,7 @@
 }
 
 .map_wrap {
-  width: 100%;
+  width: 21%;
   height: 100vh; /* 화면 전체 높이로 설정 */
   display: flex; /* 플렉스 박스 사용 */
 }

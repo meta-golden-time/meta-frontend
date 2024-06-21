@@ -57,20 +57,20 @@ function HeaderMenuBar() {
   const handleLogout = async () => {
     try {
       await postLogout(); // 로그아웃 API 호출
-      setLoginCheck(false); // 로그인 상태 업데이트
+      setLoginCheck(true); // 로그인 상태 업데이트
       navigate('/'); // 홈으로 이동 또는 필요한 페이지로 이동
     } catch (err) {
       console.log(err);
     }
   }
 
-  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
+  const [isScrolled, setIsScrolled] = React.useState(true); // 스크롤 여부를 나타내는 state
   React.useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 0) {
         setIsScrolled(true); // 스크롤 되면 true로 변경
       } else {
-        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
+        setIsScrolled(true); // 스크롤이 맨 위로 올라가면 false로 변경
       }
     };
     
