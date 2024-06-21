@@ -46,7 +46,7 @@ const MyPosts = () => {
   };
 
   return (
-    <div className="board-page">
+    <div className="board-page" style={{paddingTop:'65px'}}>
       <Sidebar />
       <div className="my-posts">
         <h2>나의 문의사항</h2>
@@ -56,7 +56,7 @@ const MyPosts = () => {
               <th>제목</th>
               <th>작성자</th>
               <th>작성일</th>
-              <th>비밀글 여부</th>
+              <th>비밀글</th>
             </tr>
           </thead>
           <tbody>
