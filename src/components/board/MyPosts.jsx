@@ -71,7 +71,7 @@ const MyPosts = () => {
                 </td>
                 <td>{post.name}</td>
                 <td>{new Date(post.createdAt).toLocaleDateString()}</td>
-                <td>{post.isPrivate ? 'Lock' : 'unLock'}</td>
+                <td>{post.isPrivate ? 'O' : 'X'}</td>
               </tr>
             ))}
           </tbody>
