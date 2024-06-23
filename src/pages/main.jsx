@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
 import Aos from 'aos';
@@ -17,6 +17,8 @@ import image2 from  '@img/main/buildings_morning_back1.jpg';
 import image3 from  '@img/main/buildings_morning_back2.jpg';
 import image4 from  '@img/main/buildings_night_back.jpg';
 
+import image from '@img/main/map_page_img.png'; // 임시 이미지
+
 const images = [
   image1,
   image2,
@@ -28,13 +30,14 @@ import '@styles/main/main.scss';
 
 const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const DIVIDER_HEIGHT = 5; // 화면와 화면 사이의 빈 공간 오차 허용범위
   const outerDivRef = useRef();
   
   useEffect(() => {
     Aos.init({ duration: 1000 }); // AOS 애니메이션 초기화 및 지속시간 설정
     
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 6000); // 1분(60초)마다 이미지 변경
