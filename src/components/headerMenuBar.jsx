@@ -56,8 +56,8 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           </div>
           {/* 드롭다운 메뉴 */}
           {isDropdownOpen && (
-            // <div className="dropdown-menu">
-            <div>
+            <div className="dropdown-option">
+            {/* <div> */}
               {checkLoginStatus ? (
                 <>
                   <a href="/user/userPage">마이페이지</a>

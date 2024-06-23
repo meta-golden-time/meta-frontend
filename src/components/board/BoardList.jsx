@@ -75,14 +75,14 @@ const BoardList = () => {
           <tbody>
             {posts.map(post => (
               <tr key={post.id}>
-                <td>
+                <td className='list-title'>
                   <Link to={`/board/view/${post.id}`}>
                     {post.isPrivate ? '비밀글입니다.' : post.title}
                   </Link>
                 </td>
                 <td>{post.name}</td>
                 <td>{new Date(post.createdAt).toLocaleDateString()}</td>
-                <td>{post.isPrivate ? 'Lock' : 'unLock'}</td>
+                <td>{post.isPrivate ? 'O' : 'X'}</td>
               </tr>
             ))}
           </tbody>

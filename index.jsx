@@ -58,7 +58,7 @@ function App() {
 
   // noHeaderPaths에 해당하는 페이지 메뉴바 숨기기
   const location = useLocation();
-  const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
+  const noHeaderPaths = ['/login', '/register'];
 
   // WeatherPage와 Main을 제외한 페이지에서 메뉴 글자 색을 검정색으로 설정
   const isWeatherOrMainPage = location.pathname === '/' || location.pathname === '/weather';
