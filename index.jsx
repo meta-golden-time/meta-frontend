@@ -19,7 +19,7 @@ function App() {
   const { isLogin, loginChecked } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
-  const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
+  const noHeaderPaths = ['/login', '/register'];
   const isWeatherOrMainPage = location.pathname === '/' || location.pathname === '/weather';
 
   useEffect(() => {
@@ -48,12 +48,14 @@ function App() {
     };
   }, []);
 
+
   const ProtectedRoute = ({ element, ...rest }) => {
     if (!isLogin) {
       return <Navigate to="/login" />;
     }
     return element;
   };
+
 
   if (!loginChecked) {
     return <div>Loading...</div>;

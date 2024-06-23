@@ -6,6 +6,7 @@ import '../../styles/board/BoardForm.css';
 import { Checkbox } from '@mui/material';
 import xIcon from '../../img/main/X_icon.svg'
 
+
 const BoardForm = ({ isEdit }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

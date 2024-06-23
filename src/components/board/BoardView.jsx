@@ -60,6 +60,9 @@ const BoardView = () => {
   }
 
   return (
+    <div className='board-wrap'>
+      <div className='board-header'>
+      </div>
     <div className="board-view">
       {post.isPrivate && !isAuthorized ? (
         <div className="password-form">
@@ -97,6 +100,7 @@ const BoardView = () => {
           <button onClick={() => navigate(-1)}>뒤로가기</button>
         </>
       )}
+    </div>
     </div>
   );
 };

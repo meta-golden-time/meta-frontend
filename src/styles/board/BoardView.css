@@ -1,6 +1,12 @@
+
+.board-wrap {
+  display: flex;
+  justify-content: center;
+}
+
 .board-view {
   max-width: 800px;
-  margin: 20px auto;
+  margin-top: 105px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;

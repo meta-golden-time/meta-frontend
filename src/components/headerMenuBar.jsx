@@ -77,6 +77,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
             <img src={arrowDownIcon} alt="Dropdown Arrow" className={`arrow-icon ${isWeatherOrMainPage ? currentPage === 1 ? 'white' : 'black' : ''} `} />
           </div>
           {/* 드롭다운 메뉴 */}
+
             {isDropdownOpen && (
               <div className="header-drop-menu">
                 <div>
@@ -95,6 +96,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
                 </div>
               </div>
             )}
+
         </div>
       </div>
     </header>
