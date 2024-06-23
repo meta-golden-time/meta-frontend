@@ -37,6 +37,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           <a href="/"> <img src={myLogo} alt="Logo" /> </a>
         </div>
       </div>
+      <div className="header-nav">
       {/* 로그인이 되어 있을 때만 내비게이션 메뉴 보여주기 */}
       {checkLoginStatus && (
         <nav className={`nav ${isWeatherOrMainPage ? '' : 'black-text'}`}>
@@ -45,6 +46,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           <a href="/chatting">커뮤니티</a>
         </nav>
       )}
+      </div>
       {/* 프로필 이미지 및 드롭다운 토글 */}
       <div className="profile">
         <div className="dropdown">

@@ -15,6 +15,9 @@ import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
 import MyPosts from '@components/board/MyPosts';
 
+import './index.css';
+import '@font/font.scss';
+
 function App() {
   // userPage에 들어가는 리스트 데이터
   const bookmarks = [

@@ -22,7 +22,9 @@ import image2 from  '@img/main/buildings_morning_back1.jpg';
 import image3 from  '@img/main/buildings_morning_back2.jpg';
 import image4 from  '@img/main/buildings_night_back.jpg';
 
-import image from '@img/main/map_page_img.png'; // 임시 이미지
+import imgWeater from '@img/main/weather.png';
+import imgMap1 from '@img/main/map1.png';
+import imgMap2 from '@img/main/map2.png';
 
 const images = [
   image1,
@@ -245,7 +247,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
           </div>
           {/* 이미지 콘텐츠 */}
           <div className="weader-col">
-            <img src={image} className="img-fluid" alt="Example" />
+            <img src={imgWeater} className="img-fluid" alt="Example" />
           </div>
         </div>
       </div>
@@ -278,10 +280,10 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             {/* <div className="carousel-inner" data-aos="fade-up" data-aos-delay="450"> */}
             <div className="carousel-inner">
               <div className="carousel-item active" data-bs-interval="4500">
-                <Content title="편리한 길 찾기" image={image} />
+                <Content title="편리한 길 찾기" image={imgMap1} />
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <Content title="경로 즐겨찾기" image={image} />
+                <Content title="경로 즐겨찾기" image={imgMap2} />
               </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
