@@ -58,7 +58,8 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@assets/weatherAsset': path.resolve(__dirname, 'src/assets/weatherAssets'),
-      '@img': path.resolve(__dirname, 'src/img')
+      '@img': path.resolve(__dirname, 'src/img'),
+      '@font': path.resolve(__dirname, 'src/fonts')
     }
   }
 }); 

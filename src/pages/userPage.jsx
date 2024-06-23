@@ -7,6 +7,7 @@ import { getPosts } from '../apis/board/api';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
 
+
 const UserPage = () => {
   const navigate = useNavigate();
   const [bookmarks, setBookmarks] = useState([]);

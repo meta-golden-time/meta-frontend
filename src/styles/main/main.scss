@@ -61,6 +61,7 @@
 .main-title-h, .main-title-p {
   text-align: center;
   font-size: 3.5rem;
+  font-family : 'Cafe24Danjunghae' !important;
 
   /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
   margin: 0 auto;
@@ -100,11 +101,6 @@
 /* 두 번째 화면 스타일 */
 .two-screen {
   background-color: #e8f6ff;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
 }
 
 .weader-row {

@@ -12,6 +12,7 @@ import '@styles/headerMenuBar/headerMenuBar.scss'
 import Swal from 'sweetalert2';
 
 const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
+
   const navigate = useNavigate();
   const { setIsLogin } = useAuth(); // AuthContext에서 setIsLogin 함수 가져오기
 
@@ -29,6 +30,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
     }
   }, [currentPage]);
   
+  // 프로필 버튼을 눌렀을 때 드롭다운 버튼 동작
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -59,6 +61,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           <a href="/"> <img src={myLogo} alt="Logo" /> </a>
         </div>
       </div>
+      <div className="header-nav">
       {/* 로그인이 되어 있을 때만 내비게이션 메뉴 보여주기 */}
       {checkLoginStatus && (
         <nav className={`nav ${isWeatherOrMainPage ? '' : 'black-text'}`}>
@@ -67,6 +70,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           <a href="/chatting">커뮤니티</a>
         </nav>
       )}
+      </div>
       {/* 프로필 이미지 및 드롭다운 토글 */}
       <div className="profile">
         <div className="dropdown">
@@ -77,26 +81,22 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
             <img src={arrowDownIcon} alt="Dropdown Arrow" className={`arrow-icon ${isWeatherOrMainPage ? currentPage === 1 ? 'white' : 'black' : ''} `} />
           </div>
           {/* 드롭다운 메뉴 */}
-
-            {isDropdownOpen && (
+          {isDropdownOpen && (
               <div className="header-drop-menu">
-                <div>
-                  {checkLoginStatus ? (
-                    <>
-                      <a href="/user/userPage">마이페이지</a>
-                      <a href="/board">고객센터</a>
-                      <a onClick={userLogout} style={{ cursor: 'pointer', color: 'black', textDecoration: 'none' }}>로그아웃</a>
-                    </>
-                  ) : (
-                    <>
-                      <a href="/login">로그인</a>
-                      <a href="/register">회원가입</a>
-                    </>
-                  )}
-                </div>
-              </div>
+              {checkLoginStatus ? (
+                <>
+                  <a href="/user/userPage">마이페이지</a>
+                  <a href="/board">고객센터</a>
+                  <a href="#logout">로그아웃</a>
+                </>
+              ) : (
+                <>
+                  <a href="/login">로그인</a>
+                  <a href="/register">회원가입</a>
+                </>
+              )}
+            </div>
             )}
-
         </div>
       </div>
     </header>

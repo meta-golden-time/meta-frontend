@@ -7,7 +7,7 @@
   justify-content: space-between; /* 공간을 균등하게 분배 */
   align-items: center; /* 수직 정렬 */
   padding: 10px 0; /* 상하 패딩 */
-  z-index: 900; /* z-index 설정 */
+  z-index: 1000; /* z-index 설정 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
   transition: background-color 0.5s, color 0.5s; /* 배경색과 글자색 전환 효과 추가 */
 
@@ -23,12 +23,17 @@
 }
 
 /* 내비게이션 스타일 */
+.header-nav {
+  margin-left: 60%;
+}
+
 .nav {
   a {
-    margin: 0 15px; /* 좌우 여백 */
+    margin: 0 30px; /* 좌우 여백 */
     text-decoration: none; /* 밑줄 없음 */
     color: inherit; /* 부모 요소의 글자색 상속 */
     transition: color 0.5s; /* 글자색 전환 효과 추가 */
+    
 
     &:hover {
       color: #3498db !important; /* 마우스 포인터가 닿았을 때 색 변경 */
@@ -91,12 +96,10 @@
 }
 
 /* 드롭다운 메뉴 스타일 */
-
 .header-drop-menu {
-
   position: absolute; /* 절대 위치 */
   // top: 55px; /* 상단에서 55px 아래 */
-  // right: 150px; /* 오른쪽 정렬 */
+  right: 0px; /* 오른쪽 정렬 */
   background-color: white; /* 배경색 흰색 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
   border-radius: 5px; /* 모서리 둥글게 */

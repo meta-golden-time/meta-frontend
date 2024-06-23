@@ -16,6 +16,9 @@ import BoardView from '@components/board/BoardView';
 import MyPosts from '@components/board/MyPosts';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 
+import './index.css';
+import '@font/font.scss';
+
 function App() {
   const { isLogin, loginChecked } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);

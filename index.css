@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+    font-family : 'Cafe24Danjunghae' !important;
+}
+
+button, p, a, div, input {
+    font-family : 'Cafe24Simplehae' !important;
+}

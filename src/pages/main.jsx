@@ -1,3 +1,8 @@
+// 적용한 AOS 애니메이션
+// data-aos="fade-down" -> 위에서 아래로 올라오는 모션
+// full page기능을 만들기 위해 참고한 사이트
+// https://codingbroker.tistory.com/128
+
 import { useEffect, useRef, useState } from "react";
 
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
@@ -17,7 +22,9 @@ import mainImage2 from '@img/main/buildings_morning_back1.jpg';
 import mainImage3 from '@img/main/buildings_morning_back2.jpg';
 import mainImage4 from '@img/main/buildings_night_back.jpg';
 
-import image from '@img/main/map_page_img.png'; // 임시 이미지
+import imgWeater from '@img/main/weather.png';
+import imgMap1 from '@img/main/map1.png';
+import imgMap2 from '@img/main/map2.png';
 
 const mainImages = [
   mainImage1,
@@ -37,7 +44,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
   
   useEffect(() => {
     Aos.init({ duration: 1000 }); // AOS 애니메이션 초기화 및 지속시간 설정
-    
+
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % mainImages.length);
     }, 6000); // 1분(60초)마다 이미지 변경
@@ -176,6 +183,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
     outerDivRefCurrent.addEventListener("wheel", wheelHandler);
     return () => {
       outerDivRefCurrent.removeEventListener("wheel", wheelHandler);
+
       clearInterval(intervalId); // 컴포넌트 언마운트 시 타이머 정리
     };
   }, [setCurrentPage]);
@@ -218,7 +226,9 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
       <Dots currentPage={currentPage} handleDotClick={handleDotClick} />
 
       {/* 제목 섹션 == 첫 번째 화면 */}
+
       <div className={`inner main-title-background`} style={{ backgroundImage: `url(${mainImages[currentImageIndex]})` }}>
+
         <div className="main-title-div" data-aos="fade-down">
           <h1 className="main-title-h" style={{ color: 'white' }}>
             당신의 바쁜 아침 출근 길을 <p className='main-title-p'>도와줄 <span style={{ color: '#007bff' }}>첫 번째 비서</span></p>
@@ -248,7 +258,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
           </div>
           {/* 이미지 콘텐츠 */}
           <div className="weader-col">
-            <img src={image} className="img-fluid" alt="Example" />
+            <img src={imgWeater} className="img-fluid" alt="Example" />
           </div>
         </div>
       </div>
@@ -281,10 +291,10 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             {/* <div className="carousel-inner" data-aos="fade-up" data-aos-delay="450"> */}
             <div className="carousel-inner">
               <div className="carousel-item active" data-bs-interval="4500">
-                <Content title="편리한 길 찾기" image={image} />
+                <Content title="편리한 길 찾기" image={imgMap1} />
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <Content title="경로 즐겨찾기" image={image} />
+                <Content title="경로 즐겨찾기" image={imgMap2} />
               </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
