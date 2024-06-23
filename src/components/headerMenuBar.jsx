@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect } from "react";
+
 
 // 이미지 가져오기
 import myLogo from '@img/main/golden_time_logo.svg';
@@ -7,8 +9,10 @@ import arrowDownIcon from '@img/headerMenuBar/arrow_down.svg'; // 화살표 이�
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
 
+
 const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
   // 프로필 버튼을 눌렀을 때 드롭다운 버튼 동작
+
   
   useEffect(() => {
     // 페이지에 따라 헤더 스타일 변경
@@ -22,12 +26,14 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
       headerElement.classList.add('solid');
       headerElement.classList.remove('transparent');
     }
+
   }, [currentPage]);
   
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
 
   return (
     <header className={`header ${currentPage === 1 ? 'transparent' : 'solid'}`}>
@@ -70,9 +76,11 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
                   <a href="/register">회원가입</a>
                 </>
               )}
+
             </div>
           )}
         </div>
+
       </div>
     </header>
   );
