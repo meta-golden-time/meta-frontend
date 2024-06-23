@@ -1,252 +1,81 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-// Material UI의 컴포넌트 불러오기
-import AppBar from '@mui/material/AppBar'; // AppBar를 import해야 다른 라이브러리들이 동작함
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-
-// "디바이스" 자체의 화면폭을 확인해서 true/false를 반환해주는 리액트 전용 훅
-import useMediaQuery from '@mui/material/useMediaQuery';
-
-// 테마 객체를 가져옴 : 어플리케이션의 색상, 폰트 크기, 브레이크포인트 등 다양한 스타일 속성을 포함하고 있음
-import { useTheme } from '@mui/material/styles';
+import React, { useState, useEffect } from "react";
 
 // 이미지 가져오기
 import myLogo from '@img/main/golden_time_logo.svg';
+import arrowDownIcon from '@img/headerMenuBar/arrow_down.svg'; // 화살표 이미지 import
 
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
 
-// 로그인체크와 로그아웃 진행
-import { postLoginCheck, postLogout } from '../apis/userApi/user';
-
-
-// 페이지 메뉴 항목을 정의
-const pages = { 날씨: 'weather', 지도: 'maps', 커뮤니티: 'chatting',  고객센터: 'board' };
-
-// 사용자 설정 메뉴 항목을 정의
-const settingsLogin = { 마이페이지: 'user/userPage', 로그아웃: 'logout' }; // 로그인 후
-const settingsLogout = { 로그인: 'login', 회원가입: 'register' }; // 로그인 전
-
-function HeaderMenuBar() {
-
-  // 로그인 체크 상태 임시 테스트 코드
-  // const [loginCheck, setLoginCheck] = React.useState(false); // 로그인 전
-  const [loginCheck, setLoginCheck] = React.useState(true); // 로그인 후
+const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
+  // 프로필 버튼을 눌렀을 때 드롭다운 버튼 동작
   
-  const checkLoginStatus  = async() =>{
-    try{
-      const result = await postLoginCheck();// 로그인 체크 상태
-      console.log("🚀 ~ checkLoginStatus ~ result:", result)
-      setLoginCheck(result.success);
-    }catch(err){
-      console.log(err)
+  useEffect(() => {
+    // 페이지에 따라 헤더 스타일 변경
+    const headerElement = document.querySelector('.header');
+    if (currentPage === 1) {
+      // 첫 번째 페이지에서는 헤더를 투명하게 설정
+      headerElement.classList.add('transparent');
+      headerElement.classList.remove('solid');
+    } else {
+      // 다른 페이지에서는 헤더를 흰색으로 설정
+      headerElement.classList.add('solid');
+      headerElement.classList.remove('transparent');
     }
-  }
-
-  const handleLogout = async () => {
-    try {
-      await postLogout(); // 로그아웃 API 호출
-      setLoginCheck(false); // 로그인 상태 업데이트
-      navigate('/'); // 홈으로 이동 또는 필요한 페이지로 이동
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  const [isScrolled, setIsScrolled] = React.useState(false); // 스크롤 여부를 나타내는 state
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 0) {
-        setIsScrolled(true); // 스크롤 되면 true로 변경
-      } else {
-        setIsScrolled(false); // 스크롤이 맨 위로 올라가면 false로 변경
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    checkLoginStatus();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
-    // 내비게이션 메뉴의 열림 상태를 관리하는 상태 훅을 정의
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-    // 사용자 메뉴의 열림 상태를 관리하는 상태 훅을 정의
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-    const handleOpenNavMenu = (event) => {
-      // 내비게이션 메뉴를 여는 함수
-      setAnchorElNav(event.currentTarget);
-    };
-
-    const handleOpenUserMenu = (event) => {
-      // 사용자 메뉴를 여는 함수
-      setAnchorElUser(event.currentTarget);
-    };
-
-    const navigate = useNavigate();
-    const handleMovePage = (page) => {
-      // 페이지 이동 함수
-      navigate(`/${page}`)
-    };
-
-    const handleCloseNavMenu = () => {
-      // 내비게이션 메뉴를 닫는 함수
-      setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-      // 사용자 메뉴를 닫는 함수
-      setAnchorElUser(null);
-    };
-
-    const theme = useTheme();
-    // 화면 크기가 'md' (기본적으로 960px) 이하일 때를 의미하는 미디어 쿼리 조건을 생성
-    const isMobile = useMediaQuery(theme.breakpoints.down('md')); // 모바일 화면 여부 확인
-    const isPc = useMediaQuery(theme.breakpoints.up('md')); // pc 화면 여부 확인
-
-    // 로그인 여부에 따라 보여지는 항목 다르게 보이게하기
-    const settings = loginCheck ? settingsLogin : settingsLogout;
-    console.log("🚀 ~ HeaderMenuBar ~ loginCheck:", loginCheck)
-    console.log("🚀 ~ HeaderMenuBar ~ settings:", settings)
+  }, [currentPage]);
+  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   return (
-    <section>
-      <div className='headerMenu' style={{ width: '100%', backgroundColor: isScrolled ? '#ffffff' : 'transparent' }}>
-
-        <Container maxWidth="xl"> {/* 최대 폭이 'xl'인 Container 컴포넌트를 사용 */}
-          {/* Toolbar 컴포넌트를 사용하여 도구 모음을 생성, disableGutters는 패딩을 제거 */}
-          <Toolbar disableGutters >
-
-            {/* pc 화면 메뉴 바 설정 */}
-            <div style={{marginRight: "6%"}}>
-            <Typography component="a" href="/">
-            {!isMobile && (
-              <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 } }} />
-            )}
-            </Typography>
-            </div>
-
-            {/* 모바일 화면에서는 내비게이션 메뉴를 위한 아이콘 버튼을 표시 */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon /> {/* 메뉴 아이콘을 표시 */}
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                { loginCheck ? Object.keys(pages).map((page) => (
-                  <MenuItem key={page} 
-                  onClick={() => handleMovePage(pages[page])}
-                  >
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                )): null }
-              </Menu>
-            </Box>
-
-          {/* 모바일 화면 메뉴 바 설정 */}
-            <Typography component="a" href="/">
-              {!isPc && (
-                <Box component="img" src={myLogo} alt="My Logo" sx={{ width: { sm: 50 }, height: { sm: 50 }, ml: 35, mr: 35 }} />
-              )}
-            </Typography>
-
-            {/* pc 화면 메뉴 버튼 */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              { loginCheck ? Object.keys(pages).map((page) => (
-                <Button
-                  key={page}
-                  onClick={() => handleMovePage(pages[page])}
-                  sx={{ my: 1, color: 'black', display: 'block', p: 1.5}}
-                >
-                  {page}
-                </Button>
-              )) : null }
-            </Box>
-
-            {/* 사용자 메뉴를 위한 아이콘 버튼을 표시 */}
-            <Box sx={{ flexGrow: 0, ml: 10 }}> {/* 사용자 아이콘은 오른쪽에 유지 */}
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                  <Avatar alt="User Nick Name" src="/static/images/avatar/2.jpg" /> {/* ***** 아바타 이미지를 표시 --> 로그인시 설정된 아이콘으로 이미지 표시할 것 ***** */}
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {/* 아이콘 버튼 클릭 후 나오는 네비게이션 바 리스트에 대한 페이지 이동 버튼 */}
-                {Object.keys(settings).map((setting) => (
-                  <MenuItem 
-                    key={setting} 
-                    onClick={() => {
-                      if (setting === 'Logout') {
-                        handleLogout(); // 로그아웃 처리
-                      } else {
-                        handleMovePage(settings[setting]);
-                      }
-                    }}
-                  >
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
+    <header className={`header ${currentPage === 1 ? 'transparent' : 'solid'}`}>
+      <div className="logo">
+        {/* 로고 이미지 */}
+        <div>
+          <a href="/"> <img src={myLogo} alt="Logo" /> </a>
+        </div>
       </div>
-    </section>
+      {/* 로그인이 되어 있을 때만 내비게이션 메뉴 보여주기 */}
+      {checkLoginStatus && (
+        <nav className={`nav ${isWeatherOrMainPage ? '' : 'black-text'}`}>
+          <a href="/weather">날씨</a>
+          <a href="/maps">지도</a>
+          <a href="/chatting">커뮤니티</a>
+        </nav>
+      )}
+      {/* 프로필 이미지 및 드롭다운 토글 */}
+      <div className="profile">
+        <div className="dropdown">
+          <div className="profile-btn" onClick={toggleDropdown}>
+            {/* 프로필 버튼 */}
+            <h6 className={`profile-btn-style ${isWeatherOrMainPage ? '' : 'black-text'}`}>프로필</h6>
+            {/* 드롭다운 화살표 아이콘 */}
+            <img src={arrowDownIcon} alt="Dropdown Arrow" className={`arrow-icon ${isWeatherOrMainPage ? currentPage === 1 ? 'white' : 'black' : ''} `} />
+          </div>
+          {/* 드롭다운 메뉴 */}
+          {isDropdownOpen && (
+            // <div className="dropdown-menu">
+            <div>
+              {checkLoginStatus ? (
+                <>
+                  <a href="/user/userPage">마이페이지</a>
+                  <a href="/board">고객센터</a>
+                  <a href="#logout">로그아웃</a>
+                </>
+              ) : (
+                <>
+                  <a href="/login">로그인</a>
+                  <a href="/register">회원가입</a>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
   );
-}
+};
 
 export default HeaderMenuBar;

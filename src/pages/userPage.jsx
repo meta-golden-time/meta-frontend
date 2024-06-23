@@ -4,6 +4,7 @@ import '@styles/users/userPage.scss';
 import { postLogout, postLoginCheck } from '../apis/userApi/user'; // 로그인 체크 진행
 import { getBookMark } from '../apis/userApi/bookMark'; // 북마크와 게시판 API 요청
 import { getPosts } from '../apis/board/api';
+
 const UserPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [users, setUsers] = useState([]); // 초기값을 null로 설정
