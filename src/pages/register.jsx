@@ -16,7 +16,7 @@ import phoneIcon from '../img/main/new_phone_icon.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
 // api 요청
-import { postRegister, postIdCheck } from '../apis/userApi/user';
+import { postRegister, postIdCheck, postEmailCheck } from '../apis/userApi/user';
 
 // CSS 파일을 import 합니다.
 import '../styles/users/register.css';
@@ -29,6 +29,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
+    const [name, setName] = useState('');
 
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
@@ -44,19 +45,20 @@ const Register = () => {
 
     const checkPasswordMatch = (password, confirmPassword) => {
         setPasswordMatch(password === confirmPassword);
-    };  
+    };
 
     const showError = () => {
         const passwordInput = document.getElementById('pwd_val');
         const confirmPasswordInput = document.getElementById('pwd_cnf_val');
         const formControl = confirmPasswordInput.parentElement;
-    
+
         if (passwordInput.value !== confirmPasswordInput.value) {
             formControl.classList.add('error');
         } else {
             formControl.classList.remove('error');
         }
     };
+
     const handleAddressSelect = (address) => {
         console.log("🚀 ~ Register ~ address:", address);
         setAddress(address);
@@ -91,6 +93,15 @@ const Register = () => {
                 icon: 'warning',
                 title: '필수 입력 항목 누락',
                 text: '모든 필수 입력 항목을 작성해 주세요.',
+            });
+            return false;
+        }
+
+        if (!/^[가-힣]+$/.test(data.name)) {
+            Swal.fire({
+                icon: 'warning',
+                title: '이름 오류',
+                text: '이름은 한글만 입력 가능합니다.',
             });
             return false;
         }
@@ -167,12 +178,26 @@ const Register = () => {
         });
     };
 
-    const duplicatecheck = async () => {
+    const duplicateIDCheck = async () => {
         const data = {
             userID: document.getElementById('id_val').value.trim()
         }
         const result = await postIdCheck(data);
-        console.log("🚀 ~ duplicatecheck ~ result:", result)
+        console.log("🚀 ~ duplicateIDCheck ~ result:", result)
+        Swal.fire({
+            icon: result.success ? 'success' : 'error',
+            title: '아이디 체크',
+            text: result.message,
+        });
+
+    }
+
+    const duplicateEmailCheck = async () => {
+        const data = {
+            email: document.getElementById('email_val').value + "@" + document.getElementById('email2_val').value
+        }
+        const result = await postEmailCheck(data);
+        console.log("🚀 ~ duplicateIDCheck ~ result:", result)
         Swal.fire({
             icon: result.success ? 'success' : 'error',
             title: '아이디 체크',
@@ -224,7 +249,7 @@ const Register = () => {
                 Swal.fire('Success', 'You have registered successfully', 'success');
                 navigate('/');
             } else {
-                Swal.fire('Error', result.message, 'error');
+                Swal.fire('Error', "회원가입에 실패 하였습니다.", 'error');
             }
         } catch (error) {
             Swal.fire('Error', 'There was an error during registration', 'error');
@@ -257,7 +282,7 @@ const Register = () => {
                                                 placeholder="아이디"
                                             />
                                             <div className='btn'>
-                                                <Button onClick={duplicatecheck} variant="outlined" className='id_validation'>중복 확인</Button>
+                                                <Button onClick={duplicateIDCheck} variant="outlined" className='id_validation'>중복 확인</Button>
                                             </div>
                                         </div>
                                         <div className='form_item'>
@@ -307,6 +332,8 @@ const Register = () => {
                                                 type="text"
                                                 name="is_Username"
                                                 placeholder="이름"
+                                                // value={name}
+                                                // onChange={handleNameChange}
                                             />
                                         </div>
                                         <div className='form_item'>
@@ -331,7 +358,7 @@ const Register = () => {
                                                 <option value="yahoo.com">yahoo.com</option>
                                             </select>
                                             <div className='btn'>
-                                                <Button onClick={duplicatecheck} variant="outlined" className='id_validation'>중복 확인</Button>
+                                                <Button onClick={duplicateEmailCheck} variant="outlined" className='id_validation'>중복 확인</Button>
                                             </div>
                                         </div>
                                         <div className='form_item'>
