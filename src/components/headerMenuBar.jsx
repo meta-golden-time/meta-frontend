@@ -15,6 +15,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
+import Swal from 'sweetalert2';
+
+
 // "디바이스" 자체의 화면폭을 확인해서 true/false를 반환해주는 리액트 전용 훅
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -37,7 +40,7 @@ const pages = { 날씨: 'weather', 지도: 'maps',
 const logoutPages = { 로그인: 'login', 회원가입: 'register' };
 
 // 사용자 설정 메뉴 항목을 정의
-const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout' }; // 로그인 후
+const settingsLogin = { 'User Page': 'user/userPage', 'Log out': 'logout-action' }; // 로그인 후
 const settingsLogout = { 'Log in': 'login', 'Sign up': 'signup' }; // 로그인 전
 
 function HeaderMenuBar() {
@@ -56,9 +59,16 @@ function HeaderMenuBar() {
 
   const handleLogout = async () => {
     try {
-      await postLogout(); // 로그아웃 API 호출
+      const result = await postLogout(); // 로그아웃 API 호출
+      if(result.success == true){
+        Swal.fire({
+          icon: 'success',
+          title: '로그아웃',
+          text: '로그아웃 되었습니다.',
+      });
       setLoginCheck(false); // 로그인 상태 업데이트
-      navigate('/'); // 홈으로 이동 또는 필요한 페이지로 이동
+      navigate('/');
+    }
     } catch (err) {
       console.log(err);
     }
@@ -243,7 +253,7 @@ function HeaderMenuBar() {
                   <MenuItem 
                     key={setting} 
                     onClick={() => {
-                      if (setting === 'Logout') {
+                      if (settings[setting] === 'logout-action') {
                         handleLogout(); // 로그아웃 처리
                       } else {
                         handleMovePage(settings[setting]);

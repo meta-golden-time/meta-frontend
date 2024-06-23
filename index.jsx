@@ -28,7 +28,7 @@ function App() {
 
   const location = useLocation();
   const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
-
+  console.log("언제언제 들어오나요?") // 여기에다가 로그인 체크 넣어서 각 route에다가  넣어주기 
   return (
     <>
       {!noHeaderPaths.includes(location.pathname) && <Header />}
