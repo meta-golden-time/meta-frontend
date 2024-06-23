@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; // 페이지 이동을 위한 useNavigate 훅
+import { useAuth } from '../context/AuthContext'; // AuthContext를 사용하여 로그인 상태 관리
+import { postLogout } from '../apis/userApi/user'; // 로그아웃 API 가져오기
 
 // 이미지 가져오기
 import myLogo from '@img/main/golden_time_logo.svg';
@@ -6,9 +9,13 @@ import arrowDownIcon from '@img/headerMenuBar/arrow_down.svg'; // 화살표 이�
 
 // css 디자인 가져오기
 import '@styles/headerMenuBar/headerMenuBar.scss'
+import Swal from 'sweetalert2';
 
 const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
-  
+
+  const navigate = useNavigate();
+  const { setIsLogin } = useAuth(); // AuthContext에서 setIsLogin 함수 가져오기
+
   useEffect(() => {
     // 페이지에 따라 헤더 스타일 변경
     const headerElement = document.querySelector('.header');
@@ -27,6 +34,23 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const userLogout = async () => {
+    try {
+      const result =  await postLogout(); // 로그아웃 API 호출
+      if(result.success == true){
+        setIsLogin(false); // 로그인 상태 업데이트
+        Swal.fire({
+          icon: 'success',
+          title: '로그아웃',
+          text: '로그아웃 되었습니다.',
+      });
+        navigate('/'); // 로그인 페이지로 이동
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (
@@ -58,7 +82,6 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           </div>
           {/* 드롭다운 메뉴 */}
           {isDropdownOpen && (
-
               <div className="header-drop-menu">
               {checkLoginStatus ? (
                 <>
@@ -73,7 +96,6 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
                 </>
               )}
             </div>
-
             )}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation, Navigate  } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import Header from '@components/headerMenuBar';
 import Main from '@pages/main';
@@ -9,29 +9,21 @@ import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
 import ChatPage from '@pages/chatPage';
-
 import BoardList from '@components/board/BoardList';
 import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
 import MyPosts from '@components/board/MyPosts';
+import { AuthProvider, useAuth } from './src/context/AuthContext';
 
 import './index.css';
 import '@font/font.scss';
 
 function App() {
-  // userPage에 들어가는 리스트 데이터
-  const bookmarks = [
-    { id: 1, from: '장소 1', to: '장소 2' },
-    { id: 2, from: '장소 3', to: '장소 4' },
-    { id: 3, from: '장소 5', to: '장소 6' },
-  ];
-
-  // 로그인 체크 상태 임시 테스트 코드
-  //const [checkLoginStatus, setLoginCheck] = useState(false); // 로그인 전
-  const [checkLoginStatus, setLoginCheck] = useState(true); // 로그인 후
-
-  // 스크롤을 통해 다른 화면 이동 감지
+  const { isLogin, loginChecked } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+  const noHeaderPaths = ['/login', '/register'];
+  const isWeatherOrMainPage = location.pathname === '/' || location.pathname === '/weather';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,12 +51,18 @@ function App() {
     };
   }, []);
 
-  // noHeaderPaths에 해당하는 페이지 메뉴바 숨기기
-  const location = useLocation();
-  const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
 
-  // WeatherPage와 Main을 제외한 페이지에서 메뉴 글자 색을 검정색으로 설정
-  const isWeatherOrMainPage = location.pathname === '/' || location.pathname === '/weather';
+  const ProtectedRoute = ({ element, ...rest }) => {
+    if (!isLogin) {
+      return <Navigate to="/login" />;
+    }
+    return element;
+  };
+
+
+  if (!loginChecked) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -72,26 +70,23 @@ function App() {
         <Header
           currentPage={currentPage}
           isWeatherOrMainPage={isWeatherOrMainPage}
-          checkLoginStatus={checkLoginStatus}
+          checkLoginStatus={isLogin}
         />
       )}
       <Routes>
-        <Route path='/' element={<Main currentPage={currentPage} setCurrentPage={setCurrentPage} checkLoginStatus={checkLoginStatus} />} />
+        <Route path='/' element={<Main currentPage={currentPage} setCurrentPage={setCurrentPage} checkLoginStatus={isLogin} />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/user/userPage' element={<UserPage bookmarks={bookmarks} />} />
+        <Route path='/user/userPage' element={<ProtectedRoute element={<UserPage/>} />} />
         <Route path='/maps' element={<MapPage />} />
         <Route path='/weather' element={<WeatherPage />} />
-        <Route path='/chatting' element={<ChatPage />} />
-
-        {/*board 게시판 */}
-        {/* <Route path="/" element={<BoardPage />} /> */}
+        <Route path='/chatting' element={<ProtectedRoute element={<ChatPage />} />} />
+         {/*board 게시판 */}
         <Route path="/board" element={<BoardList />} />
-        <Route path="/board/create" element={<BoardForm />} />
-        <Route path="/board/edit/:id" element={<BoardForm isEdit={true} />} />
-        <Route path="/board/view/:id" element={<BoardView />} />
-        <Route path="/board/my-posts" element={<MyPosts />} />
-
+        <Route path="/board/create" element={<ProtectedRoute element={<BoardForm />} />} />
+        <Route path="/board/edit/:id" element={<ProtectedRoute element={<BoardForm isEdit={true} />} />} />
+        <Route path="/board/view/:id" element={<ProtectedRoute element={<BoardView />} />} />
+        <Route path="/board/my-posts" element={<ProtectedRoute element={<MyPosts />} />} />
       </Routes>
     </>
   );
@@ -99,7 +94,9 @@ function App() {
 
 const AppWrapper = () => (
   <BrowserRouter>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </BrowserRouter>
 );
 

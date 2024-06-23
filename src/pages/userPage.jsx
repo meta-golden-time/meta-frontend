@@ -5,6 +5,7 @@ import { postLogout, postLoginCheck } from '../apis/userApi/user'; // 로그인 
 import { getBookMark } from '../apis/userApi/bookMark'; // 북마크와 게시판 API 요청
 import { getPosts } from '../apis/board/api';
 import Swal from 'sweetalert2';
+import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
 
 
 const UserPage = () => {
@@ -12,6 +13,7 @@ const UserPage = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [users, setUsers] = useState([]); // 초기값을 null로 설정
   const [posts, setPosts] = useState([]);
+  const { setIsLogin } = useAuth(); // setIsLogin 함수를 AuthContext에서 가져옵니다.
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -36,6 +38,7 @@ const UserPage = () => {
       const result = await postLogout();
       console.log("🚀 ~ userLogout ~ result:", result);
       if(result.success == true){
+        setIsLogin(false); // 로그아웃 성공 시 상태 업데이트
         Swal.fire({
           icon: 'success',
           title: '로그아웃',

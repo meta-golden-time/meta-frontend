@@ -13,14 +13,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     // 성공적인 로그인 후 결과 처리
     console.log(result.user);
+    return result.user;
   } catch (error) {
     console.error(error);
   }
 };
+
 export { app, auth, signInWithGoogle };

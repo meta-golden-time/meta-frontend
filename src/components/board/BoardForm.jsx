@@ -3,7 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { createPost, updatePost, getPosts } from '../../apis/board/api';
 import Swal from 'sweetalert2';
 import '../../styles/board/BoardForm.css';
-import {Checkbox} from '@mui/material';
+
+import { Checkbox } from '@mui/material';
 import xIcon from '@img/main/X_icon.svg'
 
 const BoardForm = ({ isEdit }) => {
