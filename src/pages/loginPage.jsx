@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
-import { postLogin } from '../apis/userApi/user';
+import { postLogin, postEmailCheck } from '../apis/userApi/user';
 import { signInWithGoogle } from '../firebase-config';
 import logImg from '../img/main/golden_time_logo.svg';
 import logIcon3 from '../img/main/m_log_i3.svg';
