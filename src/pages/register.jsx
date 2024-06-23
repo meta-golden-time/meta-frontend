@@ -321,7 +321,7 @@ const Register = () => {
                                             />
                                             <span className="e_goll">@</span>
                                             <select id="email2_val" name="is_Useremail2" className="select_ty1">
-                                                <option value="">.com</option>
+                                                <option value="">도메인</option>
                                                 <option value="naver.com">naver.com</option>
                                                 <option value="hanmail.net">hanmail.net</option>
                                                 <option value="nate.com">nate.com</option>
@@ -350,7 +350,6 @@ const Register = () => {
                                                 type="text"
                                                 name="is_Userphone1"
                                                 maxLength="3"
-                                                placeholder='010'
                                             />
                                             <span className="tel_dot">-</span>
                                             <input

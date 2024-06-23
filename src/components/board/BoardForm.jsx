@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { createPost, updatePost, getPosts } from '../../apis/board/api';
 import Swal from 'sweetalert2';
 import '../../styles/board/BoardForm.css';
@@ -61,47 +61,62 @@ const BoardForm = ({ isEdit }) => {
   };
 
   return (
-    <div className="board-form">
-      <h2>{isEdit ? '게시물 수정' : '게시물 작성'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>제목</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
+
+    <>
+      <div className="board-page">
+        <div className="board-form">
+          <form onSubmit={handleSubmit}>
+            <div className="form-header">
+              <div className='header-container'>
+                <Link to={`/board`}>
+                  <img src={xIcon} alt='xIcon'/>
+                </Link>
+                <p>{isEdit ? '게시물 수정' : '게시물 작성'}</p>
+              </div>
+              <button type="submit">{isEdit ? '수정' : '등록'}</button>
+            </div>
+            <div className='form-content'>
+              <div className="form-group">
+                <input
+                  placeholder='제목'
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+                  <textarea
+                    placeholder='내용'
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                  />  
+              </div>
+              <div className="form-private">
+                <div className='private-content'>
+                  <label>비밀글 설정</label>
+                  <Checkbox
+                    checked={isPrivate}
+                    onChange={(e) => setIsPrivate(e.target.checked)}
+                  />
+                </div>
+                <div className='private-content'>
+                <label>비밀번호 : </label>
+                  <input
+
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={isEdit} // 수정 모드일 때 비밀번호 필드를 비활성화
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <label>내용</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>비밀글 설정</label>
-          <input
-            type="checkbox"
-            checked={isPrivate}
-            onChange={(e) => setIsPrivate(e.target.checked)}
-          />
-        </div>
-        <div className="form-group">
-          <label>비밀번호</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            disabled={isEdit} // 수정 모드일 때 비밀번호 필드를 비활성화
-          />
-        </div>
-        <button type="submit">{isEdit ? '수정' : '등록'}</button>
-      </form>
-    </div>
+      </div>
+    </>
+
+
   );
 };
 
