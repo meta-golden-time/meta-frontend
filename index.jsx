@@ -5,6 +5,7 @@ import Header from '@components/headerMenuBar';
 import Main from '@pages/main';
 import LoginPage from '@pages/loginPage';
 import RegisterPage from '@pages/register';
+import RegisterPageG from '@pages/registerGoogle';
 import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
@@ -77,6 +78,7 @@ function App() {
         <Route path='/' element={<Main currentPage={currentPage} setCurrentPage={setCurrentPage} checkLoginStatus={isLogin} />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
+        <Route path='/registerG' element={<RegisterPageG />} />
         <Route path='/user/userPage' element={<ProtectedRoute element={<UserPage/>} />} />
         <Route path='/maps' element={<MapPage />} />
         <Route path='/weather' element={<WeatherPage />} />
