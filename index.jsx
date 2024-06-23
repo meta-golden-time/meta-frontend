@@ -60,6 +60,9 @@ function App() {
   const location = useLocation();
   const noHeaderPaths = ['/login', '/register', '/login_ryu', '/register_ryu'];
 
+  console.log("언제언제 들어오나요?") // 여기에다가 로그인 체크 넣어서 각 route에다가  넣어주기 
+
+
   // WeatherPage와 Main을 제외한 페이지에서 메뉴 글자 색을 검정색으로 설정
   const isWeatherOrMainPage = location.pathname === '/' || location.pathname === '/weather';
 
