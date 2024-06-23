@@ -21,8 +21,8 @@ const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     // 성공적인 로그인 후 결과 처리
-    console.log(result.user);
-    return result.user;
+    console.log(result);
+    return result.user.reloadUserInfo;
   } catch (error) {
     console.error(error);
   }

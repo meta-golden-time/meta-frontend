@@ -22,6 +22,18 @@ export const postLogin = async (data) => {
   }
 };
 
+export const postLoginG = async (data) => {
+  console.log("🚀 ~ postLogin ~ data:", data)
+  try {
+    const response = await axiosInstance.post('/auth/loginG', data);
+    console.log("🚀 ~ postLogin ~ response:", response)
+    return response.data;
+  } catch (error) {
+    console.error('Error during login:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
 export const postIdCheck = async (data) => {
   console.log("🚀 ~ postLogin ~ data:", data)
   try {
@@ -36,7 +48,7 @@ export const postIdCheck = async (data) => {
 export const postEmailCheck = async (data) => {
   console.log("🚀 ~ postLogin ~ data:", data)
   try {
-    const response = await axiosInstance.post('/auth/idCheck', data);
+    const response = await axiosInstance.post('/auth/emailCheck', data);
     return response.data;
   } catch (error) {
     console.error('Error during login:', error.response?.data || error.message);

@@ -12,10 +12,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Dots from "@components/main/dots";
 import Content from '@components/main/content.jsx';
 
-import mainImage1 from  '@img/main/buildings_back.jpg';
-import mainImage2 from  '@img/main/buildings_morning_back1.jpg';
-import mainImage3 from  '@img/main/buildings_morning_back2.jpg';
-import mainImage4 from  '@img/main/buildings_night_back.jpg';
+import mainImage1 from '@img/main/buildings_back.jpg';
+import mainImage2 from '@img/main/buildings_morning_back1.jpg';
+import mainImage3 from '@img/main/buildings_morning_back2.jpg';
+import mainImage4 from '@img/main/buildings_night_back.jpg';
 
 import image from '@img/main/map_page_img.png'; // 임시 이미지
 
@@ -32,7 +32,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const DIVIDER_HEIGHT = 5; // 화면와 화면 사이의 빈 공간 오차 허용범위
+  const DIVIDER_HEIGHT = 10; // 화면와 화면 사이의 빈 공간 오차 허용범위
   const outerDivRef = useRef();
   
   useEffect(() => {
@@ -50,8 +50,13 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
       const pageHeight = window.innerHeight; // 화면 세로길이, 100vh와 같음
 
       if (deltaY > 0) {
+        console.log("🚀 ~ wheelHandler ~ deltaY:", deltaY)
+        console.log("🚀 ~ wheelHandler ~ pageHeight:", pageHeight)
+        console.log("🚀 ~ wheelHandler ~ scrollTop:", scrollTop)
+        
         // 스크롤 내릴 때
         if (scrollTop >= 0 && scrollTop < pageHeight) {
+          
           //현재 1화면
           console.log("현재 1화면, down");
           outerDivRef.current.scrollTo({
@@ -106,6 +111,10 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
           });
         }
       } else {
+        console.log("🚀 ~ wheelHandler ~ deltaY:", deltaY)
+        console.log("🚀 ~ wheelHandler ~ pageHeight:", pageHeight)
+        console.log("🚀 ~ wheelHandler ~ scrollTop:", scrollTop)
+
         // 스크롤 올릴 때
         if (scrollTop >= 0 && scrollTop < pageHeight) {
           //현재 1화면
@@ -173,6 +182,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
 
   const handleDotClick = (pageNum) => {
     const pageHeight = window.innerHeight;
+    console.log(`Navigating to page ${pageNum}`);
     outerDivRef.current.scrollTo({
       top: (pageNum - 1) * (pageHeight + DIVIDER_HEIGHT),
       left: 0,
@@ -208,15 +218,15 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
       <Dots currentPage={currentPage} handleDotClick={handleDotClick} />
 
       {/* 제목 섹션 == 첫 번째 화면 */}
-      <div className={`inner main-title-background`}  style={{ backgroundImage: `url(${mainImages[currentImageIndex]})` }}>
+      <div className={`inner main-title-background`} style={{ backgroundImage: `url(${mainImages[currentImageIndex]})` }}>
         <div className="main-title-div" data-aos="fade-down">
           <h1 className="main-title-h" style={{ color: 'white' }}>
             당신의 바쁜 아침 출근 길을 <p className='main-title-p'>도와줄 <span style={{ color: '#007bff' }}>첫 번째 비서</span></p>
           </h1>
           {/* 제목 섹션의 날씨, 지도 위치 버튼 */}
           <div className='main-title-btn'>
-          <button type="button" onClick={handleWeatherClick}>날씨</button>
-          <button type="button" onClick={handleMapClick}>지도</button>
+            <button type="button" onClick={handleWeatherClick}>날씨</button>
+            <button type="button" onClick={handleMapClick}>지도</button>
           </div>
         </div>
       </div>
@@ -233,7 +243,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             </div>
             {/* 링크 추가 */}
             <div className="weader-link">
-              <a href={ checkLoginStatus? '/weather' : '/login' } className="custom-link">날씨 보러가기 →</a>
+              <a href={checkLoginStatus ? '/weather' : '/login'} className="custom-link">날씨 보러가기 →</a>
             </div>
           </div>
           {/* 이미지 콘텐츠 */}
@@ -261,7 +271,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
 
       {/* 다섯 번째 화면 */}
       <div className="inner five-screen">
-      <div className="section d-flex justify-content-center align-items-center">
+        <div className="section d-flex justify-content-center align-items-center">
           {/* 캐러셀 추가 */}
           <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel">
             <div className="carousel-indicators">
@@ -289,7 +299,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
         </div>
         {/* 링크 추가 */}
         <div className="map-link">
-          <a href={ checkLoginStatus? '/maps' : '/login' } className="custom-link">지도 보러가기 →</a>
+          <a href={checkLoginStatus ? '/maps' : '/login'} className="custom-link">지도 보러가기 →</a>
         </div>
       </div>
 
@@ -303,10 +313,11 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
           </div>
           {/* 링크 추가 */}
           <div className="chatting-link">
-            <a href={ checkLoginStatus? '/chatting' : '/login' } className="custom-link">커뮤니티 보러가기 →</a>
+            <a href={checkLoginStatus ? '/chatting' : '/login'} className="custom-link">커뮤니티 보러가기 →</a>
           </div>
         </div>
       </div>
+      <div className="divider"></div>
     </div>
   );
 }

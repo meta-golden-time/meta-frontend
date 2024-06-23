@@ -13,7 +13,7 @@ import emailIcon from '../img/main/email_icon.svg';
 import addrIcon from '../img/main/home_icon.svg';
 import phoneIcon from '../img/main/new_phone_icon.svg';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation  } from 'react-router-dom';
 
 // api 요청
 import { postRegister, postIdCheck } from '../apis/userApi/user';
@@ -29,7 +29,9 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMatch, setPasswordMatch] = useState(true);
-
+    const location = useLocation();
+    const { loginG } = location.state || {};
+    console.log("dddddd", loginG)
     const handleAddressSelect = (address) => {
         console.log("🚀 ~ Register ~ address:", address);
         setAddress(address);
@@ -47,8 +49,6 @@ const Register = () => {
     const validateInputs = () => {
         const data = {
             userID: document.getElementById('id_val').value.trim(),
-            email1: document.getElementById('email_val').value.trim(),
-            email2: document.getElementById('email2_val').value.trim(),
             password: document.getElementById('pwd_val').value.trim(),
             confirmPassword: document.getElementById('pwd_cnf_val').value.trim(),
             name: document.getElementById('name_val').value.trim(),
@@ -59,7 +59,7 @@ const Register = () => {
         };
         console.log("🚀 ~ validateInputs ~ data:", data);
 
-        if (!data.userID || !data.email1 || !data.email2 || !data.password || !data.confirmPassword || !data.name || !data.phone1 || !data.phone2 || !data.phone3 || !data.userAddress) {
+        if (!data.userID || !data.password || !data.confirmPassword || !data.name || !data.phone1 || !data.phone2 || !data.phone3 || !data.userAddress) {
             Swal.fire({
                 icon: 'warning',
                 title: '필수 입력 항목 누락',
@@ -191,7 +191,7 @@ const Register = () => {
 
         const data = {
             userID: document.getElementById('id_val').value,
-            email: document.getElementById('email_val').value + "@" + document.getElementById('email2_val').value,
+            email: document.getElementById('email_val').value,
             password: document.getElementById('pwd_val').value,
             confirmPassword: document.getElementById('pwd_cnf_val').value,
             name: document.getElementById('name_val').value,
@@ -293,9 +293,11 @@ const Register = () => {
                                                 id="email_val"
                                                 type="text"
                                                 name="is_Useremail1"
-                                                placeholder="이메일"
+                                                placeholder={loginG.email}
+                                                value={loginG.email}                                                
+                                                disabled
                                             />
-                                            <span className="e_goll">@</span>
+                                            {/* <span className="e_goll">@</span>
                                             <select id="email2_val" name="is_Useremail2" className="select_ty1">
                                                 <option value="">선택하세요</option>
                                                 <option value="naver.com">naver.com</option>
@@ -305,10 +307,10 @@ const Register = () => {
                                                 <option value="gmail.com">gmail.com</option>
                                                 <option value="yahoo.co.kr">yahoo.co.kr</option>
                                                 <option value="yahoo.com">yahoo.com</option>
-                                            </select>
-                                            <div className='btn'>
+                                            </select> */}
+                                            {/* <div className='btn'>
                                                 <Button onClick={duplicatecheck} variant="outlined" className='id_validation'>중복 확인</Button>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className='form_item'>
                                             <span className="icon">
@@ -326,7 +328,7 @@ const Register = () => {
                                                 type="text"
                                                 name="is_Userphone1"
                                                 maxLength="3"
-                                                placeholder='010'
+                                                placeholder=''
                                             />
                                             <span className="tel_dot">-</span>
                                             <input

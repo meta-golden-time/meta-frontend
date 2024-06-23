@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
-import { postLogin, postEmailCheck } from '../apis/userApi/user';
+import { postLogin, postEmailCheck, postLoginG } from '../apis/userApi/user';
 import { signInWithGoogle } from '../firebase-config';
 import logImg from '../img/main/golden_time_logo.svg';
 import logIcon3 from '../img/main/m_log_i3.svg';
@@ -45,42 +45,80 @@ const LoginForm = () => {
       if(result.success == true){
         setIsLogin(true); // 로그인 성공 시 상태 업데이트
         Swal.fire({
-          title: '성공',
-          text: '로그인에 성공하셨습니다.',
-          icon: 'success'
+            title: '성공',
+            text: '로그인에 성공하셨습니다.',
+            icon: 'success'
         }).then(() => {
-          navigate('/');
+            navigate('/');
         });
-      }
-      else{
+    }
+    else{
         setIsLogin(false); // 로그인 실패 시 상태 업데이트
         Swal.fire({
-          title: '실패',
-          text: '로그인에 실패하셨습니다.',
-          icon: 'warring'
+            title: '실패',
+            text: '로그인에 실패하셨습니다.',
+            icon: 'warring'
         }).then(() => {
-          navigate('/');
-        });
-      }
+            navigate('/');
+        });s
+    }
      
     } catch (error) {
       Swal.fire('Error', '아이디와 비밀번호를 확인해주세요', 'error');
     }
   }
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async() => {
     try {
-      const result = await signInWithGoogle();
-      console.log("🚀 ~ handleGoogleLogin ~ result:", result)
-      
-      setIsLogin(true); // 구글 로그인 성공 시 상태 업데이트
-      Swal.fire({
-        title: '성공',
-        text: '구글 로그인에 성공하셨습니다.',
-        icon: 'success'
-      }).then(() => {
-        navigate('/');
-      });
+      const loginG = await signInWithGoogle();
+      console.log("🚀 ~ handleGoogleLogin ~ result:", loginG.email)
+      const emailCheck = await postEmailCheck({email:loginG.email});
+      console.log("🚀 ~ handleGoogleLogin ~ emailCheck:", emailCheck)
+
+      const userData = {
+        email: loginG.email,
+      };
+      if(emailCheck.success == true){
+        Swal.fire({
+            title: '회원가입',
+            text: '가입된 정보가 없습니다. 회원가입하세요.',
+            icon: 'warning'
+        }).then(() => {
+            navigate('/registerG', { state: { loginG } });
+            return;
+        });
+    } 
+    else{        
+        try {
+            const result = await postLoginG(userData);
+            if(result.success == true){
+              setIsLogin(true); // 로그인 성공 시 상태 업데이트
+            Swal.fire({
+                title: '성공',
+                text: '로그인에 성공하셨습니다.',
+                icon: 'success'
+            }).then(() => {
+                setIsLogin(true); // 구글 로그인 성공 시 상태 업데이트
+                navigate('/');
+            });
+        }
+        else{
+              setIsLogin(false); // 로그인 실패 시 상태 업데이트
+            Swal.fire({
+                title: '실패',
+                text: '로그인에 실패하셨습니다.',
+                icon: 'warring'
+            }).then(() => {
+                //navigate('/');
+                return
+            });s
+        }
+        
+        } catch (error) {
+            Swal.fire('Error', '아이디와 비밀번호를 확인해주세요', 'error');
+            return
+        }
+      }      
     } catch (error) {
       Swal.fire('Error', '구글 로그인에 실패하였습니다.', 'error');
     }
