@@ -8,7 +8,6 @@ import arrowDownIcon from '@img/headerMenuBar/arrow_down.svg'; // 화살표 이�
 import '@styles/headerMenuBar/headerMenuBar.scss'
 
 const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
-  // 프로필 버튼을 눌렀을 때 드롭다운 버튼 동작
   
   useEffect(() => {
     // 페이지에 따라 헤더 스타일 변경
@@ -24,6 +23,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
     }
   }, [currentPage]);
   
+  // 프로필 버튼을 눌렀을 때 드롭다운 버튼 동작
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -56,8 +56,8 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           </div>
           {/* 드롭다운 메뉴 */}
           {isDropdownOpen && (
-            // <div className="dropdown-menu">
-            <div>
+
+              <div className="header-drop-menu">
               {checkLoginStatus ? (
                 <>
                   <a href="/user/userPage">마이페이지</a>
@@ -71,7 +71,8 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
                 </>
               )}
             </div>
-          )}
+
+            )}
         </div>
       </div>
     </header>
