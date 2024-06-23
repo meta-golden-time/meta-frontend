@@ -1,3 +1,8 @@
+// 적용한 AOS 애니메이션
+// data-aos="fade-down" -> 위에서 아래로 올라오는 모션
+// full page기능을 만들기 위해 참고한 사이트
+// https://codingbroker.tistory.com/128
+
 import { useEffect, useRef, useState } from "react";
 
 // 스크롤 애니메이션 AOS 라이브러리 불러오기
