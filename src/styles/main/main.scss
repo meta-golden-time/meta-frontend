@@ -22,39 +22,52 @@
 }
 
 // main page 스타일 적용
-/* 전체 설정 */
-.section {
-  /* 좌우 여백 */
-  padding-left: 10%;
-  padding-right: 10%;
-  /* 위치 설정 */
+.outer {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* 화면에서 스크롤바 안보이게 */
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+/* 전체 화면 구조*/
+.inner {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  font-size: 100px;
+  /* 좌우 여백 */
+  padding-left: 13%;
+  padding-right: 13%;
+}
+
+/* 페이지 오차 범위 채우기 */
+.divider {
+  width: 100%;
+  height: 5px;
+  background-color: #ffffff;
 }
 
 /* 제목 배경화면 설정*/
-.titleBackground {
+.main-title-background {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
 }
 
+.main-title-h, .main-title-p {
+  text-align: center;
+  font-size: 3.5rem;
 
-/* 대표 제목 위치 설정 */
-
-/* 대표 제목의 간격 및 폰트 크기 설정 */
-.mainTitle, .mainTitleP {
-  font-size: 4.5rem;
   /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
   margin: 0 auto;
-  opacity: .8;
 }
-  
+
 /* 대표 제목 아래 버튼 디자인 기능 설정 */
-.mainBtn {
+.main-title-btn {
   margin-top: 80px;
   display: flex; justify-content: center; gap: 16px;
   button {
@@ -73,75 +86,7 @@
   }
 }
 
-/* 내용 레이아웃 */
-.one-screen {
-  background-color: #e8f6ff;
-}
-
-.container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.col {
-  flex: 1;
-  padding: 15px;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-.three-screen {
-  background-color: #e8f6ff;
-}
-
-.four-screen {
-  position: relative;
-}
-
-.five-screen {
-  position: relative;
-}
-
-/* 캐러셀 가운데 정렬 */
-.carousel {
-  width: 100%; /* 캐러셀 너비 설정 */
-  max-width: 950px; /* 캐러셀 최대 너비 설정 */
-  margin: 0 auto; /* 가로로 가운데 정렬 */
-}
-
-/* 링크 스타일 설정 */
-.link-weader {
-  /* 마진 설정 */
-  margin-top: 50px;
-  margin-right: 20px; 
-  display: flex;
-  justify-content: end; /* 왼쪽 정렬 */
-}
-
-.link-map {
-  position: absolute;
-  bottom: 20%;
-  left: 28%;
-}
-
-.link-chatting {
-  position: absolute;
-  bottom: 38%;
-  left: 28%;
-}
-
+/* 링크 버튼에 대한 스타일 */
 .custom-link {
   font-size: 1.5rem; /* 폰트 크기 설정 */
   color: #007bff; /* 링크 색상 설정 */
@@ -150,4 +95,64 @@
 
 .custom-link:hover {
   text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
+
+/* 두 번째 화면 스타일 */
+.two-screen {
+  background-color: #e8f6ff;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.weader-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.weader-col {
+  flex: 1;
+  padding: 15px;
+}
+
+.weader-link {
+  /* 마진 설정 */
+  margin-top: 50px;
+  margin-right: 20px; 
+  display: flex;
+  justify-content: end; /* 왼쪽 정렬 */
+}
+
+/* 네 번째 화면 스타일 */
+.four-screen {
+  background-color: #e8f6ff;
+}
+
+/* 다섯 번째 화면 스타일 */
+.five-screen {
+  position: relative;
+}
+
+.map-link {
+  position: absolute;
+  top: 73%;
+  bottom: 20%;
+  left: 26%;
+}
+
+/* 여섯 번째 화면 스타일 */
+.six-screen {
+  position: relative;
+}
+
+.chatting-link {
+  position: absolute;
+  top: 53%;
+  bottom: 38%;
+  left: 64%;
 }
