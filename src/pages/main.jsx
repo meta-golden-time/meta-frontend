@@ -12,18 +12,18 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Dots from "@components/main/dots";
 import Content from '@components/main/content.jsx';
 
-import image1 from  '@img/main/buildings_back.jpg';
-import image2 from  '@img/main/buildings_morning_back1.jpg';
-import image3 from  '@img/main/buildings_morning_back2.jpg';
-import image4 from  '@img/main/buildings_night_back.jpg';
+import mainImage1 from  '@img/main/buildings_back.jpg';
+import mainImage2 from  '@img/main/buildings_morning_back1.jpg';
+import mainImage3 from  '@img/main/buildings_morning_back2.jpg';
+import mainImage4 from  '@img/main/buildings_night_back.jpg';
 
 import image from '@img/main/map_page_img.png'; // 임시 이미지
 
-const images = [
-  image1,
-  image2,
-  image3,
-  image4
+const mainImages = [
+  mainImage1,
+  mainImage2,
+  mainImage3,
+  mainImage4
 ];
 
 import '@styles/main/main.scss';
@@ -39,7 +39,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
     Aos.init({ duration: 1000 }); // AOS 애니메이션 초기화 및 지속시간 설정
     
     const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % mainImages.length);
     }, 6000); // 1분(60초)마다 이미지 변경
 
     // 스크롤
@@ -208,7 +208,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
       <Dots currentPage={currentPage} handleDotClick={handleDotClick} />
 
       {/* 제목 섹션 == 첫 번째 화면 */}
-      <div className={`inner main-title-background`}  style={{ backgroundImage: `url(${images[currentImageIndex]})` }}>
+      <div className={`inner main-title-background`}  style={{ backgroundImage: `url(${mainImages[currentImageIndex]})` }}>
         <div className="main-title-div" data-aos="fade-down">
           <h1 className="main-title-h" style={{ color: 'white' }}>
             당신의 바쁜 아침 출근 길을 <p className='main-title-p'>도와줄 <span style={{ color: '#007bff' }}>첫 번째 비서</span></p>
