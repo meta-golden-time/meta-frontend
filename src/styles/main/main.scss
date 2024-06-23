@@ -53,14 +53,15 @@
 
 /* 제목 배경화면 설정*/
 .main-title-background {
-  background: url("@img/main/buildings_back.png") no-repeat;
   background-size: cover;
-  z-index: -1000px;
+  background-repeat: no-repeat;
+  height: 100%;
 }
 
 .main-title-h, .main-title-p {
   text-align: center;
   font-size: 3.5rem;
+
   /* 문단의 간격을 줄이기 위해 p 태그의 상단 마진 제거 */
   margin: 0 auto;
 }

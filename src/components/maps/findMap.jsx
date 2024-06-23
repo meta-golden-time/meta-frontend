@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal'; // react-modal 임포트
+import Modal from 'react-modal';
 import Swal from 'sweetalert2';
-import '../../styles/maps/findMap.css'; // 추가: CSS 파일 임포트
+import '../../styles/maps/findMap.css';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -14,16 +14,14 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 
-
-
 import { postBookMark } from '../../apis/userApi/bookMark';
 const { kakao } = window;
 
-Modal.setAppElement('#root'); // Modal 사용을 위한 설정
+Modal.setAppElement('#root');
 
 const PathFinder = () => {
   const [map, setMap] = useState(null);
-  const [polyline, setPolyline] = useState(null); // 라인을 저장할 상태 추가
+  const [polyline, setPolyline] = useState(null);
   const [pointObj, setPointObj] = useState({
     startPoint: { marker: null, lat: null, lng: null, placeName: '' },
     endPoint: { marker: null, lat: null, lng: null, placeName: '' },
@@ -33,9 +31,10 @@ const PathFinder = () => {
     start: '',
     end: '',
   });
-  const [searchResults, setSearchResults] = useState([]); // 검색 결과 리스트를 저장할 상태 변수
-  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 상태 변수
-  const [selectedUrl, setSelectedUrl] = useState(''); // 선택된 URL 상태 변수
+  const [searchResults, setSearchResults] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedUrl, setSelectedUrl] = useState('');
+  const [showRouteOptions, setShowRouteOptions] = useState(false);
 
   const [bookMarkStart, setBookMarkStart] = useState({
     startPoint: { name: null, lat: null, lng: null },
@@ -45,24 +44,17 @@ const PathFinder = () => {
   const [searchType, setSearchType] = useState();
 
   const handleKeyDown = (e, type, value) => {
-    console.log("🚀 ~ handleKeyDown ~ type:", type)
     if (e.key === 'Enter') {
-      console.log("🚀 ~ handleKeyDown ~ e.key:", e.key)
-      //searchMap(type, value);      
       setSearchAddress((prev) => ({ ...prev, [type]: value }));
-      if(type == 'start')
-        {
-          searchMap('start', 'startPoint')
-        }
-        else{
-          searchMap('end', 'endPoint')
-        }
-      
+      if (type === 'start') {
+        searchMap('start', 'startPoint');
+      } else {
+        searchMap('end', 'endPoint');
+      }
     }
   };
-  
 
-  async function getCarDirection() {
+  async function getCarDirection(routeType) {
     if (pointObj.startPoint.placeName === '' || pointObj.endPoint.placeName === '') {
       Swal.fire({
         icon: 'warning',
@@ -80,7 +72,7 @@ const PathFinder = () => {
       Authorization: `KakaoAK ${REST_API_KEY}`,
       'Content-Type': 'application/json',
     };
-    const queryParams = new URLSearchParams({ origin, destination });
+    const queryParams = new URLSearchParams({ origin, destination, priority: routeType });
     const requestUrl = `${url}?${queryParams}`;
 
     try {
@@ -99,7 +91,6 @@ const PathFinder = () => {
         });
       });
 
-      // 기존의 라인이 있다면 삭제
       if (polyline) {
         polyline.setMap(null);
       }
@@ -113,23 +104,20 @@ const PathFinder = () => {
       });
       newPolyline.setMap(map);
 
-      // 새로 생성된 라인을 상태로 저장
       setPolyline(newPolyline);
 
-      // 출발지와 도착지 초기화
       setPointObj({
         startPoint: { marker: null, lat: null, lng: null, placeName: '' },
         endPoint: { marker: null, lat: null, lng: null, placeName: '' },
       });
 
-      // 검색 결과 초기화
       setSearchResults([]);
-
-      // 검색 주소 초기화
       setSearchAddress({
         start: '',
         end: '',
       });
+
+      setShowRouteOptions(false);
 
     } catch (error) {
       console.error('Error:', error);
@@ -137,22 +125,31 @@ const PathFinder = () => {
   }
 
   useEffect(() => {
-    const mapContainer = document.getElementById('maps');
-    const mapOptions = {
-      center: new kakao.maps.LatLng(33.452613, 126.570888),
-      level: 3,
-    };
-    const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
-    setMap(kakaoMap);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const mapContainer = document.getElementById('maps');
+        const mapOptions = {
+          center: new kakao.maps.LatLng(lat, lng),
+          level: 3,
+        };
+        const kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
+        setMap(kakaoMap);
 
-    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-    const mapTypeControl = new kakao.maps.MapTypeControl();
-    kakaoMap.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+        const mapTypeControl = new kakao.maps.MapTypeControl();
+        kakaoMap.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
-    const zoomControl = new kakao.maps.ZoomControl();
-    kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
+        const zoomControl = new kakao.maps.ZoomControl();
+        kakaoMap.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Geolocation Error',
+        text: 'Geolocation is not supported by this browser.',
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -166,9 +163,6 @@ const PathFinder = () => {
   }, [map, pointObj]);
 
   function setPoint({ lat, lng }, pointType, placeName) {
-    console.log("🚀 ~ setPoint ~ placeName:", placeName)
-    console.log("🚀 ~ setPoint ~ pointType:", pointType)
-    
     const moveLatLon = new kakao.maps.LatLng(lat, lng);
     map.setCenter(moveLatLon);
     let marker = new kakao.maps.Marker({ position: moveLatLon });
@@ -179,7 +173,6 @@ const PathFinder = () => {
       return { ...prev, [pointType]: { marker, lat, lng, placeName } };
     });
   }
-
 
   const handleSearchAddressChange = (e) => {
     const { name, value } = e.target;
@@ -230,8 +223,6 @@ const PathFinder = () => {
   }
 
   const handleBookMarkClick = async () => {
-    console.log(pointObj)
-
     if (pointObj.startPoint.placeName === '' || pointObj.endPoint.placeName === '') {
       Swal.fire({
         icon: 'warning',
@@ -263,8 +254,6 @@ const PathFinder = () => {
       lag_E: bookMarkStart.endPoint.lng,
     };
 
-    console.log("🚀 ~ bookMarkPost ~ data:", data)
-
     try {
       const result = await postBookMark(data);
       Swal.fire({
@@ -278,6 +267,10 @@ const PathFinder = () => {
     }
   }
 
+  const handleGetCarDirectionClick = () => {
+    setShowRouteOptions(true);
+  }
+
   return (
     <>
       <div className="path-finder">
@@ -288,7 +281,7 @@ const PathFinder = () => {
               variant="outlined"
               fullWidth
               name="start"
-              value={searchAddress.start} // value 추가
+              value={searchAddress.start}
               onChange={handleSearchAddressChange}
               onKeyDown={(e) => handleKeyDown(e, 'start', searchAddress.start)}
               InputProps={{
@@ -302,7 +295,7 @@ const PathFinder = () => {
                       />
                     </IconButton>
                   </InputAdornment>
-                ),              
+                ),
                 style: {
                   height: '50px',
                   display: 'flex',
@@ -317,7 +310,7 @@ const PathFinder = () => {
               variant="outlined"
               fullWidth
               name="end"
-              value={searchAddress.end} // value 추가
+              value={searchAddress.end}
               onChange={handleSearchAddressChange}
               onKeyDown={(e) => handleKeyDown(e, 'end', searchAddress.end)}
               InputProps={{
@@ -331,7 +324,7 @@ const PathFinder = () => {
                       />
                     </IconButton>
                   </InputAdornment>
-                ),              
+                ),
                 style: {
                   height: '50px',
                   display: 'flex',
@@ -341,13 +334,26 @@ const PathFinder = () => {
             />
           </div>
           <div className="button-group">
-            <Button variant="contained" onClick={getCarDirection} fullWidth>
+            <Button variant="contained" onClick={handleGetCarDirectionClick} fullWidth>
               길찾기
             </Button>
             <Button variant="contained" color="secondary" onClick={handleBookMarkClick} fullWidth>
               즐겨찾기
             </Button>
           </div>
+          {showRouteOptions && (
+            <div className="route-options">
+              <Button variant="contained" onClick={() => getCarDirection('RECOMMEND')} fullWidth>
+                추천 경로
+              </Button>
+              <Button variant="contained" onClick={() => getCarDirection('TIME')} fullWidth>
+                최단 시간
+              </Button>
+              <Button variant="contained" onClick={() => getCarDirection('DISTANCE')} fullWidth>
+                최단 경로
+              </Button>
+            </div>
+          )}
           <div>출발지: {pointObj.startPoint.placeName}</div>
           <div>도착지: {pointObj.endPoint.placeName}</div>
           <div className="scrollable-results search-results-container">
@@ -382,7 +388,7 @@ const PathFinder = () => {
         >
           <h1>장소 정보보기</h1>
           <button onClick={closeModal} className="modal-close-button">Close</button>
-          <iframe src={selectedUrl} className="modal-iframe" />  
+          <iframe src={selectedUrl} className="modal-iframe" title="Place Information" />
         </Modal>
       </div>
     </>

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '@styles/users/userPage.scss';
 import { postLogout, postLoginCheck } from '../apis/userApi/user'; // 로그인 체크 진행
 import { getBookMark } from '../apis/userApi/bookMark'; // 북마크와 게시판 API 요청
 import { getPosts } from '../apis/board/api';
+import Swal from 'sweetalert2';
+
 
 const UserPage = () => {
+  const navigate = useNavigate();
   const [bookmarks, setBookmarks] = useState([]);
   const [users, setUsers] = useState([]); // 초기값을 null로 설정
   const [posts, setPosts] = useState([]);
@@ -32,6 +35,14 @@ const UserPage = () => {
     try {
       const result = await postLogout();
       console.log("🚀 ~ userLogout ~ result:", result);
+      if(result.success == true){
+        Swal.fire({
+          icon: 'success',
+          title: '로그아웃',
+          text: '로그아웃 되었습니다.',
+      });
+      navigate('/');
+      }
     } catch (error) {
       console.error('Error during logout', error);
     }
@@ -52,7 +63,7 @@ const UserPage = () => {
               <div className="user-info-text-p-button">
                 <p>{users.userID}</p>
               </div>
-              <button>수정</button>
+              {/* <button>수정</button> */}
               <button onClick={userLogout}>로그아웃</button>
             </div>
           </div>

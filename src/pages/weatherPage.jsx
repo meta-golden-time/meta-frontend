@@ -27,6 +27,7 @@ function WeatherMap() {
   const [error, setError] = useState(false);
 
   const searchChangeHandler = async (enteredData) => {
+    console.log("🚀 ~ searchChangeHandler ~ enteredData:", enteredData)
     const [latitude, longitude] = enteredData.value.split(' ');
 
     setIsLoading(true);
