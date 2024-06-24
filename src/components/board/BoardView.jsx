@@ -77,16 +77,16 @@ const BoardView = () => {
       <Sidebar />
       <div className='board-view'>
         <div className="board-header">
+          <Link to={`/board`}>
+            <img src={xIcon} alt='xIcon'/>
+          </Link>
           <div className='header-container'>
-            <Link to={`/board`}>
-              <img src={xIcon} alt='xIcon'/>
-            </Link>
-            <div className='header-post'>
-              <h2 className="post-title">{post.title}</h2>
-              <div className='title-container'>
-                <p className="post-author">작성자: {post.name}</p>
-                <p>|</p>
-                <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
+              <div className='header-post'>
+                <h2 className="post-title">{post.title}</h2>
+                <div className='title-container'>
+                  <p className="post-author">작성자: {post.name}</p>
+                  <p>|</p>
+                  <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
               </div>
             </div>
           </div>

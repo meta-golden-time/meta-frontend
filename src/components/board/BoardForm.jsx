@@ -70,13 +70,15 @@ const BoardForm = ({ isEdit }) => {
         <div className="board-form">
           <form onSubmit={handleSubmit}>
             <div className="form-header">
-              <div className='header-container'>
+              <div>
                 <Link to={`/board`}>
                   <img src={xIcon} alt='xIcon'/>
                 </Link>
-                <p>{isEdit ? '게시물 수정' : '게시물 작성'}</p>
               </div>
-              <button type="submit">{isEdit ? '수정' : '등록'}</button>
+              <div className='header-container'>
+                <p>{isEdit ? '게시물 수정' : '게시물 작성'}</p>
+                <button type="submit">{isEdit ? '수정' : '등록'}</button>
+              </div>
             </div>
             <div className='form-content'>
               <div className="form-group">
