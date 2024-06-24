@@ -9,8 +9,10 @@ const BoardView = () => {
   const [post, setPost] = useState(null);
   const [inputPassword, setInputPassword] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [deleteAuthorization, setDeleteAuthorization] = useState(false);
   const [currentUser, setCurrentUser] = useState(null); // 현재 로그인한 사용자 정보
   const navigate = useNavigate();
+  console.log("🚀 ~ BoardView ~ isAuthorized:", isAuthorized)
 
   useEffect(() => {
     fetchPost(id);
@@ -55,6 +57,14 @@ const BoardView = () => {
     }
   };
 
+  const handleDeletePasswordSubmit = () => {
+    if (inputPassword === post.password) {
+      handleDelete();
+    } else {
+      Swal.fire('비밀번호 오류', '비밀번호가 일치하지 않습니다.', 'error');
+    }
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -63,44 +73,44 @@ const BoardView = () => {
     <div className='board-wrap'>
       <div className='board-header'>
       </div>
-    <div className="board-view">
-      {post.isPrivate && !isAuthorized ? (
-        <div className="password-form">
-          <h2>비밀번호 입력</h2>
-          <input
-            type="password"
-            value={inputPassword}
-            onChange={(e) => setInputPassword(e.target.value)}
-          />
-          <button onClick={handlePasswordSubmit}>확인</button>
-        </div>
-      ) : (
-        <>
-          <h2 className="post-title">{post.title}</h2>
-          <p className="post-content">{post.content}</p>
-          <p className="post-author">작성자: {post.name}</p>
-          <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
-          {currentUser && currentUser.id === post.userID && (
-            <div className="actions">
-              <button onClick={() => navigate(`/board/edit/${post.id}`)}>수정</button>
-              <button onClick={() => setIsAuthorized(true)}>삭제</button>
-            </div>
-          )}
-          {isAuthorized && (
-            <div className="password-form">
-              <h2>비밀번호 입력</h2>
-              <input
-                type="password"
-                value={inputPassword}
-                onChange={(e) => setInputPassword(e.target.value)}
-              />
-              <button onClick={handleDelete}>확인</button>
-            </div>
-          )}
-          <button onClick={() => navigate(-1)}>뒤로가기</button>
-        </>
-      )}
-    </div>
+      <div className="board-view">
+        {post.isPrivate && !isAuthorized ? (
+          <div className="password-form">
+            <h2>비밀번호 입력</h2>
+            <input
+              type="password"
+              value={inputPassword}
+              onChange={(e) => setInputPassword(e.target.value)}
+            />
+            <button onClick={handlePasswordSubmit}>확인</button>
+          </div>
+        ) : (
+          <>
+            <h2 className="post-title">{post.title}</h2>
+            <p className="post-content">{post.content}</p>
+            <p className="post-author">작성자: {post.name}</p>
+            <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
+            {currentUser && currentUser.id === post.userID && (
+              <div className="actions">
+                <button onClick={() => navigate(`/board/edit/${post.id}`)}>수정</button>
+                <button onClick={() => setDeleteAuthorization(true)}>삭제</button>
+              </div>
+            )}
+            {deleteAuthorization && (
+              <div className="password-form">
+                <h2>비밀번호 입력</h2>
+                <input
+                  type="password"
+                  value={inputPassword}
+                  onChange={(e) => setInputPassword(e.target.value)}
+                />
+                <button onClick={handleDeletePasswordSubmit}>확인</button>
+              </div>
+            )}
+            <button onClick={() => navigate(-1)}>뒤로가기</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

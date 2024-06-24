@@ -152,3 +152,30 @@
   bottom: 38%;
   left: 64%;
 }
+
+/* 캐러셀 컨트롤 버튼 스타일 설정 */
+.carousel-control-prev,
+.carousel-control-next {
+  filter: none !important; /* 기본 필터 효과 제거 */
+  background: none !important; /* 배경색 제거 */
+  border: none !important; /* 테두리 제거 */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: none !important; /* 마우스 오버 시 배경색 제거 */
+  border: none !important; /* 마우스 오버 시 테두리 제거 */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: transparent !important; /* 기본 아이콘 배경색 제거 */
+}
+
+/* 선택 사항: 필요 시 아이콘 색상 변경 */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+ // background-image: none; /* 기본 아이콘 이미지 제거 */
+  color: rgb(255, 255, 255); /* 아이콘 색상 설정 */
+  font-size: 2rem; /* 아이콘 크기 설정 */
+}
