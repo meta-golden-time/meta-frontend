@@ -48,7 +48,7 @@ const BoardList = () => {
     <div className="board-page">
       <Sidebar />
       <div className="board-list">
-        <h2>고객센터</h2>
+        <h2>문의사항</h2>
         <div className="search-container">
           <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
             <option value="title">제목</option>
