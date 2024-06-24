@@ -59,9 +59,9 @@ const UserPage = () => {
   return (
     <div style={{paddingTop:'65px'}}>
       <div className="user-page">
-        <div className="sidebar">
+        <div className="user-sidebar">
           <div className="user-info">
-            <img src={imguser} className="user-photo" alr='' />
+            <img src={imguser} className="user-photo" alt='' />
             <div className="user-info-text">
               <p>{users.name} 님</p>
               <div className="user-info-text-p-button">
@@ -82,9 +82,9 @@ const UserPage = () => {
             {bookmarks.length > 0 ? (
               bookmarks.map((bookmark) => (
                 <div key={bookmark.id} className="bookmark-item">
-                  <span>{bookmark.location_S}</span>
-                  <span>➡</span>
-                  <span>{bookmark.location_E}</span>
+                  <span className='bookmark-span1'>{bookmark.location_S}</span>
+                  <span className='bookmark-span2'>➡</span>
+                  <span className='bookmark-span3'>{bookmark.location_E}</span>
                 </div>
               ))
             ) : (

@@ -170,11 +170,11 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
     // 다섯 번째 화면으로 스크롤
     const pageHeight = window.innerHeight;
     outerDivRef.current.scrollTo({
-      top: 4 * (pageHeight + DIVIDER_HEIGHT),
+      top: 2 * (pageHeight + DIVIDER_HEIGHT),
       left: 0,
       behavior: "smooth",
     });
-    setCurrentPage(4);
+    setCurrentPage(2);
   };
 
   return (
