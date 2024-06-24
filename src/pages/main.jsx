@@ -90,32 +90,6 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             behavior: "smooth",
           });
           setCurrentPage(4);
-        } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
-          //현재 4화면
-          console.log("현재 4화면, down");
-          outerDivRef.current.scrollTo({
-            top: pageHeight * 4 + DIVIDER_HEIGHT * 4,
-            left: 0,
-            behavior: "smooth",
-          });
-          setCurrentPage(5);
-        } else if (scrollTop >= pageHeight * 4 && scrollTop < pageHeight * 5) {
-          //현재 5화면
-          console.log("현재 5화면, down");
-          outerDivRef.current.scrollTo({
-            top: pageHeight * 5 + DIVIDER_HEIGHT * 5,
-            left: 0,
-            behavior: "smooth",
-          });
-          setCurrentPage(6);
-        } else {
-          // 현재 6화면
-          console.log("현재 6화면, down");
-          outerDivRef.current.scrollTo({
-            top: pageHeight * 6 + DIVIDER_HEIGHT * 6,
-            left: 0,
-            behavior: "smooth",
-          });
         }
       } else {
         console.log("🚀 ~ wheelHandler ~ deltaY:", deltaY)
@@ -158,25 +132,7 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             behavior: "smooth",
           });
           setCurrentPage(3);
-        } else if (scrollTop >= pageHeight * 4 && scrollTop < pageHeight * 5) {
-          //현재 5화면
-          console.log("현재 5화면, up");
-          outerDivRef.current.scrollTo({
-            top: pageHeight * 3 + DIVIDER_HEIGHT * 3,
-            left: 0,
-            behavior: "smooth",
-          });
-          setCurrentPage(4);
-        } else {
-          // 현재 3페이지
-          console.log("현재 6페이지, up");
-          outerDivRef.current.scrollTo({
-            top: pageHeight * 4 + DIVIDER_HEIGHT * 4,
-            left: 0,
-            behavior: "smooth",
-          });
-          setCurrentPage(5);
-        }
+        } 
       }
     };
     const outerDivRefCurrent = outerDivRef.current;
@@ -214,11 +170,11 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
     // 다섯 번째 화면으로 스크롤
     const pageHeight = window.innerHeight;
     outerDivRef.current.scrollTo({
-      top: 4 * (pageHeight + DIVIDER_HEIGHT),
+      top: 2 * (pageHeight + DIVIDER_HEIGHT),
       left: 0,
       behavior: "smooth",
     });
-    setCurrentPage(4);
+    setCurrentPage(2);
   };
 
   return (
@@ -265,20 +221,6 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
 
       <div className="divider"></div>
 
-      {/* 세 번째 화면 */}
-      <div className="inner three-screen">
-        <Content title="편리한 길 찾기 서비스" description="출발 위치와 도착 위치를 입력하면 이용할 지하철이나 버스 또는 자가용, 교통편에 따라 최적의 경로를 제공해요." />
-      </div>
-
-      <div className="divider"></div>
-
-      {/* 네 번째 화면 */}
-      <div className="inner four-screen">
-        <Content title="경로 즐겨찾기" description="자주 이용하는 경로를 빠르게 확인해보세요." />
-      </div>
-
-      <div className="divider"></div>
-
       {/* 다섯 번째 화면 */}
       <div className="inner five-screen">
         <div className="section d-flex justify-content-center align-items-center">
@@ -291,10 +233,16 @@ const Main = ({ currentPage, setCurrentPage, checkLoginStatus }) => {
             {/* <div className="carousel-inner" data-aos="fade-up" data-aos-delay="450"> */}
             <div className="carousel-inner">
               <div className="carousel-item active" data-bs-interval="4500">
-                <Content title="편리한 길 찾기" image={imgMap1} />
+                <Content title="편리한 길 찾기" description="출발 위치와 도착 위치를 입력하면 이용할 지하철이나 버스 또는 자가용, 교통편에 따라 최적의 경로를 제공해요." />
+                <div className="five-screen-img-div">
+                  <img src={imgMap1} className='five-screen-img' alt=''/>
+                </div>
               </div>
               <div className="carousel-item" data-bs-interval="2000">
-                <Content title="경로 즐겨찾기" image={imgMap2} />
+                <Content title="경로 즐겨찾기" description="자주 이용하는 경로를 빠르게 확인해보세요."/>
+                <div className="five-screen-img-div ">
+                  <img src={imgMap2} className='five-screen-img' alt=''/>
+                </div>
               </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

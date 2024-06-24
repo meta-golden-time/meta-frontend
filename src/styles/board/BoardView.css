@@ -1,46 +1,93 @@
 
-.board-wrap {
+.board-page {
   display: flex;
   justify-content: center;
+  
 }
 
 .board-view {
-  max-width: 800px;
-  margin-top: 105px;
+  width: 500px;
+  flex: 1;
+  display: flex;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  margin-left: 250px;
+  margin-right: 50px;
 }
 
-.board-view h2 {
-  text-align: center;
-  color: #007bff;
-  margin-bottom: 20px;
+.header-container {
+  border-bottom: solid 1px #0056b3;
+}
+
+.board-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.board-header img{
+  width: 50px;
+  height: 50px;
+}
+
+.title-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.board-content {
+  width: inherit;
+  height: auto;
+  word-break: break-word;
+  margin-top: 29px;
+  margin-left: 60px;
 }
 
 .post-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-top: 40px;
 }
 
 .post-content {
+  flex: 1;
   white-space: pre-wrap;
+  display: block;
   margin-bottom: 20px;
+  height: inherit;
+  min-height: 400px;
+  width: auto;
+  
 }
 
 .post-author,
 .post-date {
   font-size: 14px;
   color: #555;
-  margin-bottom: 10px;
+}
+
+.board-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: solid 1px #0056b3;
+  margin-left: 60px;
+}
+
+.button-left {
+  width: 100px;
+  margin-top: 20px;
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .actions button {
@@ -122,4 +169,8 @@
 
 .password-form button:hover {
   background-color: #0056b3;
+}
+
+.delete-confirm {
+
 }

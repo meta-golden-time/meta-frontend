@@ -1,11 +1,10 @@
 .user-page {
   display: flex;
-  font-family: Arial, sans-serif;
   background-color: #f0f4f8;
   color: #333;
-  height: 100vh;
+  height: 90.5vh;
 
-  .sidebar {
+  .user-sidebar {
     width: 200px;
     background-color: #fff;
     padding: 20px;
@@ -22,7 +21,6 @@
       .user-photo {
         width: 60px;
         height: 60px;
-        background: #ccc;
         border-radius: 50%;
         margin-bottom: 10px;
       }
@@ -54,35 +52,16 @@
         }
       }
     }
-
-    .sidebar-links {
-      width: 100%;
-      text-align: center;
-
-      p {
-        margin: 10px 0;
-
-        a {
-          text-decoration: none;
-          color: #007bff;
-          font-weight: bold;
-
-          &:hover {
-            color: #0056b3;
-          }
-        }
-      }
-    }
   }
 
   .content {
     flex: 1;
-    padding: 20px;
+    padding: 40px 3%;
 
     .address, .bookmarks, .posts {
       background: #fff;
       border-radius: 10px;
-      padding: 20px;
+      padding: 15px 10%;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
       font-size: 16px;
@@ -99,10 +78,20 @@
         background: #f8f9fa;
         border-radius: 5px;
         margin-bottom: 10px;
-        transition: background 0.3s ease;
+        transition: background-color 0.3s ease;
 
         &:hover {
           background: #e2e6ea;
+        }
+
+        .bookmark-span1, .bookmark-span3 {
+          width: 25%;
+          text-align: center;
+        }
+
+        .bookmark-span2 {
+          width: 20%;
+          text-align: center;
         }
 
         span, a {

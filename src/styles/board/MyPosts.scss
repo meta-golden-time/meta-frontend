@@ -2,44 +2,32 @@
   display: flex;
 }
 
-.sidebar {
-  width: 200px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.myPage-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.sidebar ul li a:hover {
-  color: #0056b3;
+.myPage-header img {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
 }
 
 .my-posts {
+  right: 0%;
   flex: 1;
   margin-top: 40px;
-  padding: 20px;
+  margin-left: 300px;
+  margin-right: 50px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
 
   h2 {
     text-align: center;
     color: #007bff;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 40px;
   }
 
   table {
@@ -50,11 +38,14 @@
     th, td {
       padding: 10px;
       border: 1px solid #ddd;
-      text-align: left;
+      text-align: center;
     }
 
     th {
       background-color: #f1f1f1;
+    }
+    .list-title{
+      text-align: left;
     }
   }
 

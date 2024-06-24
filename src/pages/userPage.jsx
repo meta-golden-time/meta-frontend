@@ -7,6 +7,7 @@ import { getPosts } from '../apis/board/api';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
 
+import imguser from '@img/userPage/user_page_icon.svg';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -58,23 +59,25 @@ const UserPage = () => {
   return (
     <div style={{paddingTop:'65px'}}>
       <div className="user-page">
-        <div className="sidebar">
+        <div className="user-sidebar">
           <div className="user-info">
-            <div className="user-photo"></div>
+            <img src={imguser} className="user-photo" alt='' />
             <div className="user-info-text">
               <p>{users.name} 님</p>
               <div className="user-info-text-p-button">
                 <p>{users.userID}</p>
               </div>
               {/* <button>수정</button> */}
-              <button onClick={userLogout}>로그아웃</button>
+              {/* <button onClick={userLogout}>로그아웃</button> */}
             </div>
           </div>
+
           {/* <div className="sidebar-links">
             <p><a href="#address">주소</a></p>
             <p><a href="#bookmarks">북마크 목록</a></p>
             <p><a href="#posts">내 게시판 목록</a></p>
           </div> */}
+
         </div>
         <div className="content">
           <div id="address" className="address">
@@ -86,9 +89,9 @@ const UserPage = () => {
             {bookmarks.length > 0 ? (
               bookmarks.map((bookmark) => (
                 <div key={bookmark.id} className="bookmark-item">
-                  <span>{bookmark.location_S}</span>
-                  <span>➡</span>
-                  <span>{bookmark.location_E}</span>
+                  <span className='bookmark-span1'>{bookmark.location_S}</span>
+                  <span className='bookmark-span2'>➡</span>
+                  <span className='bookmark-span3'>{bookmark.location_E}</span>
                 </div>
               ))
             ) : (

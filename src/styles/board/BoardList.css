@@ -1,48 +1,28 @@
 .board-page {
   display: flex;
-  padding-top: 65px;
+  padding-top: 60px;
   justify-content: center;
 }
 
-.sidebar {
-  width: 200px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.sidebar ul li a:hover {
-  color: #0056b3;
+.board-button-top {
+  display: flex;
+  justify-content: space-between;
 }
 
 .board-list {
-  flex: 1;
+  margin-left: 300px;
+  margin-right: 50px;
+  width: 500px;
+  flex-grow: 1;
   padding: 20px;
-  margin-top: 40px;
-  background-color: #fff;
-  border-radius: 8px;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .board-list h2 {
   text-align: center;
   color: #007bff;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-right: 40px;
 }
 
 .search-container {
@@ -94,6 +74,7 @@ table tbody tr {
     height: 50px; /* 셀의 최소 높이 설정 */
     display: table-row;
     table-layout: fixed;
+    background-color: #fff;
 }
 
 table tbody tr:only-child {
@@ -121,7 +102,6 @@ table th {
 
 .create-button {
   display: block;
-  width: 100%;
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -129,6 +109,7 @@ table th {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .create-button:hover {
