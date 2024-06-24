@@ -124,26 +124,48 @@
   justify-content: end; /* 왼쪽 정렬 */
 }
 
-/* 네 번째 화면 스타일 */
-.four-screen {
-  background-color: #e8f6ff;
-}
+// /* 네 번째 화면 스타일 */
+// .four-screen {
+//   background-color: #e8f6ff;
+// }
 
 /* 다섯 번째 화면 스타일 */
 .five-screen {
   position: relative;
 }
 
+.carousel-dark {
+  margin-top: 50px;
+}
+
+.carousel-inner {
+  width: 1100px;
+  height: 520px;
+}
+
 .map-link {
   position: absolute;
-  top: 73%;
+  top: 74%;
   bottom: 20%;
-  left: 26%;
+  left: 20%;
+}
+
+/* 이미지 가운데 정렬 */
+.five-screen-img-div {
+  display: flex;
+  justify-content: center;
+}
+
+/* 이미지 크기 설정*/
+.five-screen-img {
+  width: 800px;
+  height: 300px;
 }
 
 /* 여섯 번째 화면 스타일 */
 .six-screen {
   position: relative;
+  background-color: #e8f6ff;
 }
 
 .chatting-link {
