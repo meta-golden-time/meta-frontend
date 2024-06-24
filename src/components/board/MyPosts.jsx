@@ -4,6 +4,7 @@ import { getPosts } from '../../apis/board/api';
 import Swal from 'sweetalert2';
 import Sidebar from './Sidebar';
 import '../../styles/board/MyPosts.scss';
+import xIcon from '@img/main/X_icon.svg'
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -46,10 +47,15 @@ const MyPosts = () => {
   };
 
   return (
-    <div className="board-page" style={{paddingTop:'65px'}}>
+    <div className="board-page">
       <Sidebar />
       <div className="my-posts">
+      <div className='myPage-header'>
+        <Link to={`/board`}>
+          <img src={xIcon} alt='xIcon'/>
+        </Link>
         <h2>나의 문의사항</h2>
+      </div>
         <table>
           <thead>
             <tr>
@@ -76,7 +82,6 @@ const MyPosts = () => {
             ))}
           </tbody>
         </table>
-        <button className="back-button" onClick={() => navigate(-1)}>뒤로가기</button>
       </div>
     </div>
   );

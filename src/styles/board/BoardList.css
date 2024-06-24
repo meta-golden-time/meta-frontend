@@ -2,7 +2,6 @@
   display: flex;
   padding-top: 60px;
   justify-content: center;
-  position: relative;
 }
 
 .board-button-top {
@@ -10,49 +9,18 @@
   justify-content: space-between;
 }
 
-.sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0%;
-  width: 30%;
-  height: 100vh;
-  background-color: #f9f9f9;
-  margin-top: 20px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.sidebar ul li a:hover {
-  color: #0056b3;
-}
-
 .board-list {
-  position: absolute;
-  right: 0%;
-  width: 85%;
-  flex: 1;
+  margin-left: 300px;
+  margin-right: 50px;
+  width: 500px;
+  flex-grow: 1;
   padding: 20px;
 }
 
 .board-list h2 {
   text-align: center;
   color: #007bff;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   margin-top: 40px;
   margin-right: 40px;
 }

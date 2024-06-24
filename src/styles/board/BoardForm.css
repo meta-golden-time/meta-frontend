@@ -1,9 +1,6 @@
 .board-form {
   margin-top: 40px;
   width: 80%;
-  /* background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .board-form p {
@@ -16,7 +13,7 @@
 
 .form-header {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 }
 
@@ -33,12 +30,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .form-content {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  margin-top: 40px;
+  margin-left: 50px;
   gap: 15px;
 }
 
@@ -66,18 +66,12 @@
   height: 200px;
   width: 100%;
   border: none;
-  border-top: #5a6268;
+  border-radius: 5px;
 }
 
 .form-group textarea:focus-within {
   outline: none;
 }
-
-/* .form-group label {
-
-  margin-bottom: 5px;
-  font-weight: bold;
-} */
 
 .form-private {
   display: flex;
