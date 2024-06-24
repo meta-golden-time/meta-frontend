@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getPosts, deletePost } from '../../apis/board/api';
 import Swal from 'sweetalert2';
+import Sidebar from './Sidebar';
+
+import xIcon from '../../img/main/X_icon.svg'
 import '../../styles/board/BoardView.css';
+
+
 
 const BoardView = () => {
   const { id } = useParams();
@@ -48,8 +53,6 @@ const BoardView = () => {
   };
 
   const handlePasswordSubmit = () => {
-    console.log("🚀 ~ handlePasswordSubmit ~ post.password:", post.password)
-    console.log("🚀 ~ handlePasswordSubmit ~ inputPassword:", inputPassword)
     if (inputPassword === post.password) {
       setIsAuthorized(true);
     } else {
@@ -70,10 +73,28 @@ const BoardView = () => {
   }
 
   return (
-    <div className='board-wrap'>
-      <div className='board-header'>
-      </div>
-      <div className="board-view">
+    <div className='board-page'>
+      <Sidebar />
+      <div className='board-view'>
+        <div className="board-header">
+          <div className='header-container'>
+            <Link to={`/board`}>
+              <img src={xIcon} alt='xIcon'/>
+            </Link>
+            <div className='header-post'>
+              <h2 className="post-title">{post.title}</h2>
+              <div className='title-container'>
+                <p className="post-author">작성자: {post.name}</p>
+                <p>|</p>
+                <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="board-content">
+          <p className="post-content">{post.content}</p>
+        </div>
+        <div className='board-bottom'>
         {post.isPrivate && !isAuthorized ? (
           <div className="password-form">
             <h2>비밀번호 입력</h2>
@@ -82,14 +103,11 @@ const BoardView = () => {
               value={inputPassword}
               onChange={(e) => setInputPassword(e.target.value)}
             />
-            <button onClick={handlePasswordSubmit}>확인</button>
+            <button onClick={handleDeletePasswordSubmit}>확인</button>
           </div>
         ) : (
           <>
-            <h2 className="post-title">{post.title}</h2>
-            <p className="post-content">{post.content}</p>
-            <p className="post-author">작성자: {post.name}</p>
-            <p className="post-date">작성일: {new Date(post.createdAt).toLocaleDateString()}</p>
+            <button className='button-left' onClick={() => navigate(-1)}>뒤로가기</button>
             {currentUser && currentUser.id === post.userID && (
               <div className="actions">
                 <button onClick={() => navigate(`/board/edit/${post.id}`)}>수정</button>
@@ -97,8 +115,8 @@ const BoardView = () => {
               </div>
             )}
             {deleteAuthorization && (
-              <div className="password-form">
-                <h2>비밀번호 입력</h2>
+              <div className="delete-confirm">
+                <p>비밀번호 입력</p>
                 <input
                   type="password"
                   value={inputPassword}
@@ -107,9 +125,9 @@ const BoardView = () => {
                 <button onClick={handleDeletePasswordSubmit}>확인</button>
               </div>
             )}
-            <button onClick={() => navigate(-1)}>뒤로가기</button>
           </>
         )}
+        </div>
       </div>
     </div>
   );

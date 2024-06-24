@@ -18,7 +18,6 @@
 
 #menu_wrap {
   width: 300px; /* 메뉴 너비 설정 */
-  padding: 10px;
   background: rgba(255, 255, 255, 0.9);
   z-index: 1;
   overflow-y: auto;

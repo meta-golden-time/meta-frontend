@@ -29,12 +29,14 @@
 }
 
 .my-posts {
+  position: absolute;
+  right: 0%;
   flex: 1;
   margin-top: 40px;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 85%;
 
   h2 {
     text-align: center;
@@ -50,11 +52,14 @@
     th, td {
       padding: 10px;
       border: 1px solid #ddd;
-      text-align: left;
+      text-align: center;
     }
 
     th {
       background-color: #f1f1f1;
+    }
+    .list-title{
+      text-align: left;
     }
   }
 
