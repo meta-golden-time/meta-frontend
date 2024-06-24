@@ -1,0 +1,39 @@
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// .header {
+//   width: 100%;
+//   background-color: #f4f4f4;
+//   padding: 20px;
+//   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+//   position: fixed;
+//   top: 0;
+//   z-index: 1000;
+// }
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* 헤더 높이만큼 추가 */
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 60px; /* 헤더의 높이만큼 아래에 위치하도록 설정 */
+  height: calc(100% - 60px); /* 헤더 높이를 제외한 나머지 높이를 차지 */
+  overflow-y: auto; /* 사이드바에 스크롤을 추가 */
+}
+
+.admin-content {
+  margin-left: 260px; /* 사이드바 너비만큼 왼쪽 마진 추가 */
+  padding-top: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+}

@@ -1,0 +1,43 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.map {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.zoom-controls button {
+  margin-bottom: 10px;
+}

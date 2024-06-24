@@ -1,0 +1,14 @@
+.zoom-controls {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.zoom-controls button {
+  margin: 5px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+}

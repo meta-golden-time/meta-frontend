@@ -68,7 +68,7 @@ const UserPage = () => {
                 <p>{users.userID}</p>
               </div>
               {/* <button>수정</button> */}
-              {/* <button onClick={userLogout}>로그아웃</button> */}
+              <button onClick={userLogout}>로그아웃</button>
             </div>
           </div>
 
