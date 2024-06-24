@@ -54,7 +54,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
   };
 
   return (
-    <header className={`header ${isWeatherOrMainPage? 'white' : currentPage === 1 ? 'transparent' : 'solid' }`}>
+    <header className={`header ${isWeatherOrMainPage? currentPage === 1 ? 'transparent' : 'solid' : 'back-color' }`}>
       <div className="logo">
         {/* 로고 이미지 */}
         <div>
