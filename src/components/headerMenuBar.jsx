@@ -54,7 +54,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
   };
 
   return (
-    <header className={`header ${currentPage === 1 ? 'transparent' : 'solid'}`}>
+    <header className={`header ${isWeatherOrMainPage? 'white' : currentPage === 1 ? 'transparent' : 'solid' }`}>
       <div className="logo">
         {/* 로고 이미지 */}
         <div>
@@ -76,7 +76,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
         <div className="dropdown">
           <div className="profile-btn" onClick={toggleDropdown}>
             {/* 프로필 버튼 */}
-            <h6 className={`profile-btn-style ${isWeatherOrMainPage ? '' : 'black-text'}`}>프로필</h6>
+            <h6 className={`profile-btn-style ${isWeatherOrMainPage ? '' : 'black-text'}`}>메뉴</h6>
             {/* 드롭다운 화살표 아이콘 */}
             <img src={arrowDownIcon} alt="Dropdown Arrow" className={`arrow-icon ${isWeatherOrMainPage ? currentPage === 1 ? 'white' : 'black' : ''} `} />
           </div>

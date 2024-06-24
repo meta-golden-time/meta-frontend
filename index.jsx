@@ -37,12 +37,8 @@ function App() {
         setCurrentPage(2);
       } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
         setCurrentPage(3);
-      } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
-        setCurrentPage(4);
-      } else if (scrollTop >= pageHeight * 4 && scrollTop < pageHeight * 5) {
-        setCurrentPage(5);
       } else {
-        setCurrentPage(6);
+        setCurrentPage(4);
       }
     };
 
