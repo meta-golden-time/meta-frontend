@@ -7,6 +7,7 @@ import { getPosts } from '../apis/board/api';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext'; // AuthContext를 import 합니다.
 
+import imguser from '@img/userPage/user_page_icon.svg';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -60,20 +61,15 @@ const UserPage = () => {
       <div className="user-page">
         <div className="sidebar">
           <div className="user-info">
-            <div className="user-photo"></div>
+            <img src={imguser} className="user-photo" alr='' />
             <div className="user-info-text">
               <p>{users.name} 님</p>
               <div className="user-info-text-p-button">
                 <p>{users.userID}</p>
               </div>
               {/* <button>수정</button> */}
-              <button onClick={userLogout}>로그아웃</button>
+              {/* <button onClick={userLogout}>로그아웃</button> */}
             </div>
-          </div>
-          <div className="sidebar-links">
-            <p><a href="#address">주소</a></p>
-            <p><a href="#bookmarks">북마크 목록</a></p>
-            <p><a href="#posts">내 게시판 목록</a></p>
           </div>
         </div>
         <div className="content">
