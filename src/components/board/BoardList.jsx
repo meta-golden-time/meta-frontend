@@ -48,6 +48,7 @@ const BoardList = () => {
     <div className="board-page">
       <Sidebar />
       <div className="board-list">
+
         <h2>고객센터</h2>
         <div className='board-button-top'>
           <Link to="/board/create">
@@ -67,6 +68,7 @@ const BoardList = () => {
             />
             <button onClick={handleSearch}>검색</button>
           </div>
+
         </div>
         <table>
           <thead>

@@ -9,3 +9,6 @@ lib
 components/ui
 package.json
 
+
+# Local Netlify folder
+.netlify

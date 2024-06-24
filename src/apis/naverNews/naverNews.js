@@ -1,28 +1,35 @@
-const express = require('express');
-const router = express.Router();
-const userService = require('../service/userService');
-const { authMiddleware } = require('../middlewares/user/Login');
-const axios = require('axios');
+import axios from 'axios';
 
-//navernews불러오기
-router.get('/naver', /*authMiddleware,*/ async (req, res, next) => {
-    console.log("네이버뉴스 겟으로 들어왔어요")
-    console.log("🚀 ~ router.get ~ req.query:", req.query)
-    
-  const query = req.query.query || 'latest news';
-  console.log("🚀 ~ router.get ~ query:", query)
-  const url = `https://openapi.naver.com/v1/search/news.json?query=${query}`;
-  const headers = {
-      'X-Naver-Client-Id': 'hocsbGo_VMFE8dCIgvoF',
-      'X-Naver-Client-Secret': 'KoLNbQs04S'   
-  };
-
-  try {
-      const response = await axios.get(url, { headers });
-      res.status(200).json(response.data);
-  } catch (error) {
-      res.status(500).send(error.toString());
+const apiClient = axios.create({
+  baseURL: 'http://localhost:4000',
+  withCredentials: true, // 세션 쿠키를 포함시키기 위해 설정
+  headers: {
+    'Content-Type': 'application/json'
   }
 });
 
-module.exports = router;
+export const fetchNaverNews = (postData) => {
+  console.log("🚀 ~ fetchNaverNews ~ postData:", postData)
+  const data = {
+    query: postData,
+  }
+  return apiClient.post('/news/naver', data);
+};
+
+// export const fetchNaverNews = async (query = 'latest news') => {
+//   console.log("🚀 ~ fetchNaverNews ~ query:", query)
+  
+// const url =  `https://openapi.naver.com/v1/search/news.json?query=${query}`;
+//   const headers = {
+//     'X-Naver-Client-Id': 'hocsbGo_VMFE8dCIgvoF',
+//       'X-Naver-Client-Secret': 'KoLNbQs04S'   
+//   };
+
+//   try {
+//     const response = await axios.get(url, { headers });
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching Naver news:', error);
+//     throw error;
+//   }
+// };

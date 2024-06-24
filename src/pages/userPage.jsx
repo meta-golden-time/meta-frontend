@@ -71,6 +71,13 @@ const UserPage = () => {
               {/* <button onClick={userLogout}>로그아웃</button> */}
             </div>
           </div>
+
+          {/* <div className="sidebar-links">
+            <p><a href="#address">주소</a></p>
+            <p><a href="#bookmarks">북마크 목록</a></p>
+            <p><a href="#posts">내 게시판 목록</a></p>
+          </div> */}
+
         </div>
         <div className="content">
           <div id="address" className="address">

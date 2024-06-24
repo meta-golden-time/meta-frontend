@@ -10,6 +10,7 @@ import UserPage from '@pages/userPage';
 import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
 import ChatPage from '@pages/chatPage';
+import NaverPage from '@pages/naverNews';
 import BoardList from '@components/board/BoardList';
 import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
@@ -79,6 +80,7 @@ function App() {
         <Route path='/maps' element={<MapPage />} />
         <Route path='/weather' element={<WeatherPage />} />
         <Route path='/chatting' element={<ProtectedRoute element={<ChatPage />} />} />
+        <Route path='/naverNews' element={<ProtectedRoute element={<NaverPage />} />} />
          {/*board 게시판 */}
         <Route path="/board" element={<BoardList />} />
         <Route path="/board/create" element={<ProtectedRoute element={<BoardForm />} />} />
