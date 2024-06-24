@@ -1,21 +1,26 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { postLoginCheck } from '../apis/userApi/user'; // 로그인 체크 API를 불러옵니다.
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { postLoginCheck } from '../apis/userApi/user';
 
-const AuthContext = createContext(); // AuthContext 생성
+const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext); // AuthContext를 쉽게 사용할 수 있도록 하는 훅
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
+  const [userRole, setUserRole] = useState(null); // 사용자 역할 상태 추가
   const [loginChecked, setLoginChecked] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
         const result = await postLoginCheck();
+        console.log("🚀 ~ checkLoginStatus ~ result:", result)
         setIsLogin(result.success);
-      } catch (err) {
-        console.error(err);
+        setUserRole(result.user.role); // 사용자 역할 설정
+      } catch (error) {
+        console.error('Login check failed:', error);
       } finally {
         setLoginChecked(true);
       }
@@ -25,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLogin, setIsLogin, loginChecked }}>
+    <AuthContext.Provider value={{ isLogin, setIsLogin, userRole, loginChecked }}>
       {children}
     </AuthContext.Provider>
   );

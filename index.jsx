@@ -11,6 +11,9 @@ import MapPage from '@pages/map.jsx';
 import WeatherPage from '@pages/weatherPage';
 import ChatPage from '@pages/chatPage';
 import NaverPage from '@pages/naverNews';
+import AdminPage from '@pages/adminPage';
+import UserInfo from '@components/admin/userInfo';
+import RealtimeSubway from '@pages/subwayPage';
 import BoardList from '@components/board/BoardList';
 import BoardForm from '@components/board/BoardForm';
 import BoardView from '@components/board/BoardView';
@@ -38,8 +41,12 @@ function App() {
         setCurrentPage(2);
       } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
         setCurrentPage(3);
-      } else {
+      } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
         setCurrentPage(4);
+      } else if (scrollTop >= pageHeight * 4 && scrollTop < pageHeight * 5) {
+        setCurrentPage(5);
+      } else {
+        setCurrentPage(6);
       }
     };
 
@@ -81,7 +88,11 @@ function App() {
         <Route path='/weather' element={<WeatherPage />} />
         <Route path='/chatting' element={<ProtectedRoute element={<ChatPage />} />} />
         <Route path='/naverNews' element={<ProtectedRoute element={<NaverPage />} />} />
-         {/*board 게시판 */}
+        <Route path='/admin' element={<ProtectedRoute element={<AdminPage />} />}>
+          <Route path='userInfo' element={<UserInfo />} />
+          <Route path='naverNews' element={<NaverPage />} />
+          <Route path='realtimeSubway' element={<RealtimeSubway />} />
+        </Route>
         <Route path="/board" element={<BoardList />} />
         <Route path="/board/create" element={<ProtectedRoute element={<BoardForm />} />} />
         <Route path="/board/edit/:id" element={<ProtectedRoute element={<BoardForm isEdit={true} />} />} />

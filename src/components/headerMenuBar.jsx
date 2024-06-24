@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) => {
 
   const navigate = useNavigate();
-  const { setIsLogin } = useAuth(); // AuthContext에서 setIsLogin 함수 가져오기
+  const { setIsLogin, userRole } = useAuth(); // AuthContext에서 setIsLogin 함수 가져오기
 
   useEffect(() => {
     // 페이지에 따라 헤더 스타일 변경
@@ -68,6 +68,9 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
           <a href="/weather">날씨</a>
           <a href="/maps">지도</a>
           <a href="/chatting">커뮤니티</a>
+          {userRole === 'admin' && (
+              <a href="/admin">관리자 페이지</a>
+            )}
         </nav>
       )}
       </div>
@@ -87,7 +90,7 @@ const HeaderMenuBar = ({ currentPage, isWeatherOrMainPage, checkLoginStatus }) =
                 <>
                   <a href="/user/userPage">마이페이지</a>
                   <a href="/board">고객센터</a>
-                  <a href="#logout">로그아웃</a>
+                  <a href="#logout" onClick={userLogout}>로그아웃</a>
                 </>
               ) : (
                 <>

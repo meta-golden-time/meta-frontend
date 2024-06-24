@@ -66,6 +66,43 @@ export const postLoginCheck = async () => {
   }
 };
 
+////관리자 권한
+export const getAllUsers = async () => {
+  try {
+    const response = await axiosInstance.get('/users/allUser');
+    return response.data;
+  } catch (error) {
+    console.error('Error during login:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// 유저 데이터 삭제 함수 force삭제 진행
+export const deleteUser = async (userId) => {
+  try {
+    const response = await axiosInstance.delete(`/users/deleteForce/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting user', error);
+    throw error;
+  }
+};
+
+// 유저 데이터 수정 함수 
+export const updateUser = async (userId, updatedData) => {
+  console.log("🚀 ~ updateUser ~ updatedData:", updatedData)
+  console.log("🚀 ~ updateUser ~ userId:", userId)
+  try {
+    const response = await axiosInstance.put(`/users/update/${userId}`, updatedData);
+    console.log("🚀 ~ updateUser ~ response:", response)
+    return response.data;
+  } catch (error) {
+    console.error('Error updating user', error);
+    throw error;
+  }
+};
+////////////////////////////////
+
 export const postLogout = async () => {
   try {
     const response = await axiosInstance.post('/auth/logout');
