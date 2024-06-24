@@ -62,7 +62,7 @@ const MyPosts = () => {
           <tbody>
             {posts.map(post => (
               <tr key={post.id}>
-                <td>
+                <td className='list-title'>
                   {post.isPrivate ? (
                     <Link to={`/board/view/${post.id}`}>비밀글입니다.</Link>
                   ) : (

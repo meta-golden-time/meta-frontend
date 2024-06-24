@@ -49,19 +49,24 @@ const BoardList = () => {
       <Sidebar />
       <div className="board-list">
         <h2>고객센터</h2>
-        <div className="search-container">
-          <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="author">작성자</option> {/* 작성자 옵션 추가 */}
-          </select>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="검색어를 입력하세요"
-          />
-          <button onClick={handleSearch}>검색</button>
+        <div className='board-button-top'>
+          <Link to="/board/create">
+              <button className="create-button">글쓰기</button>
+          </Link>
+          <div className="search-container">
+            <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+              <option value="author">작성자</option> {/* 작성자 옵션 추가 */}
+            </select>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="검색어를 입력하세요"
+            />
+            <button onClick={handleSearch}>검색</button>
+          </div>
         </div>
         <table>
           <thead>
@@ -87,9 +92,6 @@ const BoardList = () => {
             ))}
           </tbody>
         </table>
-        <Link to="/board/create">
-          <button className="create-button">글쓰기</button>
-        </Link>
       </div>
     </div>
   );
