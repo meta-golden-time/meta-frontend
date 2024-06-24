@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Modal from 'react-modal'; // react-modal 임포트
+import Button from '@mui/material/Button';
 import '../../styles/maps/mapSearch.css'; // 추가: CSS 파일 임포트
 
 const { kakao } = window;
@@ -134,7 +135,7 @@ const MapSearch = () => {
           itemStr += `<span>${place.address_name}</span>`;
         }
         itemStr += `<span class="tel">${place.phone}</span>
-                    <button class="detail-button" data-url="${place.place_url}">상세보기</button>
+                    <Button class="detail-button" data-url="${place.place_url}">상세보기</Button>                    
                     </div>`;
         el.innerHTML = itemStr;
         el.className = 'item';
