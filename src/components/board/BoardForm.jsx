@@ -88,7 +88,7 @@ const BoardForm = ({ isEdit }) => {
                   required
                 />
                   <textarea
-                    placeholder='내용'
+                    placeholder='내용'                    
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
